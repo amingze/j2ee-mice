@@ -12,10 +12,12 @@ import javax.servlet.http.HttpServletResponse;
 import mice.bean.Goods;
 import mice.dao.GoodsDAO;
 
+public class GoodsAddServlet extends HttpServlet {
+	private static final long serialVersionUID = 1L;
 
-public class GoodsAddServlet  extends HttpServlet{
-	protected void service(HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException {
-		Goods bean=new Goods();
+	protected void service(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		Goods bean = new Goods();
 		request.setCharacterEncoding("UTF-8");
 		bean.setName(request.getParameter("name"));
 		bean.setPrice(Float.parseFloat(request.getParameter("price")));

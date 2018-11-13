@@ -12,10 +12,10 @@ import javax.servlet.http.HttpServletResponse;
 import mice.bean.Goods;
 import mice.dao.GoodsDAO;
 
-
-public class GoodsAdminServlet  extends HttpServlet{
-	protected void service(HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException {
-		Goods bean=new Goods();
+public class GoodsAdminServlet extends HttpServlet {
+	protected void service(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		Goods bean = new Goods();
 		request.setCharacterEncoding("UTF-8");
 		request.setAttribute("goodslist", GoodsDAO.total());
 		request.getRequestDispatcher("/admin/admin_goods.jsp").forward(request, response);
