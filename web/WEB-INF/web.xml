@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app>
+
+
+    <servlet>
+        <servlet-name>UserServlet</servlet-name>
+        <servlet-class>mic.servlet.UserServlet</servlet-class>
+    </servlet>
+ 
+    <servlet-mapping>
+        <servlet-name>UserServlet</servlet-name>
+        <url-pattern>/admin_user</url-pattern>
+    </servlet-mapping>
+    
+  
+  	<servlet>
+        <servlet-name>RegisterServlet</servlet-name>
+        <servlet-class>mic.servlet.RegisterServlet</servlet-class>
+    </servlet>
+ 
+    <servlet-mapping>
+        <servlet-name>RegisterServlet</servlet-name>
+        <url-pattern>/register</url-pattern>
+    </servlet-mapping>
+    
+    <servlet>
+        <servlet-name>DeleteServlet</servlet-name>
+        <servlet-class>mic.servlet.UserDeleteServlet</servlet-class>
+    </servlet>
+ 
+    <servlet-mapping>
+        <servlet-name>DeleteServlet</servlet-name>
+        <url-pattern>/delete_user</url-pattern>
+    </servlet-mapping>
+    
+    
+    <servlet>
+        <servlet-name>GoodsAddServlet</servlet-name>
+        <servlet-class>mic.servlet.GoodsAddServlet</servlet-class>
+    </servlet>
+ 
+    <servlet-mapping>
+        <servlet-name>GoodsAddServlet</servlet-name>
+        <url-pattern>/admin_goods_add</url-pattern>
+    </servlet-mapping>    
+    
+    <servlet>
+        <servlet-name>GoodsUpdataServlet</servlet-name>
+        <servlet-class>mic.servlet.GoodsUpdataServlet</servlet-class>
+    </servlet>
+ 
+    <servlet-mapping>
+        <servlet-name>GoodsUpdataServlet</servlet-name>
+        <url-pattern>/admin_goods_updata</url-pattern>
+    </servlet-mapping>  
+    
+        <servlet>
+        <servlet-name>GoodsAdminServlet</servlet-name>
+        <servlet-class>mic.servlet.GoodsAdminServlet</servlet-class>
+    </servlet>
+ 
+    <servlet-mapping>
+        <servlet-name>GoodsAdminServlet</servlet-name>
+        <url-pattern>/admin_goods</url-pattern>
+    </servlet-mapping>  
+    
+    <servlet>
+        <servlet-name>GoodsServlet</servlet-name>
+        <servlet-class>mic.servlet.GoodsListServlet</servlet-class>
+    </servlet>
+ 
+    <servlet-mapping>
+        <servlet-name>GoodsServlet</servlet-name>
+        <url-pattern>/goods</url-pattern>
+    </servlet-mapping>  
+    
+    <servlet>
+        <servlet-name>index</servlet-name>
+        <servlet-class>mic.servlet.GoodsListServlet</servlet-class>
+    </servlet>
+ 
+    <servlet-mapping>
+        <servlet-name>index</servlet-name>
+        <url-pattern>/</url-pattern>
+    </servlet-mapping>     
+</web-app>

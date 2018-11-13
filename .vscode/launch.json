@@ -1,0 +1,179 @@
+{
+    // 使用 IntelliSense 了解相关属性。 
+    // 悬停以查看现有属性的描述。
+    // 欲了解更多信息，请访问: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Debug (Launch)",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "console": "internalConsole",
+            "stopOnEntry": false,
+            "mainClass": "",
+            "args": ""
+        },
+        {
+            "type": "java",
+            "name": "Debug (Launch)-DocsConnectionPropsHelper<mice>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "console": "internalConsole",
+            "stopOnEntry": false,
+            "mainClass": "com.mysql.jdbc.DocsConnectionPropsHelper",
+            "args": "",
+            "projectName": "mice"
+        },
+        {
+            "type": "java",
+            "name": "Debug (Launch)-ErrorMappingsDocGenerator<mice>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "console": "internalConsole",
+            "stopOnEntry": false,
+            "mainClass": "com.mysql.jdbc.util.ErrorMappingsDocGenerator",
+            "args": "",
+            "projectName": "mice"
+        },
+        {
+            "type": "java",
+            "name": "Debug (Launch)-PropertiesDocGenerator<mice>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "console": "internalConsole",
+            "stopOnEntry": false,
+            "mainClass": "com.mysql.jdbc.util.PropertiesDocGenerator",
+            "args": "",
+            "projectName": "mice"
+        },
+        {
+            "type": "java",
+            "name": "Debug (Launch)-TimezoneDump<mice>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "console": "internalConsole",
+            "stopOnEntry": false,
+            "mainClass": "com.mysql.jdbc.util.TimezoneDump",
+            "args": "",
+            "projectName": "mice"
+        },
+        {
+            "type": "java",
+            "name": "Debug (Launch)-VersionFSHierarchyMaker<mice>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "console": "internalConsole",
+            "stopOnEntry": false,
+            "mainClass": "com.mysql.jdbc.util.VersionFSHierarchyMaker",
+            "args": "",
+            "projectName": "mice"
+        },
+        {
+            "type": "java",
+            "name": "Debug (Launch)-GoodsDAO<mice>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "console": "internalConsole",
+            "stopOnEntry": false,
+            "mainClass": "mice.dao.GoodsDAO",
+            "args": "",
+            "projectName": "mice"
+        },
+        {
+            "type": "java",
+            "name": "Debug (Launch)-UserDAO<mice>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "console": "internalConsole",
+            "stopOnEntry": false,
+            "mainClass": "mice.dao.UserDAO",
+            "args": "",
+            "projectName": "mice"
+        },
+        {
+            "type": "java",
+            "name": "Debug (Launch)-DBUtil<mice>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "console": "internalConsole",
+            "stopOnEntry": false,
+            "mainClass": "mice.util.DBUtil",
+            "args": "",
+            "projectName": "mice"
+        },
+        {
+            "type": "java",
+            "name": "Debug (Launch)-TextUtil<mice>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "console": "internalConsole",
+            "stopOnEntry": false,
+            "mainClass": "mice.util.TextUtil",
+            "args": "",
+            "projectName": "mice"
+        },
+        {
+            "type": "java",
+            "name": "Debug (Launch)-Version<mice>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "console": "internalConsole",
+            "stopOnEntry": false,
+            "mainClass": "org.apache.taglibs.standard.Version",
+            "args": "",
+            "projectName": "mice"
+        },
+        {
+            "type": "java",
+            "name": "Debug (Launch)-ELParser<mice>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "console": "internalConsole",
+            "stopOnEntry": false,
+            "mainClass": "org.apache.taglibs.standard.lang.jstl.parser.ELParser",
+            "args": "",
+            "projectName": "mice"
+        },
+        {
+            "type": "java",
+            "name": "Debug (Launch)-EvaluationTest<mice>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "console": "internalConsole",
+            "stopOnEntry": false,
+            "mainClass": "org.apache.taglibs.standard.lang.jstl.test.EvaluationTest",
+            "args": "",
+            "projectName": "mice"
+        },
+        {
+            "type": "java",
+            "name": "Debug (Launch)-ParserTest<mice>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "console": "internalConsole",
+            "stopOnEntry": false,
+            "mainClass": "org.apache.taglibs.standard.lang.jstl.test.ParserTest",
+            "args": "",
+            "projectName": "mice"
+        },
+        {
+            "type": "java",
+            "name": "Debug (Launch)-StaticFunctionTests<mice>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "console": "internalConsole",
+            "stopOnEntry": false,
+            "mainClass": "org.apache.taglibs.standard.lang.jstl.test.StaticFunctionTests",
+            "args": "",
+            "projectName": "mice"
+        },
+        {
+            "type": "java",
+            "name": "Debug (Attach)",
+            "request": "attach",
+            "hostName": "localhost",
+            "port": "<debug port of remote debuggee>"
+        }
+    ]
+}
