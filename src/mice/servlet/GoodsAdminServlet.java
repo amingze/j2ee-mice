@@ -1,4 +1,4 @@
-package mic.servlet;
+package mice.servlet;
 
 import java.io.IOException;
 import java.sql.SQLException;
