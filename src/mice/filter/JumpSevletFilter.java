@@ -25,6 +25,7 @@ public class JumpSevletFilter implements Filter {
         HttpServletResponse response = (HttpServletResponse) res;
         String contextPath = request.getServletContext().getContextPath();
         request.getServletContext().setAttribute("contextPath", contextPath);
+        //
     }
 
     @Override
