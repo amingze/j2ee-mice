@@ -10,12 +10,12 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import org.apache.commons.lang.StringUtils;
 
-public class JumpSevletFilter implements Filter {
+public class JumpServletFilter implements Filter {
 
     @Override
     public void destroy() {
-
     }
 
     @Override
@@ -24,8 +24,18 @@ public class JumpSevletFilter implements Filter {
         HttpServletRequest request = (HttpServletRequest) req;
         HttpServletResponse response = (HttpServletResponse) res;
         String contextPath = request.getServletContext().getContextPath();
-        request.getServletContext().setAttribute("contextPath", contextPath);
-
+        String uri = request.getRequestURI();
+        String url = StringUtils.remove(uri, contextPath);
+        if (url.startsWith("admin_")) {
+            String servletPath = StringUtils.substringBetween(url, "_", "_");
+            String funtion = StringUtils.substringBetween(url, "_", "_");
+            request.setAttribute("funtion", funtion);
+            request.getRequestDispatcher(servletPath + "Servlet");
+            return;
+        }
+        System.out.println("c:" + contextPath);
+        System.out.println("a:" + url);
+        chain.doFilter(request, response);
     }
 
     @Override

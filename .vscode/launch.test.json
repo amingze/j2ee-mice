@@ -1,0 +1,30 @@
+{
+    "run": {
+        "default": "",
+        "items": [
+            {
+                "name": "mice",
+                "projectName": "mice",
+                "workingDirectory": "c:\\Users\\root\\Code\\shop\\eclipse\\mice",
+                "args": [],
+                "vmargs": [],
+                "env": {},
+                "preLaunchTask": ""
+            }
+        ]
+    },
+    "debug": {
+        "default": "",
+        "items": [
+            {
+                "name": "mice",
+                "projectName": "mice",
+                "workingDirectory": "c:\\Users\\root\\Code\\shop\\eclipse\\mice",
+                "args": [],
+                "vmargs": [],
+                "env": {},
+                "preLaunchTask": ""
+            }
+        ]
+    }
+}

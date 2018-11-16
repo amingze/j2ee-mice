@@ -4,7 +4,7 @@
 
     <servlet>
         <servlet-name>UserServlet</servlet-name>
-        <servlet-class>mic.servlet.UserServlet</servlet-class>
+        <servlet-class>mice.servlet.UserServlet</servlet-class>
     </servlet>
  
     <servlet-mapping>
@@ -15,7 +15,7 @@
   
   	<servlet>
         <servlet-name>RegisterServlet</servlet-name>
-        <servlet-class>mic.servlet.RegisterServlet</servlet-class>
+        <servlet-class>mice.servlet.RegisterServlet</servlet-class>
     </servlet>
  
     <servlet-mapping>
@@ -25,7 +25,7 @@
     
     <servlet>
         <servlet-name>DeleteServlet</servlet-name>
-        <servlet-class>mic.servlet.UserDeleteServlet</servlet-class>
+        <servlet-class>mice.servlet.UserDeleteServlet</servlet-class>
     </servlet>
  
     <servlet-mapping>
@@ -36,7 +36,7 @@
     
     <servlet>
         <servlet-name>GoodsAddServlet</servlet-name>
-        <servlet-class>mic.servlet.GoodsAddServlet</servlet-class>
+        <servlet-class>mice.servlet.GoodsAddServlet</servlet-class>
     </servlet>
  
     <servlet-mapping>
@@ -46,7 +46,7 @@
     
     <servlet>
         <servlet-name>GoodsUpdataServlet</servlet-name>
-        <servlet-class>mic.servlet.GoodsUpdataServlet</servlet-class>
+        <servlet-class>mice.servlet.GoodsUpdataServlet</servlet-class>
     </servlet>
  
     <servlet-mapping>
@@ -56,7 +56,7 @@
     
         <servlet>
         <servlet-name>GoodsAdminServlet</servlet-name>
-        <servlet-class>mic.servlet.GoodsAdminServlet</servlet-class>
+        <servlet-class>mice.servlet.GoodsAdminServlet</servlet-class>
     </servlet>
  
     <servlet-mapping>
@@ -66,7 +66,7 @@
     
     <servlet>
         <servlet-name>GoodsServlet</servlet-name>
-        <servlet-class>mic.servlet.GoodsListServlet</servlet-class>
+        <servlet-class>mice.servlet.GoodsListServlet</servlet-class>
     </servlet>
  
     <servlet-mapping>
@@ -74,13 +74,13 @@
         <url-pattern>/goods</url-pattern>
     </servlet-mapping>  
     
-    <servlet>
-        <servlet-name>index</servlet-name>
-        <servlet-class>mic.servlet.GoodsListServlet</servlet-class>
-    </servlet>
- 
-    <servlet-mapping>
-        <servlet-name>index</servlet-name>
-        <url-pattern>/</url-pattern>
-    </servlet-mapping>     
+    <filter>
+        <filter-name>JumpServletFilter</filter-name>
+        <filter-class>mice.filter.JumpServletFilter</filter-class>
+    </filter>
+    
+    <filter-mapping>
+        <filter-name>JumpServletFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>   
 </web-app>
