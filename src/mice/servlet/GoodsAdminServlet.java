@@ -19,6 +19,5 @@ public class GoodsAdminServlet extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		request.setAttribute("goodslist", GoodsDAO.total());
 		request.getRequestDispatcher("/admin/admin_goods.jsp").forward(request, response);
-
 	}
 }

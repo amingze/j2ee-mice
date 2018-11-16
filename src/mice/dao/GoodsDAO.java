@@ -89,7 +89,7 @@ public class GoodsDAO {
 	}
 
 	public static void main(String[] args) {
-		List<Goods> goods = GoodsDAO.total();
+		List<Goods> goods = GoodsDAO.get("a");
 		for (Goods g : goods) {
 			System.out.println(g.getName());
 		}

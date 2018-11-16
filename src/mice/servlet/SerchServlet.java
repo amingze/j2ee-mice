@@ -13,8 +13,9 @@ public class SerchServlet extends HttpServlet {
     protected void service(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         System.out.println("serch");
-        String serch = (String) request.getAttribute("name");
         request.setCharacterEncoding("UTF-8");
+        String serch = request.getParameter("goodsName");
+        System.out.println("serch:"+serch);
         request.setAttribute("goodslist", GoodsDAO.get(serch));
         for (Goods bean : GoodsDAO.get(serch)) {
             System.out.println(bean.getName());

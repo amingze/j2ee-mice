@@ -11,9 +11,6 @@ import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-/**
- * JspServletFilter
- */
 public class JSPServletFilter implements Filter {
 
     @Override

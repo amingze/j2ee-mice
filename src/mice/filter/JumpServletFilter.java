@@ -37,7 +37,7 @@ public class JumpServletFilter implements Filter {
         // }
         // System.out.println("uri:" + contextPath);
         // System.out.println("a:" + url);
-
+        System.out.println(contextPath);
         request.setAttribute("contextPath", contextPath);
         chain.doFilter(request, response);
     }

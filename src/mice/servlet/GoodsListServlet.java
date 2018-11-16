@@ -13,6 +13,7 @@ import mice.dao.GoodsDAO;
 public class GoodsListServlet extends HttpServlet {
 	protected void service(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+
 		request.setAttribute("goodslist", GoodsDAO.total());
 		request.getRequestDispatcher("/goods.jsp").forward(request, response);
 	}
