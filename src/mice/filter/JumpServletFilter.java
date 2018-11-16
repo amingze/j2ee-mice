@@ -21,20 +21,24 @@ public class JumpServletFilter implements Filter {
     @Override
     public void doFilter(ServletRequest req, ServletResponse res, FilterChain chain)
             throws IOException, ServletException {
+
         HttpServletRequest request = (HttpServletRequest) req;
         HttpServletResponse response = (HttpServletResponse) res;
+        
         String contextPath = request.getServletContext().getContextPath();
-        String uri = request.getRequestURI();
-        String url = StringUtils.remove(uri, contextPath);
-        if (url.startsWith("admin_")) {
-            String servletPath = StringUtils.substringBetween(url, "_", "_");
-            String funtion = StringUtils.substringBetween(url, "_", "_");
-            request.setAttribute("funtion", funtion);
-            request.getRequestDispatcher(servletPath + "Servlet").forward(request, response);
-            return;
-        }
-        System.out.println("uri:" + contextPath);
-        System.out.println("a:" + url);
+        // String uri = request.getRequestURI();
+        // String url = StringUtils.remove(uri, contextPath);
+        // if (url.startsWith("admin_")) {
+        //     String servletPath = StringUtils.substringBetween(url, "_", "_");
+        //     String funtion = StringUtils.substringBetween(url, "_", "_");
+        //     request.setAttribute("funtion", funtion);
+        //     request.getRequestDispatcher(servletPath + "Servlet").forward(request, response);
+        //     return;
+        // }
+        // System.out.println("uri:" + contextPath);
+        // System.out.println("a:" + url);
+
+        request.setAttribute("contextPath", contextPath);
         chain.doFilter(request, response);
     }
 

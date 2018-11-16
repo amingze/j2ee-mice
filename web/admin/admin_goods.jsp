@@ -9,7 +9,7 @@
 </head>
 <body>
 <p>----搜索----</p>
-<form action="/admin_goods_serch" method="post" >
+<form action="${contextPath}/admin_goods_serch" method="post" >
 	商品名称:<input type="text" name="name">
 	<input type="submit" value="搜索">
 	${status}

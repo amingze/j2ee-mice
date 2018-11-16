@@ -84,7 +84,7 @@
         <url-pattern>/admin_goods_serch</url-pattern>
     </servlet-mapping>  
     
-    <!-- <filter>
+    <filter>
         <filter-name>JumpServletFilter</filter-name>
         <filter-class>mice.filter.JumpServletFilter</filter-class>
     </filter>
@@ -92,7 +92,7 @@
     <filter-mapping>
         <filter-name>JumpServletFilter</filter-name>
         <url-pattern>/*</url-pattern>
-    </filter-mapping>    -->
+    </filter-mapping>   
     
     <filter>
         <filter-name>JSPServletFilter</filter-name>
