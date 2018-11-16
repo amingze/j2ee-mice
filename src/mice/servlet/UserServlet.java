@@ -20,4 +20,14 @@ public class UserServlet extends HttpServlet {
 		request.getRequestDispatcher("admin/user.jsp").forward(request, response);
 
 	}
+	public String add(User bean){
+		String name=bean.getName();
+		String passwd=bean.getPasswd();
+		UserDAO.add(bean);
+		return "@admin_user_add";	
+	}
+	public String delete(int id){
+		UserDAO.delete(id);
+		return "@admin_user_delete";
+	}
 }

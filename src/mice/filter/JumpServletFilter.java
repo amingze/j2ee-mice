@@ -30,10 +30,11 @@ public class JumpServletFilter implements Filter {
             String servletPath = StringUtils.substringBetween(url, "_", "_");
             String funtion = StringUtils.substringBetween(url, "_", "_");
             request.setAttribute("funtion", funtion);
-            request.getRequestDispatcher(servletPath + "Servlet");
+            request.getRequestDispatcher(servletPath + "Servlet").forward(request, response);;
             return;
         }
-        System.out.println("c:" + contextPath);
+
+        System.out.println("uri:" + contextPath);
         System.out.println("a:" + url);
         chain.doFilter(request, response);
     }
