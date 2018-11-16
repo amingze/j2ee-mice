@@ -16,6 +16,9 @@ public class SerchServlet extends HttpServlet {
         String serch = (String) request.getAttribute("name");
         request.setCharacterEncoding("UTF-8");
         request.setAttribute("goodslist", GoodsDAO.get(serch));
+        for (Goods bean : ) {
+            
+        }
         request.getRequestDispatcher("/admin/admin_goods.jsp").forward(request, response);
     }
 }
