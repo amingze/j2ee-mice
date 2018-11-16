@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.apache.commons.lang.StringUtils;
 
-public class JumpServletFilter implements Filter {
+public class BaseServletFiler implements Filter {
 
     @Override
     public void destroy() {

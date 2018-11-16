@@ -18,7 +18,7 @@ public class GoodsDAO {
 			ps.execute();
 			ResultSet rs = ps.getGeneratedKeys();
 			if (rs.next()) {
-				bean.setId(rs.getInt("id"));
+				bean.setId(rs.getInt(1));
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -45,8 +45,26 @@ public class GoodsDAO {
 
 	}
 
-	public static void get() {
+	public static List<Goods> get(String name) {
+		String sql = "SELECT * FROM `goods` where name like ? ";
+		List<Goods> beans = new ArrayList<Goods>();
+		try (PreparedStatement ps = DBUtil.connection().prepareStatement(sql);) {
+			ps.setString(1, "%" + name + "%");
+			ResultSet rs = ps.executeQuery();
+			while (rs.next()) {
+				Goods bean = new Goods();
+				bean.setId(rs.getInt("id"));
+				bean.setName(rs.getString("name"));
+				bean.setPrice(Float.parseFloat(rs.getString("price")));
+				beans.add(bean);
+				System.out.println(rs.getString("name"));
+			}
 
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return beans;
 	}
 
 	public static List<Goods> total() {

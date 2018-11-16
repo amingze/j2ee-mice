@@ -74,7 +74,17 @@
         <url-pattern>/goods</url-pattern>
     </servlet-mapping>  
     
-    <filter>
+    <servlet>
+        <servlet-name>SerchServlet</servlet-name>
+        <servlet-class>mice.servlet.SerchServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>SerchServlet</servlet-name>
+        <url-pattern>/admin_goods_serch</url-pattern>
+    </servlet-mapping>  
+    
+    <!-- <filter>
         <filter-name>JumpServletFilter</filter-name>
         <filter-class>mice.filter.JumpServletFilter</filter-class>
     </filter>
@@ -82,5 +92,14 @@
     <filter-mapping>
         <filter-name>JumpServletFilter</filter-name>
         <url-pattern>/*</url-pattern>
+    </filter-mapping>    -->
+    
+    <filter>
+        <filter-name>JSPServletFilter</filter-name>
+        <filter-class>mice.filter.JSPServletFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>JSPServletFilter</filter-name>
+        <url-pattern>*.jsp</url-pattern>
     </filter-mapping>   
 </web-app>

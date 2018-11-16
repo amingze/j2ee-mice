@@ -8,17 +8,23 @@
 <title>商品管理</title>
 </head>
 <body>
-
-
-<form action="/admin_goods_add" method="post" >
-	
+<p>----搜索----</p>
+<form action="/admin_goods_serch" method="post" >
 	商品名称:<input type="text" name="name">
-	商品价格:<input type="number" name="price">
-	<input type="submit" >
+	<input type="submit" value="搜索">
 	${status}
 </form>
-
-<form action="/admin_goods_updata" method="post">
+<br>
+<p>----添加----</p>
+<form action="${contextPath}/admin_goods_add" method="post" >
+	商品名称:<input type="text" name="name">
+	商品价格:<input type="number" name="price">
+	<input type="submit" value="添加">
+	${status}
+</form>
+<br>
+<p>----修改----</p>
+<form action="${contextPath}/admin_goods_updata" method="post">
 
 <c:forEach items="${goodslist}" var="goods" varStatus="st">
 	<input type="radio" name="id" value="${goods.id }">

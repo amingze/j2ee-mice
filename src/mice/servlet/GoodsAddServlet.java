@@ -19,11 +19,16 @@ public class GoodsAddServlet extends HttpServlet {
 			throws ServletException, IOException {
 		Goods bean = new Goods();
 		request.setCharacterEncoding("UTF-8");
+		String price = request.getParameter("price");
+		if (price == null) {
+			price = "0.01";
+		}
+
+		bean.setPrice(Float.parseFloat(price));
 		bean.setName(request.getParameter("name"));
-		bean.setPrice(Float.parseFloat(request.getParameter("price")));
 		GoodsDAO.add(bean);
 		request.setAttribute("status", "aaaa");
-		request.getRequestDispatcher("/admin/admin_goods.jsp").forward(request, response);
+		request.getRequestDispatcher("/admin_goods").forward(request, response);
 
 	}
 }
