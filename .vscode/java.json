@@ -1,0 +1,69 @@
+{
+	// Place your snippets for java here. Each snippet is defined under a snippet name and has a prefix, body and 
+	// description. The prefix is what is used to trigger the snippet and the body will be expanded and inserted. Possible variables are:
+	// $1, $2 for tab stops, $0 for the final cursor position, and ${1:label}, ${2:another} for placeholders. Placeholders with the 
+	// same ids are connected.
+	// Example:
+	// "Print to console": {
+	// 	"prefix": "log",
+	// 	"body": [
+	// 		"console.log('$1');",
+	// 		"$2"
+	// 	],
+	// 	"description": "Log output to console"
+	// }
+	"Print to console": {
+		"prefix": "formServlet",
+		"body": [
+			"package $1;",
+			"import java.io.IOException;",
+			"import javax.servlet.ServletException;",
+			"import javax.servlet.http.HttpServlet;",
+			"import javax.servlet.http.HttpServletRequest;",
+			"import javax.servlet.http.HttpServletResponse;",
+			"public class {$2:ClassName} extends HttpServlet {",
+			"protected void service(HttpServletRequest request, HttpServletResponse response) ",
+			"\t\tthrows ServletException, IOException {",
+			"\t$3",
+			"\t}",
+			"}"
+		],
+		"description": "Log output to console"
+	},
+	"Print to console1": {
+		"prefix": "formFilterServlet",
+		"body": [
+			"package $1;",
+			"import java.io.IOException;",
+			"import javax.servlet.Filter;",
+			"import javax.servlet.FilterChain;",
+			"import javax.servlet.FilterConfig;",
+			"import javax.servlet.ServletException;",
+			"import javax.servlet.ServletRequest;",
+			"import javax.servlet.ServletResponse;",
+			"import javax.servlet.http.HttpServletRequest;",
+			"import javax.servlet.http.HttpServletResponse;\n",
+			"public class ${2:ClassName} implements Filter {",
+			"\t@Override",
+			"\tpublic void doFilter(ServletRequest req, ServletResponse res, FilterChain chain)",
+			"\t\t\tthrows IOException, ServletException {",
+			"\t\tHttpServletRequest request = (HttpServletRequest) req;",
+			"\t\tHttpServletResponse response = (HttpServletResponse) res;",
+			"\t\t$3",
+			"\t\tchain.doFilter(request, response);",
+			"\t}",
+			"\t@Override",
+			"\tpublic void destroy() {",
+			"\t\t$4",
+			"\t}",
+			
+			"\t@Override",
+			"\tpublic void init(FilterConfig arg0) throws ServletException {",
+			"\t\t$5",
+			"\t}",
+			"}",
+		],
+		"description": "Log output to console"
+	
+
+}
