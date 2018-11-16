@@ -1,8 +1,6 @@
 package mice.servlet;
 
 import java.io.IOException;
-import java.sql.SQLException;
-import java.util.jar.Attributes.Name;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;

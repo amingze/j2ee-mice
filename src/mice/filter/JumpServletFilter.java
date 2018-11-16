@@ -10,7 +10,7 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import org.apache.commons.lang.StringUtils;
+// import org.apache.commons.lang.StringUtils;
 
 public class JumpServletFilter implements Filter {
 
@@ -24,16 +24,18 @@ public class JumpServletFilter implements Filter {
 
         HttpServletRequest request = (HttpServletRequest) req;
         HttpServletResponse response = (HttpServletResponse) res;
-        
+
         String contextPath = request.getServletContext().getContextPath();
+        System.out.println(contextPath);
         // String uri = request.getRequestURI();
         // String url = StringUtils.remove(uri, contextPath);
         // if (url.startsWith("admin_")) {
-        //     String servletPath = StringUtils.substringBetween(url, "_", "_");
-        //     String funtion = StringUtils.substringBetween(url, "_", "_");
-        //     request.setAttribute("funtion", funtion);
-        //     request.getRequestDispatcher(servletPath + "Servlet").forward(request, response);
-        //     return;
+        // String servletPath = StringUtils.substringBetween(url, "_", "_");
+        // String funtion = StringUtils.substringBetween(url, "_", "_");
+        // request.setAttribute("funtion", funtion);
+        // request.getRequestDispatcher(servletPath + "Servlet").forward(request,
+        // response);
+        // return;
         // }
         // System.out.println("uri:" + contextPath);
         // System.out.println("a:" + url);
