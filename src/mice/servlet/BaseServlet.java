@@ -31,10 +31,12 @@ public abstract class BaseServlet<HttpservletRequest> extends HttpServlet {
                 
                 if (invoke.startsWith("@")) {
 					response.sendRedirect(invoke.substring(1));
-				} else {
+				} else if (invoke.startsWith("!")) {
+					
+				}
+				else {
 					request.getRequestDispatcher(invoke).forward(request, response);
 				}
-                
             } catch (Exception e) {
 				e.printStackTrace();
 				throw new RuntimeException(e);

@@ -2,6 +2,8 @@ package mice.bean;
 
 public class Image {
 	String Image ;
+	Goods goods;
+	int id;
 	public String getImage() {
 		return Image;
 	}
@@ -20,6 +22,5 @@ public class Image {
 	public void setId(int id) {
 		this.id = id;
 	}
-	Goods goods;
-	int id;
+	
 }
