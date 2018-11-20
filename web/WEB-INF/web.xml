@@ -1,89 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app>
 
+    
 
-    <servlet>
-        <servlet-name>UserServlet</servlet-name>
-        <servlet-class>mice.servlet.UserServlet</servlet-class>
-    </servlet>
- 
-    <servlet-mapping>
-        <servlet-name>UserServlet</servlet-name>
-        <url-pattern>/admin_user</url-pattern>
-    </servlet-mapping>
-    
-  
-  	<servlet>
-        <servlet-name>RegisterServlet</servlet-name>
-        <servlet-class>mice.servlet.RegisterServlet</servlet-class>
-    </servlet>
- 
-    <servlet-mapping>
-        <servlet-name>RegisterServlet</servlet-name>
-        <url-pattern>/register</url-pattern>
-    </servlet-mapping>
-    
-    <servlet>
-        <servlet-name>DeleteServlet</servlet-name>
-        <servlet-class>mice.servlet.UserDeleteServlet</servlet-class>
-    </servlet>
- 
-    <servlet-mapping>
-        <servlet-name>DeleteServlet</servlet-name>
-        <url-pattern>/delete_user</url-pattern>
-    </servlet-mapping>
-    
-    
-    <servlet>
-        <servlet-name>GoodsAddServlet</servlet-name>
-        <servlet-class>mice.servlet.GoodsAddServlet</servlet-class>
-    </servlet>
- 
-    <servlet-mapping>
-        <servlet-name>GoodsAddServlet</servlet-name>
-        <url-pattern>/admin_goods_add</url-pattern>
-    </servlet-mapping>    
-    
-    <servlet>
-        <servlet-name>GoodsUpdataServlet</servlet-name>
-        <servlet-class>mice.servlet.GoodsUpdataServlet</servlet-class>
-    </servlet>
- 
-    <servlet-mapping>
-        <servlet-name>GoodsUpdataServlet</servlet-name>
-        <url-pattern>/admin_goods_updata</url-pattern>
-    </servlet-mapping>  
-    
-        <servlet>
-        <servlet-name>GoodsAdminServlet</servlet-name>
-        <servlet-class>mice.servlet.GoodsAdminServlet</servlet-class>
-    </servlet>
- 
-    <servlet-mapping>
-        <servlet-name>GoodsAdminServlet</servlet-name>
-        <url-pattern>/admin_goods</url-pattern>
-    </servlet-mapping>  
     
     <servlet>
         <servlet-name>GoodsServlet</servlet-name>
-        <servlet-class>mice.servlet.GoodsListServlet</servlet-class>
+        <servlet-class>mice.servlet.GoodsServlet</servlet-class>
     </servlet>
  
     <servlet-mapping>
         <servlet-name>GoodsServlet</servlet-name>
-        <url-pattern>/goods</url-pattern>
+        <url-pattern>/goodsServlet</url-pattern>
     </servlet-mapping>  
-    
-    <servlet>
-        <servlet-name>SerchServlet</servlet-name>
-        <servlet-class>mice.servlet.SerchServlet</servlet-class>
-    </servlet>
 
-    <servlet-mapping>
-        <servlet-name>SerchServlet</servlet-name>
-        <url-pattern>/admin_goods_serch</url-pattern>
-    </servlet-mapping>  
-   
     <filter>
         <filter-name>JumpServletFilter</filter-name>
         <filter-class>mice.filter.JumpServletFilter</filter-class>
@@ -93,7 +23,7 @@
         <filter-name>JumpServletFilter</filter-name>
         <url-pattern>/*</url-pattern>
     </filter-mapping>
-    
+<!--     
     <filter>
         <filter-name>JSPServletFilter</filter-name>
         <filter-class>mice.filter.JSPServletFilter</filter-class>
@@ -102,5 +32,5 @@
     <filter-mapping>
         <filter-name>JSPServletFilter</filter-name>
         <url-pattern>*.jsp</url-pattern>
-    </filter-mapping>
+    </filter-mapping> -->
 </web-app>

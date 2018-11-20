@@ -4,7 +4,7 @@ public class User {
 	int id;
 	String name;
 	String passwd;
-	String creatDate;
+	String creatDate; 
 
 	public String getName() {
 		return name;

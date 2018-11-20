@@ -20,7 +20,7 @@ public class JSPServletFilter implements Filter {
         HttpServletResponse response = (HttpServletResponse) res;
         String uri = request.getRequestURI();
         if (uri.endsWith(".jsp")) {
-            response.sendRedirect("/goods");
+            response.sendRedirect("/goodsServelt"); 
             return;
         } else {
             System.out.println("do");
