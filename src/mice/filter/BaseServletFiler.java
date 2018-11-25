@@ -20,7 +20,7 @@ public class BaseServletFiler implements Filter {
     public void destroy() {
     }
 
-    @Override 
+    @Override
     public void doFilter(ServletRequest req, ServletResponse res, FilterChain chain)
             throws IOException, ServletException {
         HttpServletRequest request = (HttpServletRequest) req;
@@ -33,7 +33,7 @@ public class BaseServletFiler implements Filter {
             String funtion = StringUtils.substringBetween(url, "_", "_");
             request.setAttribute("funtion", funtion);
             request.setAttribute("goodslist", GoodsDAO.total());
-            
+
             request.getRequestDispatcher(servletPath + "Servlet").forward(request, response);
             return;
         }
