@@ -18,10 +18,12 @@ import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
 import mice.dao.ProductDAO;
+import mice.dao.UserDAO;
 
 public abstract class ForeBaseServlet<HttpservletRequest> extends HttpServlet {
 
     protected ProductDAO productDAO = new ProductDAO();
+    protected UserDAO userDAO = new UserDAO();
 
     protected void service(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -32,9 +34,9 @@ public abstract class ForeBaseServlet<HttpservletRequest> extends HttpServlet {
             System.out.println("funtion:" + funtion);
             Method fun = this.getClass().getMethod(funtion, javax.servlet.http.HttpServletRequest.class,
                     javax.servlet.http.HttpServletResponse.class);
-            
+
             String invoke = fun.invoke(this, request, response).toString();
-            System.out.println("!!!fore invoke:"+invoke);
+            System.out.println("!!!foreinvoke:" + invoke);
             if (invoke.startsWith("@")) {
                 response.sendRedirect(invoke.substring(1));
             } else if (invoke.startsWith("!")) {

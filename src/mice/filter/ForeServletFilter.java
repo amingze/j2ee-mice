@@ -28,12 +28,15 @@ public class ForeServletFilter implements Filter {
         String contextPath = request.getServletContext().getContextPath();
         String uri = request.getRequestURI();
         String url = StringUtils.remove(uri, contextPath);
-        if (url.startsWith("/fore")) {
+        System.out.println("uri:" + uri + " url:" + url);
+        if (url.startsWith("/fore") && !url.equals("/foreServlet")) {
             String servletPath = "fore";
             String funtion = StringUtils.substringAfter(url, "fore");
             request.setAttribute("funtion", funtion);
             request.setAttribute("homelist", ProductDAO.total());
-            request.getRequestDispatcher("/"+servletPath + "Servlet").forward(request, response);
+            System.out.print("!!!forefilter:" + servletPath);
+            System.out.print("!!!forefuntion:" + funtion);
+            request.getRequestDispatcher("/" + servletPath + "Servlet").forward(request, response);
             return;
         }
         System.out.println("uri:" + contextPath);

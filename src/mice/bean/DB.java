@@ -11,7 +11,7 @@ public class DB {
 
 	public static String getSql() {
 		return sql;
-	} 
+	}
 
 	public static void setSql(String sql) {
 		DB.sql = sql;

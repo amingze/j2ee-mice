@@ -17,7 +17,7 @@ public class JumpServletFilter implements Filter {
     @Override
     public void destroy() {
     }
- 
+
     @Override
     public void doFilter(ServletRequest req, ServletResponse res, FilterChain chain)
             throws IOException, ServletException {
@@ -28,7 +28,7 @@ public class JumpServletFilter implements Filter {
 
         String contextPath = request.getServletContext().getContextPath();
         request.setAttribute("contextPath", contextPath);
-         
+
         String uri = request.getRequestURI();
         String url = StringUtils.remove(uri, contextPath);
 
@@ -37,12 +37,11 @@ public class JumpServletFilter implements Filter {
             String funtion = StringUtils.substringAfterLast(url, "_");
             System.out.println("D");
             request.setAttribute("funtion", funtion);
-            
-            request.getRequestDispatcher("/"+servletPath + "Servlet").forward(request,response);
+
+            request.getRequestDispatcher("/" + servletPath + "Servlet").forward(request, response);
             return;
         }
 
-       
         chain.doFilter(request, response);
     }
 
