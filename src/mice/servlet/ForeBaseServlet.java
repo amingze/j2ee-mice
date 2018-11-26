@@ -32,7 +32,9 @@ public abstract class ForeBaseServlet<HttpservletRequest> extends HttpServlet {
             System.out.println("funtion:" + funtion);
             Method fun = this.getClass().getMethod(funtion, javax.servlet.http.HttpServletRequest.class,
                     javax.servlet.http.HttpServletResponse.class);
+            
             String invoke = fun.invoke(this, request, response).toString();
+            System.out.println("!!!fore invoke:"+invoke);
             if (invoke.startsWith("@")) {
                 response.sendRedirect(invoke.substring(1));
             } else if (invoke.startsWith("!")) {

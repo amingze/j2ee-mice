@@ -27,7 +27,7 @@ public class ProductServlet extends BackBaseServlet {
 	public String list(HttpServletRequest request, HttpServletResponse response) throws UnsupportedEncodingException {
 		Product bean = new Product();
 		request.setCharacterEncoding("UTF-8");
-		request.setAttribute("productList", ProductDao.total());
+		request.setAttribute("productlist", ProductDao.total());
 		return ("admin/product.jsp");
 	}
 
@@ -63,7 +63,7 @@ public class ProductServlet extends BackBaseServlet {
 					turename = new String(turename.getBytes("GBK"), "UTF-8");
 					filename = bean.getId() + ".jpg";
 					String folder = request.getSession().getServletContext().getRealPath("img/product");
-
+					
 					File file = new File(folder, filename);
 					file.getParentFile().mkdirs();
 					System.out.println("!!folder:" + folder);

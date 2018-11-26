@@ -9,10 +9,10 @@
 <title>用户注册</title>
 </head>
 <body>
-<c:forEach items="${homelist}" var="produdt" varStatus="st">
-    <img src="${contextPath}/admin_product_getimg?id=${product.id }.jpg">
-    <a href="${contextPath}/foreproduct?id=${product.id}">${product.name}</a>
-    <a>${product.price}</a>
-</c:foreach>
+<c:forEach items="${productlist}" var="product" varStatus="st">
+    <img src="${contextPath}/foreimg?id=${product.id }.jpg">
+    <a href="${contextPath}/foreproduct?id=${product.id }">${product.name }</a>
+    <a>${product.price }</a>
+</c:forEach>
 </body>
 </html>
