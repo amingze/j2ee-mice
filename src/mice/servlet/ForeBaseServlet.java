@@ -27,6 +27,7 @@ public abstract class ForeBaseServlet<HttpservletRequest> extends HttpServlet {
             throws ServletException, IOException {
 
         String funtion = (String) request.getAttribute("funtion");
+        System.out.println("fore funtion");
         try {
             System.out.println("funtion:" + funtion);
             Method fun = this.getClass().getMethod(funtion, javax.servlet.http.HttpServletRequest.class,
