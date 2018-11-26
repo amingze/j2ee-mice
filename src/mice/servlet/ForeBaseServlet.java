@@ -21,7 +21,7 @@ import mice.dao.ProductDAO;
 
 public abstract class ForeBaseServlet<HttpservletRequest> extends HttpServlet {
 
-    protected ProductDAO ProductDao = new ProductDAO();
+    protected ProductDAO productDAO = new ProductDAO();
 
     protected void service(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -32,7 +32,6 @@ public abstract class ForeBaseServlet<HttpservletRequest> extends HttpServlet {
             Method fun = this.getClass().getMethod(funtion, javax.servlet.http.HttpServletRequest.class,
                     javax.servlet.http.HttpServletResponse.class);
             String invoke = fun.invoke(this, request, response).toString();
-
             if (invoke.startsWith("@")) {
                 response.sendRedirect(invoke.substring(1));
             } else if (invoke.startsWith("!")) {

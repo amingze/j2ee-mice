@@ -6,7 +6,7 @@ import javax.servlet.http.HttpServletResponse;
 public class ForeServlet extends ForeBaseServlet {
 
     public String home(HttpServletRequest request, HttpServletResponse response) {
-        request.setAttribute("homeList", ProductDao.total());
+        request.setAttribute("homelist", productDAO.total());
 
         return "home.jsp";
     }

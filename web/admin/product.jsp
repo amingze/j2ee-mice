@@ -30,7 +30,7 @@
 <c:forEach items="${productList}" var="product" varStatus="st">
 	<input type="radio" name="id" value="${product.id }">
 	<img src="${contextPath}/admin_product_getimg?id=${product.id }.jpg">
-	<a href="product/product=${product.id}">${product.name}</a>
+	<a href="product/id=${product.id}">${product.name}</a>
 	<a href="${contextPath}/admin_product_delete?id=${product.id}">删除</a>
 	<p>${product.price}</p>
 </c:forEach>
