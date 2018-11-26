@@ -9,14 +9,14 @@
 </head>
 <body>
 <p>----搜索----</p>
-<form action="${contextPath}/admin_goods_serch" method="get"  >
-	商品名称:<input type="text" name="goodsName" >
+<form action="${contextPath}/admin_product_serch" method="get"  >
+	商品名称:<input type="text" name="productName" >
 	<input type="submit" value="搜索">
 	${status}
 </form>
 <br>
 <p>----添加----</p>
-<form action="${contextPath}/admin_goods_add" method="post" enctype='multipart/form-data' >
+<form action="${contextPath}/admin_product_add" method="post" enctype='multipart/form-data' >
 	商品名称:<input type="text" name="name">
 	商品价格:<input type="number" name="price">
 	<input id="fileId1" type="file" accept="image/png,image/gif" name="file"  />
@@ -25,14 +25,14 @@
 </form>
 <br>
 <p>----修改----</p>
-<form action="${contextPath}/admin_goods_updata" method="post">
+<form action="${contextPath}/admin_product_updata" method="post">
 
-<c:forEach items="${goodslist}" var="goods" varStatus="st">
-	<input type="radio" name="id" value="${goods.id }">
-	<img src="${contextPath}/admin_goods_getimg?id=${goods.id }.jpg">
-	<a href="goods/goods=${goods.id}">${goods.name}</a>
-	<a href="${contextPath}/admin_goods_delete?id=${goods.id}">删除</a>
-	<p>${goods.price}</p>
+<c:forEach items="${productList}" var="product" varStatus="st">
+	<input type="radio" name="id" value="${product.id }">
+	<img src="${contextPath}/admin_product_getimg?id=${product.id }.jpg">
+	<a href="product/product=${product.id}">${product.name}</a>
+	<a href="${contextPath}/admin_product_delete?id=${product.id}">删除</a>
+	<p>${product.price}</p>
 </c:forEach>
 
 	<input type="text" name="name">

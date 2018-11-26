@@ -1,26 +1,32 @@
 package mice.bean;
 
 public class Image {
-	String Image ;
-	Goods goods;
+	String Image;
+	Product Product;
 	int id;
+
 	public String getImage() {
 		return Image;
 	}
+
 	public void setImage(String image) {
 		Image = image;
 	}
-	public Goods getGoods() {
-		return goods;
+
+	public Product getProduct() {
+		return Product;
 	}
-	public void setGoods(Goods goods) {
-		this.goods = goods;
+
+	public void setProduct(Product Product) {
+		this.Product = Product;
 	}
+
 	public int getId() {
 		return id;
 	}
+
 	public void setId(int id) {
 		this.id = id;
 	}
-	
+
 }

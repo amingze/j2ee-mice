@@ -1,6 +1,6 @@
 package mice.bean;
 
-public class Goods {
+public class Product {
 	int id;
 	String name;
 	float price;
@@ -12,7 +12,7 @@ public class Goods {
 	public void setId(int id) {
 		this.id = id;
 	}
- 
+
 	public String getName() {
 		return name;
 	}

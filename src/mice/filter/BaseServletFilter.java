@@ -12,9 +12,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.apache.commons.lang.StringUtils;
 
-import mice.dao.GoodsDAO;
+import mice.dao.ProductDAO;
 
-public class BaseServletFiler implements Filter {
+public class BaseServletFilter implements Filter {
 
     @Override
     public void destroy() {
@@ -32,8 +32,7 @@ public class BaseServletFiler implements Filter {
             String servletPath = StringUtils.substringBetween(url, "_", "_");
             String funtion = StringUtils.substringBetween(url, "_", "_");
             request.setAttribute("funtion", funtion);
-            request.setAttribute("goodslist", GoodsDAO.total());
-
+            request.setAttribute("Productlist", ProductDAO.total());
             request.getRequestDispatcher(servletPath + "Servlet").forward(request, response);
             return;
         }

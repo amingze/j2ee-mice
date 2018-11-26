@@ -1,19 +1,17 @@
 package mice.dao;
 
-import java.awt.geom.FlatteningPathIterator;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-
-import mice.bean.Goods;
+import mice.bean.Product;
 import mice.util.DBUtil;
 
-public class GoodsDAO {
-	public static void add(Goods bean) {
-		
-		String sql = "INSERT INTO `mice`.`goods` (`id`, `name`, `price`) VALUES (null,?,?);";
+public class ProductDAO {
+	public static void add(Product bean) {
+
+		String sql = "INSERT INTO `mice`.`Product` (`id`, `name`, `price`) VALUES (null,?,?);";
 		try (PreparedStatement ps = DBUtil.connection().prepareStatement(sql)) {
 			ps.setString(1, bean.getName());
 			ps.setFloat(2, bean.getPrice());
@@ -27,43 +25,45 @@ public class GoodsDAO {
 		}
 
 	}
-	public static Boolean get(int id)  {
-		String sql = "SELECT * FROM `goods` where id = ? ";
+
+	public static Boolean get(int id) {
+		String sql = "SELECT * FROM `Product` where id = ? ";
 		try (PreparedStatement ps = DBUtil.connection().prepareStatement(sql)) {
 			try {
 				ps.setInt(1, id);
-				ResultSet eq=ps.executeQuery();
-				if(eq.next())
+				ResultSet eq = ps.executeQuery();
+				if (eq.next())
 					return true;
-				else 
+				else
 					return false;
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			
+
 		} catch (SQLException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
-		
+
 		return false;
-		
+
 	}
+
 	public static void delete(int id) {
-		String sql = "DELETE FROM `mice`.`goods` WHERE `goods`.`id` = ?";
-		if(get(id)) {
-		try (PreparedStatement ps = DBUtil.connection().prepareStatement(sql)) {
-			ps.setInt(1, id);
-			ps.execute();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+		String sql = "DELETE FROM `mice`.`Product` WHERE `Product`.`id` = ?";
+		if (get(id)) {
+			try (PreparedStatement ps = DBUtil.connection().prepareStatement(sql)) {
+				ps.setInt(1, id);
+				ps.execute();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		}
 	}
 
-	public static void updata(Goods bean) {
-		String sql = "UPDATE  `mice`.`goods` SET  `name` =  ?,price=? WHERE  `goods`.`id` =?;";
+	public static void updata(Product bean) {
+		String sql = "UPDATE  `mice`.`Product` SET  `name` =  ?,price=? WHERE  `Product`.`id` =?;";
 		try (PreparedStatement ps = DBUtil.connection().prepareStatement(sql)) {
 			ps.setString(1, bean.getName());
 			ps.setFloat(2, bean.getPrice());
@@ -76,14 +76,14 @@ public class GoodsDAO {
 
 	}
 
-	public static List<Goods> get(String name) {
-		String sql = "SELECT * FROM `goods` where name like ? ";
-		List<Goods> beans = new ArrayList<Goods>();
+	public static List<Product> get(String name) {
+		String sql = "SELECT * FROM `Product` where name like ? ";
+		List<Product> beans = new ArrayList<Product>();
 		try (PreparedStatement ps = DBUtil.connection().prepareStatement(sql);) {
 			ps.setString(1, "%" + name + "%");
 			ResultSet rs = ps.executeQuery();
 			while (rs.next()) {
-				Goods bean = new Goods();
+				Product bean = new Product();
 				bean.setId(rs.getInt("id"));
 				bean.setName(rs.getString("name"));
 				bean.setPrice(Float.parseFloat(rs.getString("price")));
@@ -98,14 +98,14 @@ public class GoodsDAO {
 		return beans;
 	}
 
-	public static List<Goods> total() {
-		String sql = "SELECT * FROM `goods`";
-		List<Goods> beans = new ArrayList<Goods>();
-		
+	public static List<Product> total() {
+		String sql = "SELECT * FROM `Product`";
+		List<Product> beans = new ArrayList<Product>();
+
 		try (PreparedStatement ps = DBUtil.connection().prepareStatement(sql);) {
 			ResultSet rs = ps.executeQuery();
 			while (rs.next()) {
-				Goods bean = new Goods();
+				Product bean = new Product();
 				bean.setId(rs.getInt("id"));
 				bean.setName(rs.getString("name"));
 				bean.setPrice(Float.parseFloat(rs.getString("price")));
@@ -120,8 +120,8 @@ public class GoodsDAO {
 	}
 
 	public static void main(String[] args) {
-		List<Goods> goods = GoodsDAO.get("a");
-		for (Goods g : goods) {
+		List<Product> Product = ProductDAO.get("a");
+		for (Product g : Product) {
 			System.out.println(g.getName());
 		}
 	}
