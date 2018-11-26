@@ -14,5 +14,6 @@
     <a href="${contextPath}/foreproduct?id=${product.id }">${product.name }</a>
     <a>${product.price }</a>
 </c:forEach>
+
 </body>
 </html>
