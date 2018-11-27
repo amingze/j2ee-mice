@@ -101,6 +101,28 @@ public class UserDAO {
 		return bean;
 	}
 
+	public static User check(String name, String passwd) {
+		String sql = "SELECT *  FROM `user` WHERE `name` = ? and `passwd` =?";
+		User bean = null;
+		try (PreparedStatement ps = DBUtil.connection().prepareStatement(sql);) {
+			ps.setString(1, name);
+			ps.setString(2, passwd);
+			ResultSet rs = ps.executeQuery();
+			if (rs.next()) {
+				int id = rs.getInt("id");
+				bean = new User();
+				bean.setId(id);
+				bean.setName(name);
+				bean.setPasswd(passwd);
+				// bean.setCreatDate(creatDate);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+
+		}
+		return bean;
+	}
+
 	public static boolean isExist(String name) throws SQLException {
 		User bean = UserDAO.get(name);
 		if (bean.getId() != 0)
@@ -114,7 +136,10 @@ public class UserDAO {
 	}
 
 	public static void main(String[] args) throws SQLException {
-		System.out.println(UserDAO.isExist("1243"));
-
+		// System.out.println(UserDAO.isExist("1243"));
+		System.out.println(UserDAO.check("admin", "admin").getId());
+		System.out.println(UserDAO.check("1", "1"));
+		User user = UserDAO.check("1", "1");
+		System.out.println(user);
 	}
 }

@@ -31,7 +31,28 @@ public class ForeServlet extends ForeBaseServlet {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return "!register.jsp";
+        return "register.jsp";
+    }
+
+    public String login(HttpServletRequest request, HttpServletResponse response) {
+        String name = request.getParameter("name");
+        String passwd = request.getParameter("passwd");
+
+        User bean = userDAO.check(name, passwd);
+        if (null == bean) {
+            request.setAttribute("status", "erro");
+            return "register.jsp";
+        } else {
+            request.getSession().setAttribute("user", bean);
+            return "@forehome";
+        }
+
+    }
+
+    public String logout(HttpServletRequest request, HttpServletResponse response) {
+        request.getSession().removeAttribute("user");
+        return "@forehome";
+
     }
 
     public String img(HttpServletRequest request, HttpServletResponse response) {
@@ -39,5 +60,12 @@ public class ForeServlet extends ForeBaseServlet {
         product.getimg(request, response);
 
         return "!";
+    }
+
+    public String product(HttpServletRequest request, HttpServletResponse response) {
+        int id = Integer.parseInt(request.getParameter("id"));
+
+        productDAO.get(id);
+        return "product.jsp";
     }
 }

@@ -9,12 +9,11 @@
 <title>用户注册</title>
 </head>
 <body>
-<form action="/register" method="post" enctype="application/x-www-form-urlencoded">
+<form action="${contextPath}/foreregister" method="post" enctype="application/x-www-form-urlencoded">
 	账号:<input type="text" name="name"><br>
 	密码:<input type="password" name="passwd"><br>
 	<input type="submit"  value ="注册">
 	<p>${status}</p>
 </form>
-<a href="admin_user">管理</a>
 </body>
 </html>

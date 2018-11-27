@@ -26,7 +26,32 @@ public class ProductDAO {
 
 	}
 
-	public static Boolean get(int id) {
+	public static Product get(int id) {
+		String sql = "SELECT * FROM `Product` where id = ? ";
+		Product product = new Product();
+		try (PreparedStatement ps = DBUtil.connection().prepareStatement(sql)) {
+			try {
+				ps.setInt(1, id);
+				ResultSet eq = ps.executeQuery();
+				if (eq.next()) {
+
+				}
+
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
+		} catch (SQLException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+
+		return "false";
+
+	}
+
+	public static Boolean isExist(int id) {
 		String sql = "SELECT * FROM `Product` where id = ? ";
 		try (PreparedStatement ps = DBUtil.connection().prepareStatement(sql)) {
 			try {
