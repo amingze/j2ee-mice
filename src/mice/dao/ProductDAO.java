@@ -34,7 +34,9 @@ public class ProductDAO {
 				ps.setInt(1, id);
 				ResultSet eq = ps.executeQuery();
 				if (eq.next()) {
-
+					product.setId(id);
+					product.setName(eq.getString("name"));
+					product.setPrice(eq.getFloat("price"));
 				}
 
 			} catch (Exception e) {
@@ -47,7 +49,7 @@ public class ProductDAO {
 			e1.printStackTrace();
 		}
 
-		return "false";
+		return product;
 
 	}
 
@@ -77,7 +79,7 @@ public class ProductDAO {
 
 	public static void delete(int id) {
 		String sql = "DELETE FROM `mice`.`Product` WHERE `Product`.`id` = ?";
-		if (get(id)) {
+		if (isExist(id)) {
 			try (PreparedStatement ps = DBUtil.connection().prepareStatement(sql)) {
 				ps.setInt(1, id);
 				ps.execute();

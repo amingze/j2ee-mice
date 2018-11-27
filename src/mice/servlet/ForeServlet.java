@@ -65,7 +65,10 @@ public class ForeServlet extends ForeBaseServlet {
     public String product(HttpServletRequest request, HttpServletResponse response) {
         int id = Integer.parseInt(request.getParameter("id"));
 
-        productDAO.get(id);
+        Product product = productDAO.get(id);
+        request.setAttribute("name", product.getName());
+        request.setAttribute("price", product.getPrice());
+
         return "product.jsp";
     }
 }
