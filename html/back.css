@@ -17,16 +17,17 @@ nav{
 }
 .main-left{
     margin-left: 20%;
-    
+
     /* position: relative; */
     
     width: 80%;
-    height: 2200px;
+    /* height: 2200px;   */
     background-color: aquamarine;
 }
 .content{
-    
-    margin: 12px auto;
+    width: 80%;
+    padding: 30px;
+    margin: 0 auto;
 }
 .bd{
 

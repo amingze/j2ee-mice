@@ -12,16 +12,29 @@
 
 <body>
     <div class="bd">
-<nav>
-    <div class="main-right"></div>
-</nav>
-<div class="main-left">
-    <div class="content">
-        
-    </div>
-</div>
+        <nav>
+            <div class="main-right">
+                <a></a>
 
-</div>
+            </div>
+        </nav>
+        <div class="main-left">
+            <div class="content">
+
+                <br>
+                <p>添加</p>
+                <form action="${contextPath}/admin_product_add" method="post" enctype='multipart/form-data'>
+                    商品名称:<input type="text" name="name"><br><br>
+                    商品价格:<input type="number" name="price"><br><br>
+                    <input id="fileId1" type="file" accept="image/png,image/gif" name="file" /><br><br>
+                    <input type="submit" value="添加">
+                    ${status}
+                </form>
+                <br>
+            </div>
+        </div>
+
+    </div>
     <footer></footer>
 </body>
 
