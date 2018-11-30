@@ -1,6 +1,8 @@
 * {
     padding: 0;
     margin: 0;
+    color: #000;
+    text-decoration:none;
 }
 
 header {
@@ -87,7 +89,8 @@ header {
 }
 
 .background {
-    background: url("1.jpg")
+    background: url("1.jpg");
+    
 }
 
 .bd-list {
@@ -98,7 +101,8 @@ header {
     /* height: 1400px; */
     box-shadow: 5px 3px 3px 5px rgba(3, 3, 3, 0.2);
     border-radius: 10px;
-    background: rgb(255, 234, 234);
+    background-color: rgba(245, 245, 245, 1);
+    /* background: rgb(255, 234, 234); */
     display: flex;
     flex-wrap: wrap;
     z-index: 10;
@@ -143,14 +147,22 @@ header {
     margin: 8px auto;
     text-align: center;
     overflow: hidden;
-    font-size: 14px;
+    
     word-wrap:break-word; 
+    color: #333;
+}
+.pd-name a{
+    font-weight: bold;
+    font-size: 19px;
+
 }
 
 .pd-price {
     margin: 10px auto;
     text-align: center;
     line-height: 10px;
+    font-size: 18px;
+    color: #FF0036;
 }
 
 footer {
@@ -166,4 +178,5 @@ footer {
     background-repeat: no-repeat;
     /* background-attachment:fixed; */
     background-position: center;
+    background-color: rgba(230, 230, 230, 1);
 }
