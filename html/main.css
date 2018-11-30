@@ -74,6 +74,9 @@ header {
     border-radius: 10px;
     z-index: 999;
 }
+#logout{
+    display: none;
+}
 .hd{
     height: 600px;
 }

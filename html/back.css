@@ -15,6 +15,15 @@ nav{
     width: 20%;
     /* max-width: 220px; */
 }
+.menu{
+    width: 100%;
+}
+.menu-text{
+    /* width: 60%; */
+    text-align: center;
+    margin: 0px auto;
+
+}
 .main-left{
     margin-left: 20%;
 
