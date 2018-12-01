@@ -16,6 +16,6 @@
     <a>${name}</a>
     <a>${price}</a>
     <a>加入购物车</a>
-
+    
 </body>
 </html>

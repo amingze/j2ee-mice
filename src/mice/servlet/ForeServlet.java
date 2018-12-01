@@ -5,8 +5,10 @@ import java.sql.SQLException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import mice.bean.Order;
 import mice.bean.Product;
 import mice.bean.User;
+import mice.dao.OrderDAO;
 
 public class ForeServlet extends ForeBaseServlet {
 
@@ -39,6 +41,7 @@ public class ForeServlet extends ForeBaseServlet {
         String passwd = request.getParameter("passwd");
 
         User bean = userDAO.check(name, passwd);
+
         if (null == bean) {
             request.setAttribute("status", "erro");
             return "register.jsp";
@@ -70,5 +73,16 @@ public class ForeServlet extends ForeBaseServlet {
         request.setAttribute("price", product.getPrice());
 
         return "product.jsp";
+    }
+    public String addCart(HttpServletRequest request, HttpServletResponse response) {
+        Order order=new Order();
+        User user=(User)request.getSession().getAttribute("user");
+        order.setUserId(user.getId());
+        order.setNumber( Integer.getInteger(request.getParameter("number")));
+        order.setStatus(2);
+        order.setProductId(Integer.getInteger(request.getParameter("product")));
+        OrderDAO.add(order);
+        //TO-DO OrderDAO.add(user,);
+        return "!已加入购物车";
     }
 }
