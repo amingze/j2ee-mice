@@ -4,7 +4,16 @@ public class Product {
 	int id;
 	String name;
 	float price;
+	int imageid;
 
+	public int getImageId() {
+		return this.imageid;
+	}
+
+	public void setImageId(int imageid) {
+		this.imageid = imageid;
+	}
+	
 	public int getId() {
 		return id;
 	}
