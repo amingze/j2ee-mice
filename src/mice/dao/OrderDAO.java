@@ -44,14 +44,17 @@ public class OrderDAO {
 				bean.setUserId(eq.getInt("u_id"));
 				bean.setNumber(eq.getInt("number"));
 				bean.setStatus(eq.getInt("status"));
-				bean.setStatus(eq.getInt("p_id"));
+				bean.setProductId(eq.getInt("p_id"));
+				bean.setProduct(ProductDAO.get(bean.getProductId()));
+				
 				beans.add(bean);
 			}
 		}catch (Exception e) {
 				e.printStackTrace();
 		}
-		return null;
+		return beans;
 	}
+	
 	// public static Product get(int id) {
 	// 	String sql = "SELECT * FROM `Product` where id = ? ";
 	// 	Product product = new Product();
@@ -178,4 +181,7 @@ public class OrderDAO {
 	// 		System.out.println(g.getName());
 	// 	}
 	// }
+	public static void main(String[] args) {
+		System.out.println( getList(15).get(1).getProductId());
+	}
 }

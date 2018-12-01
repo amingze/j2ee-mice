@@ -1,6 +1,8 @@
 package mice.servlet;
 
 import java.sql.SQLException;
+import java.util.List;
+import java.util.Locale.Category;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -91,13 +93,27 @@ public class ForeServlet extends ForeBaseServlet {
     }
 
     public String cart(HttpServletRequest request, HttpServletResponse response){
-        User user=(User)request.getSession().getAttribute("user");
-        OrderDAO.getList(user.getId());
+        User user =(User)request.getSession().getAttribute("user");
+
+        List<Order> beans= OrderDAO.getList(user.getId());
+        
+        request.setAttribute("cartlist", beans);
         return "cart.jsp";
     }
+   
+    public String category(HttpServletRequest request, HttpServletResponse response){
+        int id=Integer.parseInt( request.getParameter("id"));
+        // Category beans= CategoryDAO.get(id);
 
-    public String personal(HttpServletRequest request, HttpServletResponse response){
-
-        return null;
+        return "category.jsp";
     }
+    // public String personal(HttpServletRequest request, HttpServletResponse response){
+    //     User user =(User)request.getSession().getAttribute("user");
+    //     List<Order> beans= OrderDAO.getList(user.getId());
+    //     System.out.println("!!!cartlist!:"+beans);
+    //     for(Order bean:beans)
+    //         System.out.println("cartlist:"+bean.getProductId());
+    //     request.setAttribute("cartlist", beans);
+    //     return null;
+    // }
 }

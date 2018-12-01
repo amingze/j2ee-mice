@@ -22,6 +22,7 @@
                 <li><a>个人中心</a></li>
             </ul>
             <ul class="hd-right">
+                <li><a  href="${contextPath}/forecart">购物车</a></li>
                 <li><a>${user.name }</a><li>
                 <li><a  href="${contextPath}/login.jsp">登录</a></li>
                 <li> <a href="${contextPath}/register.jsp">注册</a></li>
