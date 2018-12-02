@@ -5,7 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-import mice.bean.DB;
+import mice.util.DB;
 
 import java.sql.Connection;
 

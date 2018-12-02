@@ -1,0 +1,32 @@
+package mice.bean;
+
+import java.util.ArrayList;
+import java.util.List;
+
+/**
+ * ProductItem
+ */
+public class ProductItem {
+    int id;
+    String name;
+
+
+    public int getId() {
+        return this.id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return this.name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+
+
+}
