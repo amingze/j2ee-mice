@@ -19,12 +19,13 @@
     ${cart.number}
     ${cart.status}
 <br>
-<input type="">
-<input type="radio" name="id" value="${product.id }">
+<input type="checkbox"  name="productId" value="${cart.product.id}">
     ${cart.product.name}<br>
     ${cart.product.price}<br>
-    ${cart.product.id}<br>
+   <br>
 </c:forEach>
+<input type="submit" value="购买">
+
 </form>
 </body>
 </html>

@@ -77,43 +77,57 @@ public class ForeServlet extends ForeBaseServlet {
 
         return "product.jsp";
     }
+
     public String addCart(HttpServletRequest request, HttpServletResponse response) {
-        Order order=new Order();
-        User user=(User)request.getSession().getAttribute("user");
-        System.out.println("!!addCart!UserID:"+user.getId());
+        Order order = new Order();
+        User user = (User) request.getSession().getAttribute("user");
+        System.out.println("!!addCart!UserID:" + user.getId());
         order.setUserId(user.getId());
-        System.out.println("!!addCart!num:"+request.getParameter("num"));
+        System.out.println("!!addCart!num:" + request.getParameter("num"));
         order.setNumber(Integer.parseInt(request.getParameter("num")));
         order.setStatus(2);
-        System.out.println("!!addCart!productId:"+request.getParameter("productId"));
+        System.out.println("!!addCart!productId:" + request.getParameter("productId"));
         order.setProductId(Integer.parseInt(request.getParameter("productId")));
         OrderDAO.add(order);
         // TO-DO OrderDAO.add(user,);
         return "!已加入购物车";
     }
 
-    public String cart(HttpServletRequest request, HttpServletResponse response){
-        User user =(User)request.getSession().getAttribute("user");
+    public String cart(HttpServletRequest request, HttpServletResponse response) {
+        User user = (User) request.getSession().getAttribute("user");
 
-        List<Order> beans= OrderDAO.getList(user.getId());
-        
+        List<Order> beans = OrderDAO.getList(user.getId());
+
         request.setAttribute("cartlist", beans);
         return "cart.jsp";
     }
-   
-    public String category(HttpServletRequest request, HttpServletResponse response){
-        int id=Integer.parseInt( request.getParameter("id"));
-        // Category beans= CategoryDAO.get(id);
 
-        return "category.jsp";
+    public String buy(HttpServletRequest request, HttpServletResponse response) {
+        String pdIdList[] = request.getParameterValues("productId");
+        float total = 0;
+        for (int i = 0; i < pdIdList.length; i++) {
+            total += productDAO.get(Integer.parseInt(pdIdList[i])).getPrice();
+        }
+        System.out.println("!!total!" + total);
+
+        return "!";
     }
-    // public String personal(HttpServletRequest request, HttpServletResponse response){
-    //     User user =(User)request.getSession().getAttribute("user");
-    //     List<Order> beans= OrderDAO.getList(user.getId());
-    //     System.out.println("!!!cartlist!:"+beans);
-    //     for(Order bean:beans)
-    //         System.out.println("cartlist:"+bean.getProductId());
-    //     request.setAttribute("cartlist", beans);
-    //     return null;
+    // public String category(HttpServletRequest request, HttpServletResponse
+    // response){
+    // int id=Integer.parseInt( request.getParameter("id"));
+    // // Category beans= CategoryDAO.get(id);
+
+    // return "category.jsp";
     // }
+    // public String personal(HttpServletRequest request, HttpServletResponse
+    // response){
+    // User user =(User)request.getSession().getAttribute("user");
+    // List<Order> beans= OrderDAO.getList(user.getId());
+    // System.out.println("!!!cartlist!:"+beans);
+    // for(Order bean:beans)
+    // System.out.println("cartlist:"+bean.getProductId());
+    // request.setAttribute("cartlist", beans);
+    // return null;
+    // }
+
 }
