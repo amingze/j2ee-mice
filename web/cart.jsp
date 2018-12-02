@@ -14,19 +14,24 @@
 <form action="${contextPath}/forebuy" method="post">
 
 <c:forEach items="${cartlist}" var="cart" varStatus="st">
-    ${cart.productId}
-    ${cart.userId}
+   productId ${cart.productId}
+   userId ${cart.userId}
     
-    ${cart.status}
+   status ${cart.status}
 <br>
+<div>
+
 <input type="checkbox"  name="productId" value="${cart.product.id}">
 <input type="number"  name="amoun" value="${cart.number}">
+
+</div>
     ${cart.product.name}<br>
     ${cart.product.price}<br>
    <br>
 </c:forEach>
+<div>
 <input type="submit" value="购买">
-
+</div>
 </form>
 </body>
 </html>

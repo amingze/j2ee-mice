@@ -1,6 +1,6 @@
 package mice.bean;
 
-public class Image {
+public class ProductImage {
 	String type;
 	int productId;
 	int id;

@@ -2,10 +2,6 @@ package mice.bean;
 
 import java.util.ArrayList;
 import java.util.List;
-
-/**
- * OrderItem
- */
 public class Order {
 
     int id;

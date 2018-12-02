@@ -107,15 +107,16 @@ public class ForeServlet extends ForeBaseServlet {
     public String buy(HttpServletRequest request, HttpServletResponse response) {
         String pdIdList[] = request.getParameterValues("productId");
         String pdAmountList[]= request.getParameterValues("amoun");
-        System.out.println("!!pdAmountList!"+pdAmountList[0]);
+        for (int i = 0; i < pdAmountList.length; i++) {
+            System.out.println("!!pdAmountList!"+pdAmountList[i]);
+        }
+
         float total = 0;
-        
+        int amount=1;
         for (int i = 0; i < pdIdList.length; i++) {
             float product= productDAO.get(Integer.parseInt(pdIdList[i])).getPrice();
-            float amount= Float.parseFloat(pdAmountList[i]);
-            total += product*amount;
-            System.out.println("!!!product!:"+product);
-            System.out.println("!!!amount!:"+amount);
+            amount= Integer.parseInt(pdAmountList[i]);
+            total =total+ product*amount;
         }
         
         // OrderDAO.setTotal();
