@@ -1,18 +1,34 @@
 package mice.bean;
-
-import java.util.ArrayList;
-import java.util.List;
-
-/**
- * OrderItem
- */
-public class OrderItem {
-
+public  class OrderItem {
     int id;
     int userId;
-    List<Order> orderItem = new ArrayList<>();
-    String datetime;
 
+
+    Product product;
+    int productId;
+
+    int number;
+    int status;
+    //0-订单隐藏 1-收藏夹 2-购物车 3-未付款 4-已付款 5-已发货 
+    //6-退款申请 7-退款同意 8-退款失败 9-退款中 10-退款完成
+    String remake;
+
+    
+    public int getProductId() {
+        return this.productId;
+    }
+
+    public void setProductId(int productId) {
+        this.productId = productId;
+    }
+    
+    public int getUserId() {
+        return this.userId;
+    }
+
+    public void setUserId(int userId) {
+        this.userId = userId;
+    }
     public int getId() {
         return this.id;
     }
@@ -21,28 +37,37 @@ public class OrderItem {
         this.id = id;
     }
 
-    public int getUserId() {
-        return this.userId;
+    public Product getProduct() {
+        return this.product;
     }
 
-    public void setUserId(int userId) {
-        this.userId = userId;
+    public void setProduct(Product product) {
+        this.product = product;
     }
 
-    public List<Order> getOrderItem() {
-        return this.orderItem;
+    public int getNumber() {
+        return this.number;
     }
 
-    public void setOrderItem(List<Order> orderItem) {
-        this.orderItem = orderItem;
+    public void setNumber(int number) {
+        this.number = number;
     }
 
-    public String getDatetime() {
-        return this.datetime;
+    public int getStatus() {
+        return this.status;
     }
 
-    public void setDatetime(String datetime) {
-        this.datetime = datetime;
+    public void setStatus(int status) {
+        this.status = status;
     }
 
+    public String getRemake() {
+        return this.remake;
+    }
+
+    public void setRemake(String remake) {
+        this.remake = remake;
+    }
+
+    
 }

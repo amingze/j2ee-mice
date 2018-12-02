@@ -1,34 +1,18 @@
 package mice.bean;
-public  class Order{
+
+import java.util.ArrayList;
+import java.util.List;
+
+/**
+ * OrderItem
+ */
+public class Order {
+
     int id;
     int userId;
-
-
-    Product product;
-    int productId;
-
-    int number;
-    int status;
-    //0-订单隐藏 1-收藏夹 2-购物车 3-未付款 4-已付款 5-已发货 
-    //6-退款申请 7-退款同意 8-退款失败 9-退款中 10-退款完成
-    String remake;
+    List<Order> orderItem = new ArrayList<>();
+    String datetime;
     Address address;
-    
-    public int getProductId() {
-        return this.productId;
-    }
-
-    public void setProductId(int productId) {
-        this.productId = productId;
-    }
-    
-    public int getUserId() {
-        return this.userId;
-    }
-
-    public void setUserId(int userId) {
-        this.userId = userId;
-    }
     public int getId() {
         return this.id;
     }
@@ -37,36 +21,28 @@ public  class Order{
         this.id = id;
     }
 
-    public Product getProduct() {
-        return this.product;
+    public int getUserId() {
+        return this.userId;
     }
 
-    public void setProduct(Product product) {
-        this.product = product;
+    public void setUserId(int userId) {
+        this.userId = userId;
     }
 
-    public int getNumber() {
-        return this.number;
+    public List<Order> getOrderItem() {
+        return this.orderItem;
     }
 
-    public void setNumber(int number) {
-        this.number = number;
+    public void setOrderItem(List<Order> orderItem) {
+        this.orderItem = orderItem;
     }
 
-    public int getStatus() {
-        return this.status;
+    public String getDatetime() {
+        return this.datetime;
     }
 
-    public void setStatus(int status) {
-        this.status = status;
-    }
-
-    public String getRemake() {
-        return this.remake;
-    }
-
-    public void setRemake(String remake) {
-        this.remake = remake;
+    public void setDatetime(String datetime) {
+        this.datetime = datetime;
     }
 
     public Address getAddress() {
@@ -76,5 +52,4 @@ public  class Order{
     public void setAddress(Address address) {
         this.address = address;
     }
-    
 }

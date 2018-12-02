@@ -16,10 +16,11 @@
 <c:forEach items="${cartlist}" var="cart" varStatus="st">
     ${cart.productId}
     ${cart.userId}
-    ${cart.number}
+    
     ${cart.status}
 <br>
 <input type="checkbox"  name="productId" value="${cart.product.id}">
+<input type="number"  name="amoun" value="${cart.number}">
     ${cart.product.name}<br>
     ${cart.product.price}<br>
    <br>
