@@ -2,16 +2,19 @@ package mice.dao;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-
-import mice.bean.Category;
-import mice.bean.Product;
+import mice.bean.ProductImage;
 import mice.util.DBUtil;
 
-public class CategoryDAO {
-    public void add(Category bean) {
-        String sql = "INSERT INTO `mice`.`Category` (`id`, `name`) VALUES (null,?);";
+/**
+ * CategoryDAO
+ */
+public class ProductImageDAO {
+    public void add(ProductImage bean) {
+        String sql = "INSERT INTO `mice`.`ProductImage` (`id`, `p_id`,`type`) VALUES (null,?,?);";
         try (PreparedStatement ps = DBUtil.connection().prepareStatement(sql)) {
-            ps.setString(1, bean.getName());
+            ps.setInt(1, bean.getId());
+            ps.setInt(2, bean.getProductId());
+            ps.setString(3, bean.getType());
             ps.execute();
             ResultSet rs = ps.getGeneratedKeys();
             if (rs.next()) {
@@ -23,7 +26,7 @@ public class CategoryDAO {
     }
 
     public static void delete(int id) {
-        String sql = "DELETE FROM `mice`.`Category` WHERE `Category`.`id` = ?";
+        String sql = "DELETE FROM `ProductImage`.`Product` WHERE `ProductImage`.`id` = ?";
         try (PreparedStatement ps = DBUtil.connection().prepareStatement(sql)) {
             ps.setInt(1, id);
             ps.execute();
@@ -32,26 +35,29 @@ public class CategoryDAO {
         }
     }
 
-    public static void updata(Category bean) {
-        String sql = "UPDATE  `mice`.`Category` SET  `name` =  ?, WHERE  `Category`.`id` =?;";
+    public static void updata(ProductImage bean) {
+        String sql = "UPDATE  `mice`.`ProductImage` SET  `p_id` =  ?,`type` =  ?,WHERE  `ProductImage`.`id` =?;";
         try (PreparedStatement ps = DBUtil.connection().prepareStatement(sql)) {
-            ps.setString(1, bean.getName());
+            ps.setInt(1, bean.getId());
+            ps.setString(2, bean.getType());
+            ps.setInt(3, bean.getProductId());
             ps.execute();
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    public static Category get(int id) {
-        String sql = "SELECT * FROM `Category` where id = ? ";
-        Category bean = new Category();
+    public static ProductImage get(int id) {
+        String sql = "SELECT * FROM `ProductImage` where id = ? ";
+        ProductImage bean = new ProductImage();
         try (PreparedStatement ps = DBUtil.connection().prepareStatement(sql)) {
             try {
                 ps.setInt(1, id);
                 ResultSet eq = ps.executeQuery();
                 if (eq.next()) {
-                    bean.setId(id);
-                    bean.setName(eq.getString("name"));
+                    bean.setId(eq.getInt("id"));
+                    bean.setProductId(eq.getInt("p_id"));
+                    bean.setType(eq.getString("type"));
                 }
             } catch (Exception e) {
                 e.printStackTrace();

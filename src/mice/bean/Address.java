@@ -3,8 +3,24 @@ public  class Address{
     int id;
     String name;
     String address;
-    String phone;
-    String userid;
+    int phoneNumber;
+
+    public int getPhoneNumber() {
+        return this.phoneNumber;
+    }
+
+    public void setPhoneNumber(int phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+    int userId;
+
+    public int getUserId() {
+        return this.userId;
+    }
+
+    public void setUserId(int userId) {
+        this.userId = userId;
+    }
     public int getId() {
         return this.id;
     }
@@ -29,11 +45,4 @@ public  class Address{
         this.address = address;
     }
 
-    public String getPhone() {
-        return this.phone;
-    }
-
-    public void setPhone(String phone) {
-        this.phone = phone;
-    }
 }

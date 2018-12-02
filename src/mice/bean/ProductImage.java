@@ -4,7 +4,7 @@ public class ProductImage {
 	String type;
 	int productId;
 	int id;
-
+	
 	public String getType() {
 		return type;
 	}

@@ -3,9 +3,6 @@ package mice.bean;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * ProductItem
- */
 public class ProductItem {
     int id;
     String name;

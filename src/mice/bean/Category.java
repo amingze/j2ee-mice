@@ -1,13 +1,19 @@
 package mice.bean;
 
-/**
- * Category
- */
+import java.util.List;
+
 public class Category {
     int id;
     String name;
-    int productId;
+    List<Product> products;
 
+    public List<Product> getProducts() {
+        return this.products;
+    }
+
+    public void setProducts(List<Product> products) {
+        this.products = products;
+    }
     public int getId() {
         return this.id;
     }
@@ -23,15 +29,5 @@ public class Category {
     public void setName(String name) {
         this.name = name;
     }
-
-    public int getProductId() {
-        return this.productId;
-    }
-
-    public void setProductId(int productId) {
-        this.productId = productId;
-    }
-    // List porductId=new ArrayList<>();
-    
     
 }

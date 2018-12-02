@@ -19,11 +19,9 @@ public class OrderDAO {
 	// 		ps.setFloat(2, bean.getPrice());
 	// 		ps.setInt(3, bean.getId());
 	// 		ps.execute();
-
 	// 	} catch (Exception e) {
 	// 		e.printStackTrace();
 	// 	}
-
 	// }
 
     public int createOrder() {
