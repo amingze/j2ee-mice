@@ -11,49 +11,91 @@ import mice.bean.Product;
 import mice.util.DBUtil;
 
 public class OrderDAO {
-	public static void add(Order bean) {
 
-		String sql = "INSERT INTO `mice`.`order` (`id`, `u_id`, `number`,`status`,`p_id`) VALUES (null,?,?,?,?);";
+	// public static void updata(Order bean) {
+	// 	String sql = "UPDATE  `mice`.`Order` SET  `name` =  ?,price=? WHERE  `Order`.`id` =?;";
+	// 	try (PreparedStatement ps = DBUtil.connection().prepareStatement(sql)) {
+	// 		ps.setString(1, bean.getName());
+	// 		ps.setFloat(2, bean.getPrice());
+	// 		ps.setInt(3, bean.getId());
+	// 		ps.execute();
+
+	// 	} catch (Exception e) {
+	// 		e.printStackTrace();
+	// 	}
+
+	// }
+
+    public int createOrder() {
+        int id=0;
+        String sql = "INSERT INTO `mice`.`order` (`id`, `datetime`) VALUES (null,null);";
+        try (PreparedStatement ps = DBUtil.connection().prepareStatement(sql)) {
+            ps.execute();
+            ResultSet rs = ps.getGeneratedKeys();
+            if (rs.next()) {
+                id=rs.getInt(1);
+            }
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        return id;
+
+    }
+
+	public void setTotal(float total){
+		String sql = "UPDATE  `mice`.`Order` SET  `total` =  ?WHERE  `Order`.`id` =?;";
 		try (PreparedStatement ps = DBUtil.connection().prepareStatement(sql)) {
-
-            ps.setInt(1, bean.getUserId());
-            ps.setInt(2, bean.getNumber());
-            ps.setInt(3, bean.getStatus());
-            ps.setInt(4, bean.getProductId());
+			ps.setFloat(1,total);
 			ps.execute();
-			ResultSet rs = ps.getGeneratedKeys();
-			if (rs.next()) {
-				bean.setId(rs.getInt(1));
-			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 
 	}
 
-	public static List<Order> getList(int id) {
-		String sql="SELECT *  FROM `order` WHERE `u_id` = ?";
-		List<Order> beans=new ArrayList<>();
+	// public static void add(Order bean) {
+
+	// 	String sql = "INSERT INTO `mice`.`order` (`id`, `u_id`, `number`,`status`,`p_id`) VALUES (null,?,?,?,?);";
+	// 	try (PreparedStatement ps = DBUtil.connection().prepareStatement(sql)) {
+
+    //         ps.setInt(1, bean.getUserId());
+    //         ps.setInt(2, bean.getNumber());
+    //         ps.setInt(3, bean.getStatus());
+    //         ps.setInt(4, bean.getProductId());
+	// 		ps.execute();
+	// 		ResultSet rs = ps.getGeneratedKeys();
+	// 		if (rs.next()) {
+	// 			bean.setId(rs.getInt(1));
+	// 		}
+	// 	} catch (Exception e) {
+	// 		e.printStackTrace();
+	// 	}
+
+	// }
+
+	// public static List<Order> getList(int id) {
+	// 	String sql="SELECT *  FROM `order` WHERE `u_id` = ?";
+	// 	List<Order> beans=new ArrayList<>();
 		
-		try (PreparedStatement ps = DBUtil.connection().prepareStatement(sql)) {
-			ps.setInt(1, id);
-			ResultSet eq = ps.executeQuery();
-			while(eq.next()){
-				Order bean=new Order();
-				bean.setId(eq.getInt("id"));
-				bean.setUserId(eq.getInt("u_id"));
-				bean.setNumber(eq.getInt("number"));
-				bean.setStatus(eq.getInt("status"));
-				bean.setProductId(eq.getInt("p_id"));
-				bean.setProduct(ProductDAO.get(bean.getProductId()));
+	// 	try (PreparedStatement ps = DBUtil.connection().prepareStatement(sql)) {
+	// 		ps.setInt(1, id);
+	// 		ResultSet eq = ps.executeQuery();
+	// 		while(eq.next()){
+	// 			Order bean=new Order();
+	// 			bean.setId(eq.getInt("id"));
+	// 			bean.setUserId(eq.getInt("u_id"));
+	// 			bean.setNumber(eq.getInt("number"));
+	// 			bean.setStatus(eq.getInt("status"));
+	// 			bean.setProductId(eq.getInt("p_id"));
+	// 			bean.setProduct(ProductDAO.get(bean.getProductId()));
 				
-				beans.add(bean);
-			}
-		}catch (Exception e) {
-				e.printStackTrace();
-		}
-		return beans;
-	}
+	// 			beans.add(bean);
+	// 		}
+	// 	}catch (Exception e) {
+	// 			e.printStackTrace();
+	// 	}
+	// 	return beans;
+	// }
 	
 	// public static Product get(int id) {
 	// 	String sql = "SELECT * FROM `Product` where id = ? ";
@@ -118,19 +160,19 @@ public class OrderDAO {
 	// 	}
 	// }
 
-	// public static void updata(Product bean) {
-	// 	String sql = "UPDATE  `mice`.`Product` SET  `name` =  ?,price=? WHERE  `Product`.`id` =?;";
-	// 	try (PreparedStatement ps = DBUtil.connection().prepareStatement(sql)) {
-	// 		ps.setString(1, bean.getName());
-	// 		ps.setFloat(2, bean.getPrice());
-	// 		ps.setInt(3, bean.getId());
-	// 		ps.execute();
+	public static void updata(Product bean) {
+		String sql = "UPDATE  `mice`.`Product` SET  `name` =  ?,price=? WHERE  `Product`.`id` =?;";
+		try (PreparedStatement ps = DBUtil.connection().prepareStatement(sql)) {
+			ps.setString(1, bean.getName());
+			ps.setFloat(2, bean.getPrice());
+			ps.setInt(3, bean.getId());
+			ps.execute();
 
-	// 	} catch (Exception e) {
-	// 		e.printStackTrace();
-	// 	}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 
-	// }
+	}
 
 	// public static List<Product> get(String name) {
 	// 	String sql = "SELECT * FROM `Product` where name like ? ";
@@ -181,7 +223,7 @@ public class OrderDAO {
 	// 		System.out.println(g.getName());
 	// 	}
 	// }
-	public static void main(String[] args) {
-		System.out.println( getList(15).get(1).getProductId());
-	}
+	// public static void main(String[] args) {
+	// 	System.out.println( getList(15).get(1).getProductId());
+	// }
 }

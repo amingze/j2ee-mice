@@ -8,9 +8,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import mice.bean.Order;
+import mice.bean.OrderItem;
 import mice.bean.Product;
 import mice.bean.User;
 import mice.dao.OrderDAO;
+import mice.dao.OrderItemDAO;
 
 public class ForeServlet extends ForeBaseServlet {
 
@@ -79,16 +81,16 @@ public class ForeServlet extends ForeBaseServlet {
     }
 
     public String addCart(HttpServletRequest request, HttpServletResponse response) {
-        Order order = new Order();
+        OrderItem orderItem = new OrderItem();
         User user = (User) request.getSession().getAttribute("user");
         System.out.println("!!addCart!UserID:" + user.getId());
-        order.setUserId(user.getId());
+        orderItem.setUserId(user.getId());
         System.out.println("!!addCart!num:" + request.getParameter("num"));
-        order.setNumber(Integer.parseInt(request.getParameter("num")));
-        order.setStatus(2);
+        orderItem.setNumber(Integer.parseInt(request.getParameter("num")));
+        orderItem.setStatus(2);
         System.out.println("!!addCart!productId:" + request.getParameter("productId"));
-        order.setProductId(Integer.parseInt(request.getParameter("productId")));
-        OrderDAO.add(order);
+        orderItem.setProductId(Integer.parseInt(request.getParameter("productId")));
+        OrderItemDAO.add(orderItem);
         // TO-DO OrderDAO.add(user,);
         return "!已加入购物车";
     }
@@ -96,7 +98,7 @@ public class ForeServlet extends ForeBaseServlet {
     public String cart(HttpServletRequest request, HttpServletResponse response) {
         User user = (User) request.getSession().getAttribute("user");
 
-        List<Order> beans = OrderDAO.getList(user.getId());
+        List<OrderItem> beans = OrderItemDAO.getList(user.getId());
 
         request.setAttribute("cartlist", beans);
         return "cart.jsp";
@@ -104,13 +106,23 @@ public class ForeServlet extends ForeBaseServlet {
 
     public String buy(HttpServletRequest request, HttpServletResponse response) {
         String pdIdList[] = request.getParameterValues("productId");
+        String pdAmountList[]= request.getParameterValues("amoun");
+        System.out.println("!!pdAmountList!"+pdAmountList[0]);
         float total = 0;
+        
         for (int i = 0; i < pdIdList.length; i++) {
-            total += productDAO.get(Integer.parseInt(pdIdList[i])).getPrice();
+            float product= productDAO.get(Integer.parseInt(pdIdList[i])).getPrice();
+            float amount= Float.parseFloat(pdAmountList[i]);
+            total += product*amount;
+            System.out.println("!!!product!:"+product);
+            System.out.println("!!!amount!:"+amount);
         }
+        
+        // OrderDAO.setTotal();
+        request.setAttribute("total", total);
+        // OrderDAO
         System.out.println("!!total!" + total);
-
-        return "!";
+        return "accounts.jsp";
     }
     // public String category(HttpServletRequest request, HttpServletResponse
     // response){
