@@ -2,21 +2,20 @@ package mice.dao;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.util.Properties;
 
-import mice.bean.Property;
+import mice.bean.PropertyValue;
 import mice.util.DBUtil;
 
 /**
- * PropertyDAO
+ * PropertyValue
  */
-public class PropertyDAO {
-    public void add(Property bean) {
-        String sql = "INSERT INTO `mice`.`Property` (`id`, `name`,`c_id`) VALUES (null,?,?);";
+public class PropertyValueDAO {
+    public void add(PropertyValue bean) {
+        String sql = "INSERT INTO `mice`.`PropertyValue` (`id`, `pid`,`c_id`) VALUES (null,?,?);";
         try (PreparedStatement ps = DBUtil.connection().prepareStatement(sql)) {
-            ps.setString(1, bean.getName());
-            ps.setInt(2, bean.getCategoryId());
-
+            ps.setInt(1, bean.getProductId());
+            ps.setInt(2, bean.getPropertyId());
+            ps.setString(3, bean.getValue());
             ps.execute();
             ResultSet rs = ps.getGeneratedKeys();
             if (rs.next()) {
@@ -28,7 +27,7 @@ public class PropertyDAO {
     }
 
     public static void delete(int id) {
-        String sql = "DELETE FROM `mice`.`Property` WHERE `Property`.`id` = ?";
+        String sql = "DELETE FROM `mice`.`PropertyValue` WHERE `PropertyValue`.`id` = ?";
         try (PreparedStatement ps = DBUtil.connection().prepareStatement(sql)) {
             ps.setInt(1, id);
             ps.execute();
@@ -37,11 +36,12 @@ public class PropertyDAO {
         }
     }
 
-    public static void updata(Property bean) {
-        String sql = "UPDATE  `mice`.`Property` SET  `name` =  ?, `c_id` = ?, WHERE  `Property`.`id` =?;";
+    public static void updata(PropertyValue bean) {
+        String sql = "UPDATE  `mice`.`PropertyValue` SET  `p_id` =  ?, `pt_id` = ?, `value` = ?,WHERE  `PropertyValue`.`id` =?;";
         try (PreparedStatement ps = DBUtil.connection().prepareStatement(sql)) {
-            ps.setString(1, bean.getName());
-            ps.setInt(2, bean.getCategoryId());
+            ps.setInt(1, bean.getProductId());
+            ps.setInt(2, bean.getPropertyId());
+            ps.setString(3, bean.getValue());
             ps.setInt(3, bean.getId());
             ps.execute();
         } catch (Exception e) {
@@ -49,17 +49,18 @@ public class PropertyDAO {
         }
     }
 
-    public static Property get(int id) {
-        String sql = "SELECT * FROM `Property` where id = ? ";
-        Property bean = new Property();
+    public static PropertyValue get(int id) {
+        String sql = "SELECT * FROM `PropertyValue` where id = ? ";
+        PropertyValue bean = new PropertyValue();
         try (PreparedStatement ps = DBUtil.connection().prepareStatement(sql)) {
             try {
                 ps.setInt(1, id);
                 ResultSet eq = ps.executeQuery();
                 if (eq.next()) {
                     bean.setId(id);
-                    bean.setName(eq.getString("name"));
-                    bean.setCategoryId(eq.getInt("c_id"));
+                    bean.setProductId(eq.getInt("p_id"));
+                    bean.setPropertyId(eq.getInt("pt_id"));
+                    bean.setValue(eq.getString("value"));
                 }
             } catch (Exception e) {
                 e.printStackTrace();

@@ -12,7 +12,6 @@ public  class OrderItem {
     //0-订单隐藏 1-收藏夹 2-购物车 3-未付款 4-已付款 5-已发货 
     //6-退款申请 7-退款同意 8-退款失败 9-退款中 10-退款完成
     String remake;
-
     
     public int getProductId() {
         return this.productId;

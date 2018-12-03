@@ -107,24 +107,16 @@ public class ForeServlet extends ForeBaseServlet {
     public String buy(HttpServletRequest request, HttpServletResponse response) {
         String pdIdList[] = request.getParameterValues("productId");
         String pdAmountList[]= request.getParameterValues("amoun");
-        for (int i = 0; i < pdAmountList.length; i++) {
-            System.out.println("!!pdAmountList!"+pdAmountList[i]);
+        String params[]=request.getParameterValues("params");
+        float total=0;
+        for(String param:params){
+            int orderItemId=Integer.parseInt(param);
+            OrderItem orderItem= OrderItemDAO.get(oiid);
+            total+=OrderItem.
         }
-
-        float total = 0;
-        int amount=1;
-        for (int i = 0; i < pdIdList.length; i++) {
-            float product= productDAO.get(Integer.parseInt(pdIdList[i])).getPrice();
-            amount= Integer.parseInt(pdAmountList[i]);
-            total =total+ product*amount;
-        }
-        
-        // OrderDAO.setTotal();
-        request.setAttribute("total", total);
-        // OrderDAO
-        System.out.println("!!total!" + total);
         return "accounts.jsp";
     }
+
     // public String category(HttpServletRequest request, HttpServletResponse
     // response){
     // int id=Integer.parseInt( request.getParameter("id"));

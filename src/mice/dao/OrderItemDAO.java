@@ -53,6 +53,37 @@ public class OrderItemDAO {
 		}
 		return beans;
 	}
+
+	public static OrderItem get(int id) {
+		String sql = "SELECT * FROM `OrderItem` where id = ? ";
+		OrderItem bean = new OrderItem();
+		try (PreparedStatement ps = DBUtil.connection().prepareStatement(sql)) {
+			try {
+				ps.setInt(1, id);
+				ResultSet eq = ps.executeQuery();
+				if (eq.next()) {
+					bean.setId(id);
+					bean.setUserId(eq.getInt("name"));
+					bean.setNumber(eq.getInt("number"));
+					bean.setStatus(eq.getInt("status"));
+					// bean.setRemake(remake);
+					ProductDAO.get(eq.getInt("p_id"));
+					// bean.setProductId();
+					//TODO
+					
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+
+		} catch (SQLException e1) {
+			e1.printStackTrace();
+		}
+
+		return bean;
+
+	}
+
 	// public static Product getPId(int id) {
 	// 	String sql="SELECT *  FROM `OrderItem` WHERE `p_id` = ?";
 	// 	Product bean;
@@ -75,32 +106,7 @@ public class OrderItemDAO {
 	public void setOrder(int orderId,int orderItemId) {
 		
 	}
-	// public static Product get(int id) {
-	// 	String sql = "SELECT * FROM `Product` where id = ? ";
-	// 	Product product = new Product();
-	// 	try (PreparedStatement ps = DBUtil.connection().prepareStatement(sql)) {
-	// 		try {
-	// 			ps.setInt(1, id);
-	// 			ResultSet eq = ps.executeQuery();
-	// 			if (eq.next()) {
-	// 				product.setId(id);
-	// 				product.setName(eq.getString("name"));
-	// 				product.setPrice(eq.getFloat("price"));
-	// 			}
 
-	// 		} catch (Exception e) {
-	// 			// TODO Auto-generated catch block
-	// 			e.printStackTrace();
-	// 		}
-
-	// 	} catch (SQLException e1) {
-	// 		// TODO Auto-generated catch block
-	// 		e1.printStackTrace();
-	// 	}
-
-	// 	return product;
-
-	// }
 
 	// public static Boolean isExist(int id) {
 	// 	String sql = "SELECT * FROM `Product` where id = ? ";
