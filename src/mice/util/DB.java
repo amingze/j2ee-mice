@@ -1,10 +1,11 @@
 package mice.util;
 
 public class DB {
-	public final String DB_IP = "132.232.49.18";
-	public final int DB_PORT = 3307;
+	// public final String DB_IP = "132.232.49.18";
+	public final String DB_IP = "127.0.0.1";
+	public final int DB_PORT = 3306;
 	public final String DB_LOGIN_NAME = "root";
-	public final String DB_LOGIN_PASS = "ZZT2gZa2";
+	public final String DB_LOGIN_PASS = "root";
 	public final String DB_DBNAME = "mice";
 	public final String DB_ENCODE = "UTF-8";
 	public static String sql;
