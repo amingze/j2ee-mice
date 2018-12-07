@@ -179,22 +179,6 @@ public class ForeServlet extends ForeBaseServlet {
         request.setAttribute("orders", orders);
         return "order.jsp";
     }
-    // public String category(HttpServletRequest request, HttpServletResponse
-    // response){
-    // int id=Integer.parseInt( request.getParameter("id"));
-    // // Category beans= CategoryDAO.get(id);
 
-    // return "category.jsp";
-    // }
-    // public String personal(HttpServletRequest request, HttpServletResponse
-    // response){
-    // User user =(User)request.getSession().getAttribute("user");
-    // List<Order> beans= OrderDAO.getList(user.getId());
-    // System.out.println("!!!cartlist!:"+beans);
-    // for(Order bean:beans)
-    // System.out.println("cartlist:"+bean.getProductId());
-    // request.setAttribute("cartlist", beans);
-    // return null;
-    // }
 
 }
