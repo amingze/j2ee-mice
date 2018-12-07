@@ -32,19 +32,17 @@ public abstract class ForeBaseServlet<HttpservletRequest> extends HttpServlet {
 
     protected ProductDAO productDAO = new ProductDAO();
     protected UserDAO userDAO = new UserDAO();
-    protected CategoryDAO categoryDAO=new CategoryDAO();
-    protected AddressDAO addressDAO=new  AddressDAO();
-    protected OrderDAO orderDAO=new OrderDAO();
-    protected OrderItemDAO orderItemDAO=new OrderItemDAO();
-    protected ProductImageDAO productImageDAO=new ProductImageDAO() ;
-    protected PropertyDAO propertyDAO=new PropertyDAO();
-    protected PropertyValueDAO propertyValueDAO=new PropertyValueDAO();
-    protected ReviewDAO reviewDAO=new ReviewDAO() ;
-
+    protected CategoryDAO categoryDAO = new CategoryDAO();
+    protected AddressDAO addressDAO = new AddressDAO();
+    protected OrderDAO orderDAO = new OrderDAO();
+    protected OrderItemDAO orderItemDAO = new OrderItemDAO();
+    protected ProductImageDAO productImageDAO = new ProductImageDAO();
+    protected PropertyDAO propertyDAO = new PropertyDAO();
+    protected PropertyValueDAO propertyValueDAO = new PropertyValueDAO();
+    protected ReviewDAO reviewDAO = new ReviewDAO();
 
     protected void service(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
         String funtion = (String) request.getAttribute("funtion");
         System.out.println("fore funtion");
         try {

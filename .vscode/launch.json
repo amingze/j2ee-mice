@@ -6,6 +6,17 @@
     "configurations": [
         {
             "type": "java",
+            "name": "CodeLens (Launch) - DBCPUtil",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "console": "internalConsole",
+            "stopOnEntry": false,
+            "mainClass": "mice.util.DBCPUtil",
+            "args": "",
+            "projectName": "mice"
+        },
+        {
+            "type": "java",
             "name": "CodeLens (Launch) - OrderItemDAO",
             "request": "launch",
             "cwd": "${workspaceFolder}",
