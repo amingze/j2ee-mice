@@ -7,8 +7,8 @@
 <head>
 <meta charset="UTF-8">
 <title></title>
-<link rel="stylesheet" type="text/css" media="screen" href="include\css\main.css" />
-
+<link rel="stylesheet" type="text/css" media="screen" href="include/css/main.css" />
+<script src="include/js/home.js"></script>
 </head>
 <body>
 
@@ -19,14 +19,14 @@
             <ul class="hd-left">
                 <li><a>首页</a></li>
                 <li><a>分类</a></li>
-                <li><a href="${contextPath}/foreshowOrder">个人中心</a></li>
+                <li id="paper" style="display:none" class="statusNone"><a href="${contextPath}/foreshowOrder">个人中心</a></li>
             </ul>
             <ul class="hd-right">
-                <li><a  href="${contextPath}/forecart">购物车</a></li>
-                <li><a>${user.name }</a><li>
-                <li><a  href="${contextPath}/login.jsp">登录</a></li>
-                <li> <a href="${contextPath}/register.jsp">注册</a></li>
-                <li> <a href="${contextPath}/forelogout">登出</a></li>
+                <li id="cart" style="display:none" class="statusNone"><a  href="${contextPath}/forecart">购物车</a></li>
+                <li id="name"><a>${user.name }</a><li>
+                <li id="login" class="statusBlock"><a  href="${contextPath}/login.jsp">登录</a></li>
+                <li id="register" class="statusBlock"> <a href="${contextPath}/register.jsp">注册</a></li>
+                <li id="logout" style="display:none"  class="statusNone"> <a href="${contextPath}/forelogout">登出</a></li>
 
             </ul>
         </nav>

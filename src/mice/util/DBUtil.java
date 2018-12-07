@@ -11,20 +11,20 @@ import java.sql.Connection;
 
 public class DBUtil {
 	static int SELECT_SQL = 0;
-	private final static String DB_IP = "132.232.49.18";
+	// private final static String DB_IP = "132.232.49.18";
 	// private final static String DB_IP = "10.160.16.10";
-	// private final static String DB_IP = "localhost";
+	private final static String DB_IP = "localhost";
 	private final static int DB_PORT = 3307;
 	// private final static int DB_PORT = 3306;
 	// private final static String DB_LOGIN_NAME = "root";
 	private final static String DB_LOGIN_NAME = "root";
 	// private final static String DB_LOGIN_PASS = "123";
-	private final static String DB_LOGIN_PASS = "ZZT2gZa2";
-	// private final static String DB_LOGIN_PASS = "usbw";
+	// private final static String DB_LOGIN_PASS = "ZZT2gZa2";
+	private final static String DB_LOGIN_PASS = "usbw";
 	private final static String DB_DBNAME = "mice";
 	private final static String DB_ENCODE = "UTF-8";
 	static {
-
+		
 		try {
 			// Class.forName("com.mysql.jdbc.Driver");
 			Class.forName("com.mysql.jdbc.Driver");
