@@ -10,9 +10,8 @@ import java.sql.DatabaseMetaData;
 import mice.util.DB;
 import javax.sql.DataSource;
 
-import org.apache.commons.dbcp.BasicDataSource;
-import org.apache.commons.dbcp.BasicDataSourceFactory;
-import org.apache.commons.pool.KeyedObjectPoolFactory;
+import org.apache.commons.dbcp2.BasicDataSourceFactory;
+
 import java.io.InputStream;
 import java.sql.Connection;
 import java.util.Properties;
