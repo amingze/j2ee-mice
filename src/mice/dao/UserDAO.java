@@ -13,6 +13,7 @@ import mice.bean.User;
 import mice.util.DBUtil;
 
 public class UserDAO {
+	protected static UserDAO userDAO=new UserDAO();
 	public static void add(User bean) {
 		String sql = "INSERT INTO `mice`.`user` (`id`, `name`, `passwd`, `creatdate`) VALUES (null,?,?, CURRENT_TIMESTAMP);";
 		try (PreparedStatement ps = DBUtil.prepareStatement(sql);) {
@@ -124,7 +125,7 @@ public class UserDAO {
 	}
 
 	public static boolean isExist(String name) throws SQLException {
-		User bean = UserDAO.get(name);
+		User bean = userDAO.get(name);
 		if (bean.getId() != 0)
 			return true;
 		else

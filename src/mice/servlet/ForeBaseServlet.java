@@ -17,13 +17,30 @@ import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
+import mice.dao.AddressDAO;
+import mice.dao.CategoryDAO;
+import mice.dao.OrderDAO;
+import mice.dao.OrderItemDAO;
 import mice.dao.ProductDAO;
+import mice.dao.ProductImageDAO;
+import mice.dao.PropertyDAO;
+import mice.dao.PropertyValueDAO;
+import mice.dao.ReviewDAO;
 import mice.dao.UserDAO;
 
 public abstract class ForeBaseServlet<HttpservletRequest> extends HttpServlet {
 
     protected ProductDAO productDAO = new ProductDAO();
     protected UserDAO userDAO = new UserDAO();
+    protected CategoryDAO categoryDAO=new CategoryDAO();
+    protected AddressDAO addressDAO=new  AddressDAO();
+    protected OrderDAO orderDAO=new OrderDAO();
+    protected OrderItemDAO orderItemDAO=new OrderItemDAO();
+    protected ProductImageDAO productImageDAO=new ProductImageDAO() ;
+    protected PropertyDAO propertyDAO=new PropertyDAO();
+    protected PropertyValueDAO propertyValueDAO=new PropertyValueDAO();
+    protected ReviewDAO reviewDAO=new ReviewDAO() ;
+
 
     protected void service(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {

@@ -12,6 +12,7 @@ import mice.bean.Product;
 import mice.util.DBUtil;
 
 public class OrderItemDAO {
+	protected static ProductDAO productDAO=new ProductDAO();
 	public static void add(OrderItem bean) {
 		String sql = "INSERT INTO `mice`.`orderitem` (`id`, `u_id`, `number`,`status`,`p_id`) VALUES (null,?,?,?,?);";
 		try (PreparedStatement ps = DBUtil.connection().prepareStatement(sql)) {
@@ -70,7 +71,7 @@ public class OrderItemDAO {
 					bean.setAmount(eq.getInt("number"));
 					bean.setStatus(eq.getInt("status"));
 					// bean.setRemake(remake);
-					bean.setProduct(ProductDAO.get(eq.getInt("p_id")));
+					bean.setProduct(productDAO.get(eq.getInt("p_id")));
 					
 					// bean.setProductId();
 					//TODO
@@ -102,7 +103,7 @@ public class OrderItemDAO {
 				bean.setStatus(eq.getInt("status"));
 				int productId=eq.getInt("p_id");
 				bean.setProductId(productId);
-				bean.setProduct(ProductDAO.get(productId));
+				bean.setProduct(productDAO.get(productId));
 				beans.add(bean);
 			}
 		}catch (Exception e) {
@@ -126,7 +127,7 @@ public class OrderItemDAO {
 				bean.setStatus(eq.getInt("status"));
 				int productId=eq.getInt("p_id");
 				bean.setProductId(productId);
-				bean.setProduct(ProductDAO.get(productId));
+				bean.setProduct(productDAO.get(productId));
 				beans.add(bean);
 			}
 		}catch (Exception e) {
@@ -151,12 +152,12 @@ public class OrderItemDAO {
 	
 	}
 
-	public static void setOrder(int orderId , int orderItemId) {
+	public static void setOrder(int orderItemId  , int orderId) {
 		String sql = "UPDATE  `mice`.`orderitem` SET  `o_id` =  ?, `status`=? WHERE  `orderitem`.`id` =?;";
         try (PreparedStatement ps = DBUtil.connection().prepareStatement(sql)) {
-            ps.setInt(1, orderItemId);
+            ps.setInt(1, orderId);
             ps.setInt(2, 3);
-            ps.setInt(3, orderId);
+            ps.setInt(3, orderItemId);
             ps.execute();
         } catch (Exception e) {
             e.printStackTrace();
@@ -178,7 +179,7 @@ public class OrderItemDAO {
 				bean.setStatus(eq.getInt("status"));
 				int productId=eq.getInt("p_id");
 				bean.setProductId(productId);
-				bean.setProduct(ProductDAO.get(productId));
+				bean.setProduct(productDAO.get(productId));
 				beans.add(bean);
 			}
 		}catch (Exception e) {

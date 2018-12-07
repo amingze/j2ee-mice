@@ -12,7 +12,9 @@ import mice.bean.Product;
 import mice.util.DBUtil;
 
 public class OrderDAO {
-
+    protected static ProductDAO productDAO=new ProductDAO();
+    protected static OrderItemDAO orderItemDAO=new OrderItemDAO();
+    protected static OrderDAO orderDAO=new OrderDAO();
 	// public void add(Order bean) {
     //     String sql = "INSERT INTO `mice`.`Order` (`id`, `u_id`,`p_id`,`content`,`createtime`) VALUES (null,?,?,?,null);";
     //     try (PreparedStatement ps = DBUtil.connection().prepareStatement(sql)) {
@@ -83,7 +85,7 @@ public class OrderDAO {
 			while (rs.next()) {
                 int id=rs.getInt("id");
                 List<OrderItem> bean=new ArrayList<OrderItem>();
-                bean=OrderItemDAO.getByOrder(id);
+                bean=orderItemDAO.getByOrder(id);
                 beans.add(bean);
 			}
 		} catch (Exception e) {
@@ -105,7 +107,7 @@ public class OrderDAO {
 
     public static void main(String[] args) {
         List<List<OrderItem>> order=new ArrayList<>();
-        order=OrderDAO.getByUser(16);
+        order=orderDAO.getByUser(16);
 
         for(List<OrderItem> beans:order){
             for(OrderItem bean:beans)
