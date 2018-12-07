@@ -102,61 +102,65 @@ public class ForeServlet extends ForeBaseServlet {
             return "@forehome";
         }
     }
-    public String addAmount(HttpServletRequest request, HttpServletResponse response){
+
+    public String addAmount(HttpServletRequest request, HttpServletResponse response) {
         String oiId = request.getParameter("orderItemId");
-        int id=Integer.parseInt(oiId);
-        if(orderItemDAO.get(id).getAmount()>1)orderItemDAO.changeAmount(id,orderItemDAO.get(id).getAmount()+1);
+        int id = Integer.parseInt(oiId);
+        if (orderItemDAO.get(id).getAmount() > 1)
+            orderItemDAO.changeAmount(id, orderItemDAO.get(id).getAmount() + 1);
         return "!";
     }
-    public String reduceAmount(HttpServletRequest request, HttpServletResponse response){
+
+    public String reduceAmount(HttpServletRequest request, HttpServletResponse response) {
         String oiId = request.getParameter("orderItemId");
-        int id=Integer.parseInt(oiId);
-        if(orderItemDAO.get(id).getAmount()>1)orderItemDAO.changeAmount(id,orderItemDAO.get(id).getAmount()-1);
+        int id = Integer.parseInt(oiId);
+        if (orderItemDAO.get(id).getAmount() > 1)
+            orderItemDAO.changeAmount(id, orderItemDAO.get(id).getAmount() - 1);
         return "!";
     }
-    public String changeAmount(HttpServletRequest request, HttpServletResponse response){
+
+    public String changeAmount(HttpServletRequest request, HttpServletResponse response) {
         String oiAmount = request.getParameter("orderItemAmount");
         String oiId = request.getParameter("orderItemId");
-        int orderItemAmount=Integer.parseInt(oiAmount);
-        int orderItemId=Integer.parseInt(oiId);
-        System.out.println("orderItemAmount!!"+orderItemAmount);
-        System.out.println("orderItemId!!"+orderItemId);
-        if(orderItemAmount>0)orderItemDAO.changeAmount(orderItemId,orderItemAmount);
+        int orderItemAmount = Integer.parseInt(oiAmount);
+        int orderItemId = Integer.parseInt(oiId);
+        System.out.println("orderItemAmount!!" + orderItemAmount);
+        System.out.println("orderItemId!!" + orderItemId);
+        if (orderItemAmount > 0)
+            orderItemDAO.changeAmount(orderItemId, orderItemAmount);
         return "!";
     }
+
     public String buy(HttpServletRequest request, HttpServletResponse response) {
         String paramsList[] = request.getParameterValues("oiid");
-        User user=(User)request.getSession().getAttribute("user");
+        User user = (User) request.getSession().getAttribute("user");
         // List<OrderItem> order=new ArrayList<>();
-        float total=0;
-    
-        int oid=orderDAO.createOrder();
-        Order bean=new Order();
+        float total = 0;
+
+        int oid = orderDAO.createOrder();
+        Order bean = new Order();
         bean.setId(oid);
         bean.setUserId(user.getId());
         orderDAO.updata(bean);
 
-        for(String strid:paramsList){
-            int orderItemId=Integer.parseInt(strid);
-            OrderItem orderItem=orderItemDAO.get(orderItemId);
-           
+        for (String strid : paramsList) {
+            int orderItemId = Integer.parseInt(strid);
+            OrderItem orderItem = orderItemDAO.get(orderItemId);
+
             // order.add(orderItem);
-            //updata
-            orderItemDAO.setOrder(orderItemId,oid);
-            orderItemDAO.changeStatus(orderItemId, 3);//更改状态为未支付
-            
-            total+=orderItem.getAmount()*orderItem.getProduct().getPrice();
+            // updata
+            orderItemDAO.setOrder(orderItemId, oid);
+            orderItemDAO.changeStatus(orderItemId, 3);// 更改状态为未支付
+
+            total += orderItem.getAmount() * orderItem.getProduct().getPrice();
         }
-        // 
-        System.out.println("!!!total!"+total);
-        // request.getSession().setAttribute("oid", oid);
+        System.out.println("!!!total!" + total);
         request.getSession().setAttribute("oid", oid);
 
         request.getSession().setAttribute("total", total);
 
         return "pay.jsp";
     }
-
 
     public String buyone(HttpServletRequest request, HttpServletResponse response) {
         String productId = request.getParameter("productId");
@@ -167,15 +171,15 @@ public class ForeServlet extends ForeBaseServlet {
     }
 
     public String pay(HttpServletRequest request, HttpServletResponse response) {
-        float orderPriceTotal =(float) request.getSession().getAttribute("total");
-        int oid = (int)request.getSession().getAttribute("oid");
+        float orderPriceTotal = (float) request.getSession().getAttribute("total");
+        int oid = (int) request.getSession().getAttribute("oid");
         orderItemDAO.changeStatus(oid, 4);
         return "over.jsp";
     }
 
     public String showOrder(HttpServletRequest request, HttpServletResponse response) {
-        User user =(User) request.getSession().getAttribute("user");
-        List<List<OrderItem>> orders=orderDAO.getByUser(user.getId());
+        User user = (User) request.getSession().getAttribute("user");
+        List<List<OrderItem>> orders = orderDAO.getByUser(user.getId());
         request.setAttribute("orders", orders);
         return "order.jsp";
     }
