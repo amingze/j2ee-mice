@@ -27,7 +27,7 @@
 <p>----修改----</p>
 <form action="${contextPath}/admin_product_updata" method="post">
 
-<c:forEach items="${productlist}" var="product" varStatus="st">
+<c:forEach items="${productList}" var="product" varStatus="st">
 	<input type="radio" name="id" value="${product.id }">
 	<img src="${contextPath}/admin_product_getimg?id=${product.id }.jpg">
 	<a href="product/id=${product.id}">${product.name}</a>

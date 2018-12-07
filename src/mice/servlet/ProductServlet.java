@@ -27,7 +27,7 @@ public class ProductServlet extends BackBaseServlet {
 	public String list(HttpServletRequest request, HttpServletResponse response) throws UnsupportedEncodingException {
 		Product bean = new Product();
 		request.setCharacterEncoding("UTF-8");
-		request.setAttribute("productlist", ProductDao.total());
+		request.setAttribute("productList", ProductDao.total());
 		return ("admin/product.jsp");
 	}
 

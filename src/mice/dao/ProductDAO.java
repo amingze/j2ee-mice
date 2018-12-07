@@ -147,9 +147,10 @@ public class ProductDAO {
 	}
 
 	public static void main(String[] args) {
-		List<Product> Product = ProductDAO.get("a");
-		for (Product g : Product) {
-			System.out.println(g.getName());
-		}
+		// List<Product> Product = ProductDAO.get("a");
+		// for (Product g : Product) {
+		// 	System.out.println(g.getName());
+		// }
+	 System.out.println(ProductDAO.get("纸").get(0).getName());
 	}
 }
