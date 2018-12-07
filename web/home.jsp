@@ -19,7 +19,7 @@
             <ul class="hd-left">
                 <li><a>首页</a></li>
                 <li><a>分类</a></li>
-                <li><a>个人中心</a></li>
+                <li><a href="${contextPath}/foreshowOrder">个人中心</a></li>
             </ul>
             <ul class="hd-right">
                 <li><a  href="${contextPath}/forecart">购物车</a></li>

@@ -6,6 +6,17 @@
     "configurations": [
         {
             "type": "java",
+            "name": "CodeLens (Launch) - OrderItemDAO",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "console": "internalConsole",
+            "stopOnEntry": false,
+            "mainClass": "mice.dao.OrderItemDAO",
+            "args": "",
+            "projectName": "mice"
+        },
+        {
+            "type": "java",
             "name": "CodeLens (Launch) - OrderDAO",
             "request": "launch",
             "cwd": "${workspaceFolder}",

@@ -12,10 +12,15 @@
 <script src="include/js/jquery.min.js"></script>
 
 <script src="include/js/list.js">
+
+
+</script>
+<script>
+
 </script>
 </head>
 <body>
-<form action="${contextPath}/forebuy"  method="post">
+
 
 <c:forEach items="${cartlist}"  var="cart" varStatus="st">
    productId ${cart.productId}
@@ -24,8 +29,8 @@
 <br>
 <div>
 
-<input type="checkbox" selectit="false" oiid="cart.id" class="productIdSelect" name="productId" value="${cart.productId}">
-<input type="number" pid="${cart.productId}"  class="orderItemNumber" name="amoun" value="${cart.number}">
+<input type="checkbox" pid="${cart.productId}" selectit="false" oiid="${cart.id}" class="selectOrderItem" name="productId" value="${cart.productId}">
+<input type="number" oiid="${cart.id}"  class="orderItemNumber" name="amoun" value="${cart.amount}">
 
 </div>
     ${cart.product.name}<br>
@@ -33,15 +38,16 @@
    <br>
    <span class="orderItemPromotePrice" pid="${cart.product.id}">${cart.product.price}</span>
    <span class="cartProductItemSmallSumPrice" oiid="${cart.id}" pid="${cart.product.id}" >
-￥<fmt:formatNumber  type="number" value="${cart.product.price*cart.number}" minFractionDigits="2"/>
+<%-- ￥<fmt:formatNumber  type="number" value="${cart.product.price*cart.number}" minFractionDigits="2"/> --%>
 </span>
 <br>
 <br>
 </c:forEach>
 <div>
 
-<input type="submit" class="createOrderButton" value="购买">
+<button class="createOrder"  >结  算</button>
+<%-- disabled="disabled" --%>
 </div>
-</form>
+
 </body>
 </html>

@@ -29,7 +29,7 @@ public class ReviewDAO {
     }
 
     public static void delete(int id) {
-        String sql = "DELETE FROM `mice`.`Review` WHERE `Review`.`id` = ?";
+        String sql = "DELETE FROM `mice`.`review` WHERE `review`.`id` = ?";
         try (PreparedStatement ps = DBUtil.connection().prepareStatement(sql)) {
             ps.setInt(1, id);
             ps.execute();
@@ -39,7 +39,7 @@ public class ReviewDAO {
     }
 
     public static void updata(Review bean) {
-        String sql = "UPDATE  `mice`.`Review` SET  `u_id` =  ?, `p_id` = ?, `content` = ?,WHERE  `Review`.`id` =?;";
+        String sql = "UPDATE  `mice`.`review` SET  `u_id` =  ?, `p_id` = ?, `content` = ?,WHERE  `review`.`id` =?;";
         try (PreparedStatement ps = DBUtil.connection().prepareStatement(sql)) {
             ps.setInt(1, bean.getUserId());
             ps.setInt(2, bean.getProductId());
@@ -52,7 +52,7 @@ public class ReviewDAO {
     }
 
     public static Review get(int id) {
-        String sql = "SELECT * FROM `Review` where id = ? ";
+        String sql = "SELECT * FROM `review` where id = ? ";
         Review bean = new Review();
         try (PreparedStatement ps = DBUtil.connection().prepareStatement(sql)) {
             try {

@@ -25,7 +25,7 @@ public class AddressDAO {
     }
 
     public static void delete(int id) {
-        String sql = "DELETE FROM `mice`.`Product` WHERE `Address`.`id` = ?";
+        String sql = "DELETE FROM `mice`.`product` WHERE `address`.`id` = ?";
         try (PreparedStatement ps = DBUtil.connection().prepareStatement(sql)) {
             ps.setInt(1, id);
             ps.execute();
@@ -35,7 +35,7 @@ public class AddressDAO {
     }
 
     public static void updata(Address bean) {
-		String sql = "UPDATE  `mice`.`Address` SET  `name` =  ?,address=?,phonenume=?, WHERE  `Address`.`id` =?;";
+		String sql = "UPDATE  `mice`.`address` SET  `name` =  ?,address=?,phonenume=?, WHERE  `address`.`id` =?;";
 		try (PreparedStatement ps = DBUtil.connection().prepareStatement(sql)) {
 			ps.setString(1, bean.getName());
 			ps.setString(2, bean.getAddress());
@@ -48,7 +48,7 @@ public class AddressDAO {
     }
     
     public static Address get(int id) {
-		String sql = "SELECT * FROM `Address` where id = ? ";
+		String sql = "SELECT * FROM `address` where id = ? ";
 		Address product = new Address();
 		try (PreparedStatement ps = DBUtil.connection().prepareStatement(sql)) {
 			try {

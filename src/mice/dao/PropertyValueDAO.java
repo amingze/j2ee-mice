@@ -11,7 +11,7 @@ import mice.util.DBUtil;
  */
 public class PropertyValueDAO {
     public void add(PropertyValue bean) {
-        String sql = "INSERT INTO `mice`.`PropertyValue` (`id`, `pid`,`c_id`) VALUES (null,?,?);";
+        String sql = "INSERT INTO `mice`.`propertyvalue` (`id`, `pid`,`c_id`) VALUES (null,?,?);";
         try (PreparedStatement ps = DBUtil.connection().prepareStatement(sql)) {
             ps.setInt(1, bean.getProductId());
             ps.setInt(2, bean.getPropertyId());
@@ -27,7 +27,7 @@ public class PropertyValueDAO {
     }
 
     public static void delete(int id) {
-        String sql = "DELETE FROM `mice`.`PropertyValue` WHERE `PropertyValue`.`id` = ?";
+        String sql = "DELETE FROM `mice`.`propertyvalue` WHERE `propertyvalue`.`id` = ?";
         try (PreparedStatement ps = DBUtil.connection().prepareStatement(sql)) {
             ps.setInt(1, id);
             ps.execute();
@@ -37,7 +37,7 @@ public class PropertyValueDAO {
     }
 
     public static void updata(PropertyValue bean) {
-        String sql = "UPDATE  `mice`.`PropertyValue` SET  `p_id` =  ?, `pt_id` = ?, `value` = ?,WHERE  `PropertyValue`.`id` =?;";
+        String sql = "UPDATE  `mice`.`propertyvalue` SET  `p_id` =  ?, `pt_id` = ?, `value` = ?,WHERE  `propertyvalue`.`id` =?;";
         try (PreparedStatement ps = DBUtil.connection().prepareStatement(sql)) {
             ps.setInt(1, bean.getProductId());
             ps.setInt(2, bean.getPropertyId());
@@ -50,7 +50,7 @@ public class PropertyValueDAO {
     }
 
     public static PropertyValue get(int id) {
-        String sql = "SELECT * FROM `PropertyValue` where id = ? ";
+        String sql = "SELECT * FROM `propertyvalue` where id = ? ";
         PropertyValue bean = new PropertyValue();
         try (PreparedStatement ps = DBUtil.connection().prepareStatement(sql)) {
             try {

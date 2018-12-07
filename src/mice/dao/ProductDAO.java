@@ -11,7 +11,7 @@ import mice.util.DBUtil;
 public class ProductDAO {
 	public static void add(Product bean) {
 
-		String sql = "INSERT INTO `mice`.`Product` (`id`, `name`, `price`) VALUES (null,?,?);";
+		String sql = "INSERT INTO `mice`.`product` (`id`, `name`, `price`) VALUES (null,?,?);";
 		try (PreparedStatement ps = DBUtil.connection().prepareStatement(sql)) {
 			ps.setString(1, bean.getName());
 			ps.setFloat(2, bean.getPrice());
@@ -27,7 +27,7 @@ public class ProductDAO {
 	}
 
 	public static Product get(int id) {
-		String sql = "SELECT * FROM `Product` where id = ? ";
+		String sql = "SELECT * FROM `product` where id = ? ";
 		Product product = new Product();
 		try (PreparedStatement ps = DBUtil.connection().prepareStatement(sql)) {
 			try {
@@ -54,7 +54,7 @@ public class ProductDAO {
 	}
 
 	public static Boolean isExist(int id) {
-		String sql = "SELECT * FROM `Product` where id = ? ";
+		String sql = "SELECT * FROM `product` where id = ? ";
 		try (PreparedStatement ps = DBUtil.connection().prepareStatement(sql)) {
 			try {
 				ps.setInt(1, id);
@@ -78,7 +78,7 @@ public class ProductDAO {
 	}
 
 	public static void delete(int id) {
-		String sql = "DELETE FROM `mice`.`Product` WHERE `Product`.`id` = ?";
+		String sql = "DELETE FROM `mice`.`product` WHERE `product`.`id` = ?";
 		if (isExist(id)) {
 			try (PreparedStatement ps = DBUtil.connection().prepareStatement(sql)) {
 				ps.setInt(1, id);
@@ -90,7 +90,7 @@ public class ProductDAO {
 	}
 
 	public static void updata(Product bean) {
-		String sql = "UPDATE  `mice`.`Product` SET  `name` =  ?,price=? WHERE  `Product`.`id` =?;";
+		String sql = "UPDATE  `mice`.`product` SET  `name` =  ?,price=? WHERE  `product`.`id` =?;";
 		try (PreparedStatement ps = DBUtil.connection().prepareStatement(sql)) {
 			ps.setString(1, bean.getName());
 			ps.setFloat(2, bean.getPrice());
@@ -104,7 +104,7 @@ public class ProductDAO {
 	}
 
 	public static List<Product> get(String name) {
-		String sql = "SELECT * FROM `Product` where name like ? ";
+		String sql = "SELECT * FROM `product` where name like ? ";
 		List<Product> beans = new ArrayList<Product>();
 		try (PreparedStatement ps = DBUtil.connection().prepareStatement(sql);) {
 			ps.setString(1, "%" + name + "%");
@@ -126,7 +126,7 @@ public class ProductDAO {
 	}
 
 	public static List<Product> total() {
-		String sql = "SELECT * FROM `Product`";
+		String sql = "SELECT * FROM `product`";
 		List<Product> beans = new ArrayList<Product>();
 
 		try (PreparedStatement ps = DBUtil.connection().prepareStatement(sql);) {

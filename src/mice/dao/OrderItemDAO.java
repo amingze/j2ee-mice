@@ -13,11 +13,11 @@ import mice.util.DBUtil;
 
 public class OrderItemDAO {
 	public static void add(OrderItem bean) {
-		String sql = "INSERT INTO `mice`.`OrderItem` (`id`, `u_id`, `number`,`status`,`p_id`) VALUES (null,?,?,?,?);";
+		String sql = "INSERT INTO `mice`.`orderitem` (`id`, `u_id`, `number`,`status`,`p_id`) VALUES (null,?,?,?,?);";
 		try (PreparedStatement ps = DBUtil.connection().prepareStatement(sql)) {
 
             ps.setInt(1, bean.getUserId());
-            ps.setInt(2, bean.getNumber());
+            ps.setInt(2, bean.getAmount());
             ps.setInt(3, bean.getStatus());
             ps.setInt(4, bean.getProductId());
 			ps.execute();
@@ -30,32 +30,34 @@ public class OrderItemDAO {
 		}
 	}
 
-	public static List<OrderItem> getList(int id) {
-		String sql="SELECT *  FROM `OrderItem` WHERE `u_id` = ?";
-		List<OrderItem> beans=new ArrayList<>();
-		
-		try (PreparedStatement ps = DBUtil.connection().prepareStatement(sql)) {
-			ps.setInt(1, id);
-			ResultSet eq = ps.executeQuery();
-			while(eq.next()){
-				OrderItem bean=new OrderItem();
-				bean.setId(eq.getInt("id"));
-				bean.setUserId(eq.getInt("u_id"));
-				bean.setNumber(eq.getInt("number"));
-				bean.setStatus(eq.getInt("status"));
-				int productId=eq.getInt("p_id");
-				bean.setProductId(productId);
-				bean.setProduct(ProductDAO.get(productId));
-				beans.add(bean);
-			}
-		}catch (Exception e) {
-				e.printStackTrace();
-		}
-		return beans;
-	}
+	
+    public static void delete(int id) {
+        String sql = "DELETE FROM `mice`.`orderitem` WHERE `orderitem`.`id` = ?";
+        try (PreparedStatement ps = DBUtil.connection().prepareStatement(sql)) {
+            ps.setInt(1, id);
+            ps.execute();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void updata(OrderItem bean) {
+        String sql = "UPDATE  `mice`.`orderitem` SET  `u_id` =  ?, `p_id` = ?, `number` = ?,`status`=?,WHERE  `orderitem`.`id` =?;";
+        try (PreparedStatement ps = DBUtil.connection().prepareStatement(sql)) {
+            ps.setInt(1, bean.getUserId());
+            ps.setInt(2, bean.getProductId());
+            ps.setInt(3, bean.getAmount());
+            ps.setInt(3, bean.getStatus());
+            ps.setInt(4, bean.getId());
+            ps.execute();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
 
 	public static OrderItem get(int id) {
-		String sql = "SELECT * FROM `OrderItem` where id = ? ";
+		String sql = "SELECT * FROM `orderitem` where id = ? ";
 		OrderItem bean = new OrderItem();
 		try (PreparedStatement ps = DBUtil.connection().prepareStatement(sql)) {
 			try {
@@ -63,11 +65,13 @@ public class OrderItemDAO {
 				ResultSet eq = ps.executeQuery();
 				if (eq.next()) {
 					bean.setId(id);
-					bean.setUserId(eq.getInt("name"));
-					bean.setNumber(eq.getInt("number"));
+					bean.setUserId(eq.getInt("u_id"));
+					
+					bean.setAmount(eq.getInt("number"));
 					bean.setStatus(eq.getInt("status"));
 					// bean.setRemake(remake);
-					ProductDAO.get(eq.getInt("p_id"));
+					bean.setProduct(ProductDAO.get(eq.getInt("p_id")));
+					
 					// bean.setProductId();
 					//TODO
 					
@@ -83,31 +87,118 @@ public class OrderItemDAO {
 		return bean;
 
 	}
-
-	// public static Product getPId(int id) {
-	// 	String sql="SELECT *  FROM `OrderItem` WHERE `p_id` = ?";
-	// 	Product bean;
+	public static List<OrderItem> getList(int id) {
+		String sql="SELECT *  FROM `orderitem` WHERE `u_id` = ?";
+		List<OrderItem> beans=new ArrayList<>();
 		
-	// 	try (PreparedStatement ps = DBUtil.connection().prepareStatement(sql)) {
-	// 		ps.setInt(1, id);
-	// 		ResultSet eq = ps.executeQuery();
-	// 		while(eq.next()){
-	// 			bean=new Product();
-	// 			bean.setId(eq.getInt("id"));
-	// 			bean.setName(eq.getString("name"));
+		try (PreparedStatement ps = DBUtil.connection().prepareStatement(sql)) {
+			ps.setInt(1, id);
+			ResultSet eq = ps.executeQuery();
+			while(eq.next()){
+				OrderItem bean=new OrderItem();
+				bean.setId(eq.getInt("id"));
+				bean.setUserId(eq.getInt("u_id"));
+				bean.setAmount(eq.getInt("number"));
+				bean.setStatus(eq.getInt("status"));
+				int productId=eq.getInt("p_id");
+				bean.setProductId(productId);
+				bean.setProduct(ProductDAO.get(productId));
+				beans.add(bean);
+			}
+		}catch (Exception e) {
+				e.printStackTrace();
+		}
+		return beans;
+	}
 
-	// 			beans.add(bean);
-	// 		}
-	// 	}catch (Exception e) {
-	// 			e.printStackTrace();
-	// 	}
-	// 	return beans;
-	// }
-	public void setOrder(int orderId,int orderItemId) {
+	public static List<OrderItem> getCart(int id) {
+		String sql="SELECT *  FROM `orderitem` WHERE `u_id` = ? and `status` =2";
+		List<OrderItem> beans=new ArrayList<>();
 		
+		try (PreparedStatement ps = DBUtil.connection().prepareStatement(sql)) {
+			ps.setInt(1, id);
+			ResultSet eq = ps.executeQuery();
+			while(eq.next()){
+				OrderItem bean=new OrderItem();
+				bean.setId(eq.getInt("id"));
+				bean.setUserId(eq.getInt("u_id"));
+				bean.setAmount(eq.getInt("number"));
+				bean.setStatus(eq.getInt("status"));
+				int productId=eq.getInt("p_id");
+				bean.setProductId(productId);
+				bean.setProduct(ProductDAO.get(productId));
+				beans.add(bean);
+			}
+		}catch (Exception e) {
+				e.printStackTrace();
+		}
+		return beans;
 	}
 
 
+
+	public static void changeAmount(int id,int num){
+		
+		String sql = "UPDATE  `mice`.`orderitem` SET  `number` =  ? WHERE  `orderitem`.`id` =?;";
+		try (PreparedStatement ps = DBUtil.connection().prepareStatement(sql)) {
+			ps.setInt(1, num);
+			ps.setInt(2, id);
+
+			ps.execute();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	
+	}
+
+	public static void setOrder(int orderId , int orderItemId) {
+		String sql = "UPDATE  `mice`.`orderitem` SET  `o_id` =  ?, `status`=? WHERE  `orderitem`.`id` =?;";
+        try (PreparedStatement ps = DBUtil.connection().prepareStatement(sql)) {
+            ps.setInt(1, orderItemId);
+            ps.setInt(2, 3);
+            ps.setInt(3, orderId);
+            ps.execute();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+	}
+
+	public static List<OrderItem> getByOrder(int orderId) {
+		String sql="SELECT *  FROM `orderitem` WHERE `o_id` = ?";
+		List<OrderItem> beans=new ArrayList<>();
+		
+		try (PreparedStatement ps = DBUtil.connection().prepareStatement(sql)) {
+			ps.setInt(1, orderId);
+			ResultSet eq = ps.executeQuery();
+			while(eq.next()){
+				OrderItem bean=new OrderItem();
+				bean.setId(eq.getInt("id"));
+				bean.setUserId(eq.getInt("u_id"));
+				bean.setAmount(eq.getInt("number"));
+				bean.setStatus(eq.getInt("status"));
+				int productId=eq.getInt("p_id");
+				bean.setProductId(productId);
+				bean.setProduct(ProductDAO.get(productId));
+				beans.add(bean);
+			}
+		}catch (Exception e) {
+				e.printStackTrace();
+		}
+		return beans;
+	}
+
+	public static void changeStatus(int orderId,int status){
+        String sql = "UPDATE  `mice`.`orderitem` SET  `status` =  ? WHERE  `orderitem`.`o_id` =?;";
+		try (PreparedStatement ps = DBUtil.connection().prepareStatement(sql)) {
+			ps.setInt(1, status);
+			ps.setInt(2, orderId);
+			ps.execute();
+			
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+    }
 	// public static Boolean isExist(int id) {
 	// 	String sql = "SELECT * FROM `Product` where id = ? ";
 	// 	try (PreparedStatement ps = DBUtil.connection().prepareStatement(sql)) {
@@ -208,6 +299,11 @@ public class OrderItemDAO {
 	// 	}
 	// }
 	public static void main(String[] args) {
-		System.out.println( getList(15).get(1).getProductId());
+		// OrderItemDAO.changeAmount(1,2); 
+		float total=0;
+		OrderItem orderItem=OrderItemDAO.get(5);
+		System.out.println(total+=orderItem.getAmount()*orderItem.getProduct().getPrice()); 
+		// 
+		// System.out.println( getList(15).get(1).getProductId());
 	}
 }

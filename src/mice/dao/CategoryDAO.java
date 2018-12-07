@@ -9,7 +9,7 @@ import mice.util.DBUtil;
 
 public class CategoryDAO {
     public void add(Category bean) {
-        String sql = "INSERT INTO `mice`.`Category` (`id`, `name`) VALUES (null,?);";
+        String sql = "INSERT INTO `mice`.`category` (`id`, `name`) VALUES (null,?);";
         try (PreparedStatement ps = DBUtil.connection().prepareStatement(sql)) {
             ps.setString(1, bean.getName());
             ps.execute();
@@ -23,7 +23,7 @@ public class CategoryDAO {
     }
 
     public static void delete(int id) {
-        String sql = "DELETE FROM `mice`.`Category` WHERE `Category`.`id` = ?";
+        String sql = "DELETE FROM `mice`.`category` WHERE `category`.`id` = ?";
         try (PreparedStatement ps = DBUtil.connection().prepareStatement(sql)) {
             ps.setInt(1, id);
             ps.execute();
@@ -33,7 +33,7 @@ public class CategoryDAO {
     }
 
     public static void updata(Category bean) {
-        String sql = "UPDATE  `mice`.`Category` SET  `name` =  ?, WHERE  `Category`.`id` =?;";
+        String sql = "UPDATE  `mice`.`category` SET  `name` =  ?, WHERE  `category`.`id` =?;";
         try (PreparedStatement ps = DBUtil.connection().prepareStatement(sql)) {
             ps.setString(1, bean.getName());
             ps.execute();
@@ -43,7 +43,7 @@ public class CategoryDAO {
     }
 
     public static Category get(int id) {
-        String sql = "SELECT * FROM `Category` where id = ? ";
+        String sql = "SELECT * FROM `category` where id = ? ";
         Category bean = new Category();
         try (PreparedStatement ps = DBUtil.connection().prepareStatement(sql)) {
             try {

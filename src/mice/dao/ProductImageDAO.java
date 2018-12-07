@@ -10,7 +10,7 @@ import mice.util.DBUtil;
  */
 public class ProductImageDAO {
     public void add(ProductImage bean) {
-        String sql = "INSERT INTO `mice`.`ProductImage` (`id`, `p_id`,`type`) VALUES (null,?,?);";
+        String sql = "INSERT INTO `mice`.`productimage` (`id`, `p_id`,`type`) VALUES (null,?,?);";
         try (PreparedStatement ps = DBUtil.connection().prepareStatement(sql)) {
             ps.setInt(1, bean.getId());
             ps.setInt(2, bean.getProductId());
@@ -26,7 +26,7 @@ public class ProductImageDAO {
     }
 
     public static void delete(int id) {
-        String sql = "DELETE FROM `ProductImage`.`Product` WHERE `ProductImage`.`id` = ?";
+        String sql = "DELETE FROM `productimage`.`product` WHERE `productimage`.`id` = ?";
         try (PreparedStatement ps = DBUtil.connection().prepareStatement(sql)) {
             ps.setInt(1, id);
             ps.execute();
@@ -36,7 +36,7 @@ public class ProductImageDAO {
     }
 
     public static void updata(ProductImage bean) {
-        String sql = "UPDATE  `mice`.`ProductImage` SET  `p_id` =  ?,`type` =  ?,WHERE  `ProductImage`.`id` =?;";
+        String sql = "UPDATE  `mice`.`productimage` SET  `p_id` =  ?,`type` =  ?,WHERE  `productimage`.`id` =?;";
         try (PreparedStatement ps = DBUtil.connection().prepareStatement(sql)) {
             ps.setInt(1, bean.getId());
             ps.setString(2, bean.getType());
@@ -48,7 +48,7 @@ public class ProductImageDAO {
     }
 
     public static ProductImage get(int id) {
-        String sql = "SELECT * FROM `ProductImage` where id = ? ";
+        String sql = "SELECT * FROM `productimage` where id = ? ";
         ProductImage bean = new ProductImage();
         try (PreparedStatement ps = DBUtil.connection().prepareStatement(sql)) {
             try {

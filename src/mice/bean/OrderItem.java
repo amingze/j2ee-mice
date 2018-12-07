@@ -7,8 +7,24 @@ public class OrderItem {
     Product product;
     int productId;
 
-    int number;
+    int amount;
     int status;
+    int order;
+
+    public int getOrder() {
+        return this.order;
+    }
+
+    public void setOrder(int order) {
+        this.order = order;
+    }
+    public int getAmount() {
+        return this.amount;
+    }
+
+    public void setAmount(int amount) {
+        this.amount = amount;
+    }
     // 0-订单隐藏 1-收藏夹 2-购物车 3-未付款 4-已付款 5-已发货
     // 6-退款申请 7-退款同意 8-退款失败 9-退款中 10-退款完成
     String remake;
@@ -45,13 +61,6 @@ public class OrderItem {
         this.product = product;
     }
 
-    public int getNumber() {
-        return this.number;
-    }
-
-    public void setNumber(int number) {
-        this.number = number;
-    }
 
     public int getStatus() {
         return this.status;

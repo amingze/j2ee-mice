@@ -1,6 +1,7 @@
 package mice.servlet;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale.Category;
 
@@ -83,7 +84,7 @@ public class ForeServlet extends ForeBaseServlet {
         OrderItem orderItem = new OrderItem();
         User user = (User) request.getSession().getAttribute("user");
         orderItem.setUserId(user.getId());
-        orderItem.setNumber(Integer.parseInt(request.getParameter("num")));
+        orderItem.setAmount(Integer.parseInt(request.getParameter("num")));
         orderItem.setStatus(2);
         orderItem.setProductId(Integer.parseInt(request.getParameter("productId")));
         OrderItemDAO.add(orderItem);
@@ -93,7 +94,7 @@ public class ForeServlet extends ForeBaseServlet {
     public String cart(HttpServletRequest request, HttpServletResponse response) {
         User user = (User) request.getSession().getAttribute("user");
         if (user != null) {
-            List<OrderItem> beans = OrderItemDAO.getList(user.getId());
+            List<OrderItem> beans = OrderItemDAO.getCart(user.getId());
 
             request.setAttribute("cartlist", beans);
             return "cart.jsp";
@@ -101,28 +102,81 @@ public class ForeServlet extends ForeBaseServlet {
             return "@forehome";
         }
     }
-
+    public String addAmount(HttpServletRequest request, HttpServletResponse response){
+        String oiId = request.getParameter("orderItemId");
+        int id=Integer.parseInt(oiId);
+        if(OrderItemDAO.get(id).getAmount()>1)OrderItemDAO.changeAmount(id,OrderItemDAO.get(id).getAmount()+1);
+        return "!";
+    }
+    public String reduceAmount(HttpServletRequest request, HttpServletResponse response){
+        String oiId = request.getParameter("orderItemId");
+        int id=Integer.parseInt(oiId);
+        if(OrderItemDAO.get(id).getAmount()>1)OrderItemDAO.changeAmount(id,OrderItemDAO.get(id).getAmount()-1);
+        return "!";
+    }
+    public String changeAmount(HttpServletRequest request, HttpServletResponse response){
+        String oiAmount = request.getParameter("orderItemAmount");
+        String oiId = request.getParameter("orderItemId");
+        int orderItemAmount=Integer.parseInt(oiAmount);
+        int orderItemId=Integer.parseInt(oiId);
+        System.out.println("orderItemAmount!!"+orderItemAmount);
+        System.out.println("orderItemId!!"+orderItemId);
+        if(orderItemAmount>0)OrderItemDAO.changeAmount(orderItemId,orderItemAmount);
+        return "!";
+    }
     public String buy(HttpServletRequest request, HttpServletResponse response) {
-        String pdIdList[] = request.getParameterValues("productId");
-        String pdAmountList[]= request.getParameterValues("amoun");
-        String params[]=request.getParameterValues("params");
+        String paramsList[] = request.getParameterValues("oiid");
+        User user=(User)request.getSession().getAttribute("user");
+        List<OrderItem> order=new ArrayList<>();
+        System.out.println("oiid!!"+paramsList[0]);
         float total=0;
-        for(String param:params){
-            int orderItemId=Integer.parseInt(param);
-            // OrderItem orderItem= OrderItemDAO.get(oiid);
-            // total+=OrderItem.
+    
+        int oid=OrderDAO.createOrder();
+        for(String strid:paramsList){
+            int oiId=Integer.parseInt(strid);
+            OrderItem orderItem=OrderItemDAO.get(oiId);
+           
+            order.add(orderItem);
+            OrderItemDAO.setOrder(oid,oiId);
+            //updata
+            OrderItemDAO.changeStatus(oiId, 3);
+            Order bean=new Order();
+            bean.setId(oid);
+            bean.setUserId(user.getId());
+            OrderDAO.updata(bean);
+            total+=orderItem.getAmount()*orderItem.getProduct().getPrice();
         }
-        return "accounts.jsp";
+        // 
+        System.out.println("!!!total!"+total);
+        // request.getSession().setAttribute("oid", oid);
+        request.getSession().setAttribute("oid", oid);
+
+        request.getSession().setAttribute("total", total);
+
+        return "pay.jsp";
     }
 
-    
 
     public String buyone(HttpServletRequest request, HttpServletResponse response) {
         String productId = request.getParameter("productId");
-        String productAmount = request.getParameter("productAmount");
+        String productAmount = request.getParameter("orderItemAmount");
 
         return "";
 
+    }
+
+    public String pay(HttpServletRequest request, HttpServletResponse response) {
+        float orderPriceTotal =(float) request.getSession().getAttribute("total");
+        int oid = (int)request.getSession().getAttribute("oid");
+        OrderItemDAO.changeStatus(oid, 4);
+        return "over.jsp";
+    }
+
+    public String showOrder(HttpServletRequest request, HttpServletResponse response) {
+        User user =(User) request.getSession().getAttribute("user");
+        List<List<OrderItem>> orders=OrderDAO.getByUser(user.getId());
+        request.setAttribute("orders", orders);
+        return "order.jsp";
     }
     // public String category(HttpServletRequest request, HttpServletResponse
     // response){
