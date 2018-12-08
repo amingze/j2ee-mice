@@ -1,18 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" import="java.util.*"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<!DOCTYPE html>
-
-<html>
-<head>
-<meta charset="UTF-8">
-<title></title>
-<link rel="stylesheet" type="text/css" media="screen" href="include\css\main.css" />
+<%@include file="include/part/head.jsp"%>
+<%@include file="include/part/header.jsp"%>
 
 ${total}
 <a href="${contextPath}/forepay">付款</a>
-</head>
-<body>
-
-</body>
-</html>

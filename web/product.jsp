@@ -1,26 +1,26 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" import="java.util.*"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<!DOCTYPE html>
+    pageEncoding="UTF-8"  isELIgnored="false"%>
 
-<html>
-<head>
-<meta charset="UTF-8">
-<title></title>
-</head>
-<body>
-    <a>${user.name }</a>
-    <a href="${contextPath}/forelogout">logout</a>
-    <a href="${contextPath}/login.jsp">login</a>
-    <a href="${contextPath}/register.jsp">register</a>
-    <a>${name}</a>
-    <a>${price}</a>
-    <a>加入购物车</a>
-    <form action="${contextPath}/foreaddCart" method="post" enctype="application/x-www-form-urlencoded">
-        <input type="number" name="num" value="1">
-        <input type="number" name="productId"  value="${productId}">
-        <input type="submit"  value ="加入购物车">
+<%@include file="include/part/head.jsp"%>
+<%@include file="include/part/header.jsp"%>
+<script>
+// $(".buttonAddCart").click(function () { 
+//     var num=$("#productNum").var
+//     var id=$("#productId").var
 
-    </form>
-</body>
-</html>
+//     $.post(
+//         foreaddCart,
+//         {"productId":id,"productAmount":num},
+//     );
+    
+// });
+
+</script>
+<a>${name}</a>
+<a>${price}</a>
+
+<input type="number" name="productNum"  class="productNum" value="1">
+<div type="number" name="productId" class="productId" value="${productId}" pid="${productId}">
+<button class="buttonAddCart"  pid="${productId}" value ="${productId}">加入购物车</button>
+
+

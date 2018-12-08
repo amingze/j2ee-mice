@@ -1,5 +1,6 @@
 package mice.bean;
-public  class Address{
+
+public class Address {
     int id;
     String name;
     String address;
@@ -12,6 +13,7 @@ public  class Address{
     public void setPhoneNumber(int phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
+
     int userId;
 
     public int getUserId() {
@@ -21,6 +23,7 @@ public  class Address{
     public void setUserId(int userId) {
         this.userId = userId;
     }
+
     public int getId() {
         return this.id;
     }

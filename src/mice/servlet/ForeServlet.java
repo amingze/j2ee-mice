@@ -14,6 +14,7 @@ import mice.bean.Product;
 import mice.bean.User;
 import mice.dao.OrderDAO;
 import mice.dao.OrderItemDAO;
+import mice.util.NumCheck;
 
 public class ForeServlet extends ForeBaseServlet {
 
@@ -81,14 +82,29 @@ public class ForeServlet extends ForeBaseServlet {
     }
 
     public String addCart(HttpServletRequest request, HttpServletResponse response) {
-        OrderItem orderItem = new OrderItem();
         User user = (User) request.getSession().getAttribute("user");
-        orderItem.setUserId(user.getId());
-        orderItem.setAmount(Integer.parseInt(request.getParameter("num")));
-        orderItem.setStatus(2);
-        orderItem.setProductId(Integer.parseInt(request.getParameter("productId")));
-        orderItemDAO.add(orderItem);
-        return "!已加入购物车";
+        String id = request.getParameter("pid");
+        String num = request.getParameter("num");
+
+        int pid = Integer.parseInt(id);
+        int amount = Integer.parseInt(num);
+        if (NumCheck.IsNoPositive(amount))
+            return "!";
+
+        OrderItem orderItem = new OrderItem();
+
+        if (orderItemDAO.isNoExistCartByPId(pid)) {
+            orderItem.setUserId(user.getId());
+            orderItem.setProductId(pid);
+            orderItem.setAmount(amount);
+            orderItem.setStatus(2);
+            orderItemDAO.add(orderItem);
+        } else {
+            orderItem = orderItemDAO.getByPId(pid);
+            orderItem.setAmount(orderItemDAO.get(orderItem.getId()).getAmount() + amount);
+            orderItemDAO.updata(orderItem);
+        }
+        return "!";
     }
 
     public String cart(HttpServletRequest request, HttpServletResponse response) {
@@ -101,6 +117,17 @@ public class ForeServlet extends ForeBaseServlet {
         } else {
             return "@forehome";
         }
+    }
+
+    public String deleteCart(HttpServletRequest request, HttpServletResponse response) {
+        User user = (User) request.getSession().getAttribute("user");
+        String id = request.getParameter("oiid");
+        int pid = Integer.parseInt(id);
+
+        if (orderItemDAO.isExistCartByOIId(pid)) {
+            orderItemDAO.delete(pid);
+        }
+        return "!";
     }
 
     public String addAmount(HttpServletRequest request, HttpServletResponse response) {
@@ -124,8 +151,6 @@ public class ForeServlet extends ForeBaseServlet {
         String oiId = request.getParameter("orderItemId");
         int orderItemAmount = Integer.parseInt(oiAmount);
         int orderItemId = Integer.parseInt(oiId);
-        System.out.println("orderItemAmount!!" + orderItemAmount);
-        System.out.println("orderItemId!!" + orderItemId);
         if (orderItemAmount > 0)
             orderItemDAO.changeAmount(orderItemId, orderItemAmount);
         return "!";
@@ -183,6 +208,5 @@ public class ForeServlet extends ForeBaseServlet {
         request.setAttribute("orders", orders);
         return "order.jsp";
     }
-
 
 }

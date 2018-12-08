@@ -3,7 +3,6 @@ package mice.dao;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
-import mice.bean.PropertyValue;
 import mice.bean.Review;
 import mice.util.DBUtil;
 
@@ -72,5 +71,5 @@ public class ReviewDAO {
         }
         return bean;
     }
-    
+
 }
