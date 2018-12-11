@@ -38,6 +38,7 @@ public abstract class ForeBaseServlet<HttpservletRequest> extends HttpServlet {
     protected OrderItemDAO orderItemDAO = new OrderItemDAO();
     protected ProductImageDAO productImageDAO = new ProductImageDAO();
     protected PropertyDAO propertyDAO = new PropertyDAO();
+    // protected ProductItemDAO productItemDAO = new ProductItemDAO();
     protected PropertyValueDAO propertyValueDAO = new PropertyValueDAO();
     protected ReviewDAO reviewDAO = new ReviewDAO();
 

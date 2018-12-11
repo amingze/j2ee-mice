@@ -6,6 +6,17 @@
     "configurations": [
         {
             "type": "java",
+            "name": "CodeLens (Launch) - DBUtil",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "console": "internalConsole",
+            "stopOnEntry": false,
+            "mainClass": "mice.util.DBUtil",
+            "args": "",
+            "projectName": "mice"
+        },
+        {
+            "type": "java",
             "name": "CodeLens (Launch) - ProductDAO",
             "request": "launch",
             "cwd": "${workspaceFolder}",

@@ -260,8 +260,8 @@ public class OrderItemDAO {
 		// OrderItem orderItem = OrderItemDAO.get(5);
 		// System.out.println(total += orderItem.getAmount() *
 		// orderItem.getProduct().getPrice());
-		System.out.println(isExistCartByOIId(29));
-
+		// System.out.println(isExistCartByOIId(29));
+		delete(14);
 		//
 		// System.out.println( getList(15).get(1).getProductId());
 	}

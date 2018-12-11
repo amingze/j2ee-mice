@@ -5,6 +5,16 @@ import java.util.List;
 public class Category {
     int id;
     String name;
+    int largeCategoryId;
+
+    public int getLargeCategoryId() {
+        return this.largeCategoryId;
+    }
+
+    public void setLargeCategoryId(int largeCategoryId) {
+        this.largeCategoryId = largeCategoryId;
+    }
+
     List<Product> products;
 
     public List<Product> getProducts() {
@@ -14,6 +24,7 @@ public class Category {
     public void setProducts(List<Product> products) {
         this.products = products;
     }
+
     public int getId() {
         return this.id;
     }
@@ -29,5 +40,5 @@ public class Category {
     public void setName(String name) {
         this.name = name;
     }
-    
+
 }

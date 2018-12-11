@@ -24,7 +24,7 @@ public class DBUtil {
 	private final static String DB_DBNAME = "mice";
 	private final static String DB_ENCODE = "UTF-8";
 	static {
-		
+
 		try {
 			// Class.forName("com.mysql.jdbc.Driver");
 			Class.forName("com.mysql.jdbc.Driver");

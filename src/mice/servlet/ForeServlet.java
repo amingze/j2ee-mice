@@ -122,10 +122,10 @@ public class ForeServlet extends ForeBaseServlet {
     public String deleteCart(HttpServletRequest request, HttpServletResponse response) {
         User user = (User) request.getSession().getAttribute("user");
         String id = request.getParameter("oiid");
-        int pid = Integer.parseInt(id);
+        int oiid = Integer.parseInt(id);
 
-        if (orderItemDAO.isExistCartByOIId(pid)) {
-            orderItemDAO.delete(pid);
+        if (orderItemDAO.isExistCartByOIId(oiid)) {
+            orderItemDAO.delete(oiid);
         }
         return "!";
     }
@@ -208,5 +208,12 @@ public class ForeServlet extends ForeBaseServlet {
         request.setAttribute("orders", orders);
         return "order.jsp";
     }
+
+    // public String showCategory(HttpServletRequest request, HttpServletResponse
+    // response) {
+    // List<List<mice.bean.Category>> orders = productItemDAO.getTotal();
+    // request.setAttribute("orders", orders);
+    // return "order.jsp";
+    // }
 
 }
