@@ -15,20 +15,20 @@ import mice.dao.OrderDAO;
 import mice.dao.OrderItemDAO;
 
 public class OrderServlet extends ForeBaseServlet {
+
     public String addAmount(String arg) {
-        
+
         return null;
     }
-    
+
     public String reduceAmount(String arg) {
-        
+
         return null;
     }
 
     public String changeStatus(String arg) {
-        
+
         return null;
     }
-    
 
 }
