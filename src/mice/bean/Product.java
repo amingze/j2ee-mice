@@ -1,10 +1,10 @@
 package mice.bean;
 
 public class Product {
-	int id;
-	String name;
-	float price;
-	int imageid;
+	private int id;
+	private String name;
+	private float price;
+	private int imageid;
 
 	public int getImageId() {
 		return this.imageid;
@@ -13,7 +13,7 @@ public class Product {
 	public void setImageId(int imageid) {
 		this.imageid = imageid;
 	}
-	
+
 	public int getId() {
 		return id;
 	}

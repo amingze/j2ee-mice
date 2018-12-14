@@ -4,9 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ProductItem {
-    int id;
-    String name;
-
+    private int id;
+    private String name;
 
     public int getId() {
         return this.id;
@@ -23,7 +22,5 @@ public class ProductItem {
     public void setName(String name) {
         this.name = name;
     }
-
-
 
 }

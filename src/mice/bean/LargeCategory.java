@@ -4,9 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class LargeCategory {
-    int id;
-    String name;
-    List<List<Product>> largeCategory = new ArrayList<>();
+    private int id;
+    private String name;
+    private List<List<Product>> largeCategory = new ArrayList<>();
 
     public List<List<Product>> getLargeCategory() {
         return this.largeCategory;

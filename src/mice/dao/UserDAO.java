@@ -13,7 +13,8 @@ import mice.bean.User;
 import mice.util.DBUtil;
 
 public class UserDAO {
-	protected static UserDAO userDAO=new UserDAO();
+	protected static UserDAO userDAO = new UserDAO();
+
 	public static void add(User bean) {
 		String sql = "INSERT INTO `mice`.`user` (`id`, `name`, `passwd`, `creatdate`) VALUES (null,?,?, CURRENT_TIMESTAMP);";
 		try (PreparedStatement ps = DBUtil.prepareStatement(sql);) {
@@ -102,6 +103,71 @@ public class UserDAO {
 		return bean;
 	}
 
+	public static User get(User userBean) {
+		String sql = "SELECT *  FROM `user` WHERE `name` = ? and `passwd` =?";
+		User bean = null;
+		try (PreparedStatement ps = DBUtil.connection().prepareStatement(sql);) {
+			ps.setString(1, userBean.getName());
+			ps.setString(2, userBean.getPasswd());
+			ResultSet rs = ps.executeQuery();
+			if (rs.next()) {
+				int id = rs.getInt("id");
+				bean = new User();
+				bean.setId(id);
+				bean.setName(rs.getString("name"));
+				bean.setPasswd(rs.getString("passwd"));
+				// bean.setCreatDate(creatDate);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+
+		}
+		return bean;
+	}
+
+	public static User get(int userId) {
+		String sql = "SELECT *  FROM `user` WHERE `id` = ? ";
+		User bean = null;
+		try (PreparedStatement ps = DBUtil.connection().prepareStatement(sql);) {
+			ps.setInt(1, userId);
+			ResultSet rs = ps.executeQuery();
+			if (rs.next()) {
+				int id = rs.getInt("id");
+				bean = new User();
+				bean.setId(id);
+				bean.setName(rs.getString("name"));
+				bean.setPasswd(rs.getString("passwd"));
+				// bean.setCreatDate(creatDate);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+
+		}
+		return bean;
+	}
+
+	public static boolean loginCheck(String name, String passwd) {
+		String sql = "SELECT *  FROM `user` WHERE `name` = ? and `passwd` =?";
+		User bean = null;
+		try (PreparedStatement ps = DBUtil.connection().prepareStatement(sql);) {
+			ps.setString(1, name);
+			ps.setString(2, passwd);
+			ResultSet rs = ps.executeQuery();
+			if (rs.next()) {
+				int id = rs.getInt("id");
+				bean = new User();
+				bean.setId(id);
+				bean.setName(name);
+				bean.setPasswd(passwd);
+				// bean.setCreatDate(creatDate);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+
+		}
+		return null == bean;
+	}
+
 	public static User check(String name, String passwd) {
 		String sql = "SELECT *  FROM `user` WHERE `name` = ? and `passwd` =?";
 		User bean = null;
@@ -137,10 +203,6 @@ public class UserDAO {
 	}
 
 	public static void main(String[] args) throws SQLException {
-		// System.out.println(UserDAO.isExist("1243"));
-		System.out.println(UserDAO.check("admin", "admin").getId());
-		System.out.println(UserDAO.check("1", "1"));
-		User user = UserDAO.check("1", "1");
-		System.out.println(user);
+
 	}
 }

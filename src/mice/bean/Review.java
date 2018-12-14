@@ -5,10 +5,10 @@ package mice.bean;
  */
 public class Review {
 
-    int id;
-    int userId;
-    int productId;
-    String Content;
+    private int id;
+    private int userId;
+    private int productId;
+    private String Content;
 
     public int getId() {
         return this.id;

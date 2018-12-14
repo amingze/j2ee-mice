@@ -6,6 +6,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "CodeLens (Launch) - OrderService",
+            "request": "launch",
+            "mainClass": "mice.service.OrderService",
+            "projectName": "mice"
+        },
+        {
+            "type": "java",
             "name": "CodeLens (Launch) - DBUtil",
             "request": "launch",
             "cwd": "${workspaceFolder}",

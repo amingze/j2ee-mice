@@ -1,10 +1,10 @@
 package mice.bean;
 
 public class ProductImage {
-	String type;
-	int productId;
-	int id;
-	
+	private String type;
+	private int productId;
+	private int id;
+
 	public String getType() {
 		return type;
 	}

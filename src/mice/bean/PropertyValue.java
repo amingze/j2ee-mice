@@ -5,10 +5,10 @@ package mice.bean;
  */
 public class PropertyValue {
 
-    int id;
-    int productId;
-    int propertyId;
-    String value;
+    private int id;
+    private int productId;
+    private int propertyId;
+    private String value;
 
     public int getId() {
         return this.id;

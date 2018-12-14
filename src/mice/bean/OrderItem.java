@@ -1,34 +1,53 @@
 package mice.bean;
 
 public class OrderItem {
-    int id;
-    int userId;
+    private int id;
+    private int userId;
 
-    Product product;
-    int productId;
+    private Product product;
+    private int productId;
+    private float productPrice;
+    private String productName;
+    private int number;
+    private String status;
+    private int orderId;
 
-    int amount;
-    int status;
-    int order;
-
-    public int getOrder() {
-        return this.order;
+    public int getProductPrice() {
+        return this.orderId;
     }
 
-    public void setOrder(int order) {
-        this.order = order;
-    }
-    public int getAmount() {
-        return this.amount;
+    public void setProductPrice(int orderId) {
+        this.orderId = orderId;
     }
 
-    public void setAmount(int amount) {
-        this.amount = amount;
+    public int getProductName() {
+        return this.orderId;
     }
+
+    public void setProductName(int orderId) {
+        this.orderId = orderId;
+    }
+
+    public int getOrderId() {
+        return this.orderId;
+    }
+
+    public void setOrderId(int orderId) {
+        this.orderId = orderId;
+    }
+
+    public int getNumber() {
+        return this.number;
+    }
+
+    public void setNumber(int number) {
+        this.number = number;
+    }
+
     // 0-订单隐藏 1-收藏夹 2-购物车 3-未付款 4-已付款 5-已发货
     // 6-退款申请 7-退款同意 8-退款失败 9-退款中 10-退款完成
     String remake;
-    
+
     public int getProductId() {
         return this.productId;
     }
@@ -61,12 +80,11 @@ public class OrderItem {
         this.product = product;
     }
 
-
-    public int getStatus() {
+    public String getStatus() {
         return this.status;
     }
 
-    public void setStatus(int status) {
+    public void setStatus(String status) {
         this.status = status;
     }
 

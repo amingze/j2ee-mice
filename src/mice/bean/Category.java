@@ -3,9 +3,9 @@ package mice.bean;
 import java.util.List;
 
 public class Category {
-    int id;
-    String name;
-    int largeCategoryId;
+    private int id;
+    private String name;
+    private int largeCategoryId;
 
     public int getLargeCategoryId() {
         return this.largeCategoryId;

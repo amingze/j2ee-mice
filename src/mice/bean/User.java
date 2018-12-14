@@ -1,10 +1,10 @@
 package mice.bean;
 
 public class User {
-	int id;
-	String name;
-	String passwd;
-	String creatDate;
+	private int id;
+	private String name;
+	private String passwd;
+	private String creatDate;
 
 	public String getName() {
 		return name;

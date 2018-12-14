@@ -9,6 +9,7 @@ import java.util.List;
 import mice.bean.Order;
 import mice.bean.OrderItem;
 import mice.bean.Product;
+import mice.bean.User;
 import mice.util.DBUtil;
 
 public class OrderItemDAO {
@@ -19,8 +20,8 @@ public class OrderItemDAO {
 		try (PreparedStatement ps = DBUtil.connection().prepareStatement(sql)) {
 
 			ps.setInt(1, bean.getUserId());
-			ps.setInt(2, bean.getAmount());
-			ps.setInt(3, bean.getStatus());
+			ps.setInt(2, bean.getNumber());
+			ps.setString(3, bean.getStatus());
 			ps.setInt(4, bean.getProductId());
 			ps.execute();
 			ResultSet rs = ps.getGeneratedKeys();
@@ -47,8 +48,8 @@ public class OrderItemDAO {
 		try (PreparedStatement ps = DBUtil.connection().prepareStatement(sql)) {
 			ps.setInt(1, bean.getUserId());
 			ps.setInt(2, bean.getProductId());
-			ps.setInt(3, bean.getAmount());
-			ps.setInt(4, bean.getStatus());
+			ps.setInt(3, bean.getNumber());
+			ps.setString(4, bean.getStatus());
 			ps.setInt(5, bean.getId());
 			ps.execute();
 		} catch (Exception e) {
@@ -67,9 +68,9 @@ public class OrderItemDAO {
 					bean.setId(id);
 					bean.setUserId(eq.getInt("u_id"));
 					bean.setProductId(eq.getInt("p_id"));
-					bean.setOrder(eq.getInt("o_id"));
-					bean.setAmount(eq.getInt("number"));
-					bean.setStatus(eq.getInt("status"));
+					bean.setOrderId(eq.getInt("o_id"));
+					bean.setNumber(eq.getInt("number"));
+					bean.setNumber(eq.getInt("status"));
 					bean.setProduct(productDAO.get(eq.getInt("p_id")));
 				}
 			} catch (Exception e) {
@@ -92,9 +93,9 @@ public class OrderItemDAO {
 					bean.setId(eq.getInt("id"));
 					bean.setProductId(pid);
 					bean.setUserId(eq.getInt("u_id"));
-					bean.setAmount(eq.getInt("number"));
-					bean.setStatus(eq.getInt("status"));
-					bean.setOrder(eq.getInt("o_id"));
+					bean.setNumber(eq.getInt("number"));
+					bean.setStatus(eq.getString("status"));
+					bean.setOrderId(eq.getInt("o_id"));
 					bean.setProduct(productDAO.get(pid));
 				}
 			} catch (Exception e) {
@@ -117,8 +118,8 @@ public class OrderItemDAO {
 				OrderItem bean = new OrderItem();
 				bean.setId(eq.getInt("id"));
 				bean.setUserId(eq.getInt("u_id"));
-				bean.setAmount(eq.getInt("number"));
-				bean.setStatus(eq.getInt("status"));
+				bean.setNumber(eq.getInt("number"));
+				bean.setStatus(eq.getString("status"));
 				int productId = eq.getInt("p_id");
 				bean.setProductId(productId);
 				bean.setProduct(productDAO.get(productId));
@@ -141,8 +142,8 @@ public class OrderItemDAO {
 				OrderItem bean = new OrderItem();
 				bean.setId(eq.getInt("id"));
 				bean.setUserId(eq.getInt("u_id"));
-				bean.setAmount(eq.getInt("number"));
-				bean.setStatus(eq.getInt("status"));
+				bean.setNumber(eq.getInt("number"));
+				bean.setStatus(eq.getString("status"));
 				int productId = eq.getInt("p_id");
 				bean.setProductId(productId);
 				bean.setProduct(productDAO.get(productId));
@@ -191,8 +192,8 @@ public class OrderItemDAO {
 				OrderItem bean = new OrderItem();
 				bean.setId(eq.getInt("id"));
 				bean.setUserId(eq.getInt("u_id"));
-				bean.setAmount(eq.getInt("number"));
-				bean.setStatus(eq.getInt("status"));
+				bean.setNumber(eq.getInt("number"));
+				bean.setStatus(eq.getString("status"));
 				int productId = eq.getInt("p_id");
 				bean.setProductId(productId);
 				bean.setProduct(productDAO.get(productId));
@@ -204,10 +205,10 @@ public class OrderItemDAO {
 		return beans;
 	}
 
-	public static void changeStatus(int orderId, int status) {
+	public static void changeStatus(int orderId, String status) {
 		String sql = "UPDATE  `mice`.`orderitem` SET  `status` =  ? WHERE  `orderitem`.`o_id` =?;";
 		try (PreparedStatement ps = DBUtil.connection().prepareStatement(sql)) {
-			ps.setInt(1, status);
+			ps.setString(1, status);
 			ps.setInt(2, orderId);
 			ps.execute();
 

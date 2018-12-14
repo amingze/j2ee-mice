@@ -1,17 +1,17 @@
 package mice.bean;
 
 public class Address {
-    int id;
-    String name;
-    String address;
-    int phoneNumber;
+    private int id;
+    private String name;
+    private String address;
+    private String phone;
 
-    public int getPhoneNumber() {
-        return this.phoneNumber;
+    public String getPhone() {
+        return this.phone;
     }
 
-    public void setPhoneNumber(int phoneNumber) {
-        this.phoneNumber = phoneNumber;
+    public void setPhoneNumber(String phoneNumber) {
+        this.phone = phone;
     }
 
     int userId;

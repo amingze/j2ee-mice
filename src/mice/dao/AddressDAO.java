@@ -12,7 +12,7 @@ public class AddressDAO {
         try (PreparedStatement ps = DBUtil.connection().prepareStatement(sql)) {
             ps.setString(1, bean.getName());
             ps.setString(2, bean.getAddress());
-            ps.setInt(3, bean.getPhoneNumber());
+            ps.setString(3, bean.getPhone());
             ps.setInt(4, bean.getUserId());
             ps.execute();
             ResultSet rs = ps.getGeneratedKeys();
@@ -35,39 +35,39 @@ public class AddressDAO {
     }
 
     public static void updata(Address bean) {
-		String sql = "UPDATE  `mice`.`address` SET  `name` =  ?,address=?,phonenume=?, WHERE  `address`.`id` =?;";
-		try (PreparedStatement ps = DBUtil.connection().prepareStatement(sql)) {
-			ps.setString(1, bean.getName());
-			ps.setString(2, bean.getAddress());
-            ps.setInt(3, bean.getPhoneNumber());
-            ps.setInt(4,bean.getUserId());
-			ps.execute();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+        String sql = "UPDATE  `mice`.`address` SET  `name` =  ?,address=?,phonenume=?, WHERE  `address`.`id` =?;";
+        try (PreparedStatement ps = DBUtil.connection().prepareStatement(sql)) {
+            ps.setString(1, bean.getName());
+            ps.setString(2, bean.getAddress());
+            ps.setString(3, bean.getPhone());
+            ps.setInt(4, bean.getUserId());
+            ps.execute();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
-    
+
     public static Address get(int id) {
-		String sql = "SELECT * FROM `address` where id = ? ";
-		Address product = new Address();
-		try (PreparedStatement ps = DBUtil.connection().prepareStatement(sql)) {
-			try {
-				ps.setInt(1, id);
-				ResultSet eq = ps.executeQuery();
-				if (eq.next()) {
-					product.setId(id);
-					product.setName(eq.getString("name"));
+        String sql = "SELECT * FROM `address` where id = ? ";
+        Address product = new Address();
+        try (PreparedStatement ps = DBUtil.connection().prepareStatement(sql)) {
+            try {
+                ps.setInt(1, id);
+                ResultSet eq = ps.executeQuery();
+                if (eq.next()) {
+                    product.setId(id);
+                    product.setName(eq.getString("name"));
                     product.setAddress(eq.getString("address"));
-                    product.setPhoneNumber(eq.getInt("phonenume"));
+                    product.setPhoneNumber(eq.getString("phonenume"));
                     product.setUserId(eq.getInt("u_id"));
-				}
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-		} catch (Exception e1) {
-			e1.printStackTrace();
-		}
-		return product;
-	}
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        } catch (Exception e1) {
+            e1.printStackTrace();
+        }
+        return product;
+    }
 
 }

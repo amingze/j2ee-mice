@@ -14,6 +14,9 @@ import mice.bean.Product;
 import mice.bean.User;
 import mice.dao.OrderDAO;
 import mice.dao.OrderItemDAO;
+import mice.service.OrderService;
+import mice.service.ProductService;
+import mice.service.UserService;
 import mice.util.NumCheck;
 
 public class ForeServlet extends ForeBaseServlet {
@@ -29,90 +32,56 @@ public class ForeServlet extends ForeBaseServlet {
         User bean = new User();
         bean.setName(request.getParameter("name"));
         bean.setPasswd(request.getParameter("passwd"));
-        try {
-            if (userDAO.isNoExist(bean.getName())) {
-                userDAO.add(bean);
-                request.setAttribute("status", "注册成功");
-            } else {
-                request.setAttribute("status", "名字已存在");
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
+        if (UserService.register(bean)) {
+            request.setAttribute("registerStatus", "注册成功");
+        } else {
+            request.setAttribute("registerStatus", "注册失败");
         }
         return "register.jsp";
     }
 
     public String login(HttpServletRequest request, HttpServletResponse response) {
-        String name = request.getParameter("name");
-        String passwd = request.getParameter("passwd");
-
-        User bean = userDAO.check(name, passwd);
-
-        if (null == bean) {
-            request.setAttribute("status", "erro");
-            return "register.jsp";
+        User userBean = UserService.login(request.getParameter("name"), request.getParameter("passwd"));
+        if (null == userBean) {
+            request.setAttribute("status", "登录失败");
+            return "login.jsp";
         } else {
-            request.getSession().setAttribute("user", bean);
+            request.getSession().setAttribute("userBean", userBean);
             return "@forehome";
         }
-
     }
 
     public String logout(HttpServletRequest request, HttpServletResponse response) {
         request.getSession().removeAttribute("user");
         return "@forehome";
-
     }
 
     public String img(HttpServletRequest request, HttpServletResponse response) {
         ProductServlet product = new ProductServlet();
         product.getimg(request, response);
-
         return "!";
     }
 
     public String product(HttpServletRequest request, HttpServletResponse response) {
         int id = Integer.parseInt(request.getParameter("id"));
-
-        Product product = productDAO.get(id);
-        request.setAttribute("productId", product.getId());
-        request.setAttribute("name", product.getName());
-        request.setAttribute("price", product.getPrice());
+        Product productBean = ProductService.getProduct(id);
+        request.setAttribute("productBean", productBean);
         return "product.jsp";
     }
 
     public String addCart(HttpServletRequest request, HttpServletResponse response) {
         User user = (User) request.getSession().getAttribute("user");
-        String id = request.getParameter("pid");
+        String pid = request.getParameter("pid");
         String num = request.getParameter("num");
-
-        int pid = Integer.parseInt(id);
-        int amount = Integer.parseInt(num);
-        if (NumCheck.IsNoPositive(amount))
-            return "!";
-
-        OrderItem orderItem = new OrderItem();
-
-        if (orderItemDAO.isNoExistCartByPId(pid)) {
-            orderItem.setUserId(user.getId());
-            orderItem.setProductId(pid);
-            orderItem.setAmount(amount);
-            orderItem.setStatus(2);
-            orderItemDAO.add(orderItem);
-        } else {
-            orderItem = orderItemDAO.getByPId(pid);
-            orderItem.setAmount(orderItemDAO.get(orderItem.getId()).getAmount() + amount);
-            orderItemDAO.updata(orderItem);
-        }
+        OrderService.addCart(pid, user.getId(), num);
         return "!";
     }
 
     public String cart(HttpServletRequest request, HttpServletResponse response) {
-        User user = (User) request.getSession().getAttribute("user");
-        if (user != null) {
-            List<OrderItem> beans = orderItemDAO.getCart(user.getId());
-
-            request.setAttribute("cartlist", beans);
+        User userBean = (User) request.getSession().getAttribute("user");
+        if (userBean != null) {
+            List<OrderItem> beans = OrderService.getCartList(userBean);
+            request.setAttribute("cartList", beans);
             return "cart.jsp";
         } else {
             return "@forehome";
@@ -120,44 +89,36 @@ public class ForeServlet extends ForeBaseServlet {
     }
 
     public String deleteCart(HttpServletRequest request, HttpServletResponse response) {
-        User user = (User) request.getSession().getAttribute("user");
-        String id = request.getParameter("oiid");
-        int oiid = Integer.parseInt(id);
-
-        if (orderItemDAO.isExistCartByOIId(oiid)) {
-            orderItemDAO.delete(oiid);
+        User userBean = (User) request.getSession().getAttribute("userBean");
+        String oiId = request.getParameter("oiId");
+        if (!UserService.isLogin(userBean)) {
+            return "@forehome";
         }
+        OrderService.deleteCart(oiId);
         return "!";
     }
 
     public String addAmount(HttpServletRequest request, HttpServletResponse response) {
         String oiId = request.getParameter("orderItemId");
-        int id = Integer.parseInt(oiId);
-        if (orderItemDAO.get(id).getAmount() > 1)
-            orderItemDAO.changeAmount(id, orderItemDAO.get(id).getAmount() + 1);
+        OrderService.addAmount(oiId);
         return "!";
     }
 
     public String reduceAmount(HttpServletRequest request, HttpServletResponse response) {
         String oiId = request.getParameter("orderItemId");
-        int id = Integer.parseInt(oiId);
-        if (orderItemDAO.get(id).getAmount() > 1)
-            orderItemDAO.changeAmount(id, orderItemDAO.get(id).getAmount() - 1);
+        OrderService.reduceAmount(oiId);
         return "!";
     }
 
     public String changeAmount(HttpServletRequest request, HttpServletResponse response) {
         String oiAmount = request.getParameter("orderItemAmount");
         String oiId = request.getParameter("orderItemId");
-        int orderItemAmount = Integer.parseInt(oiAmount);
-        int orderItemId = Integer.parseInt(oiId);
-        if (orderItemAmount > 0)
-            orderItemDAO.changeAmount(orderItemId, orderItemAmount);
+        OrderService.changeAmount(oiId, oiAmount);
         return "!";
     }
 
     public String buy(HttpServletRequest request, HttpServletResponse response) {
-        String paramsList[] = request.getParameterValues("oiid");
+        String paramsList[] = request.getParameterValues("oiId");
         User user = (User) request.getSession().getAttribute("user");
         // List<OrderItem> order=new ArrayList<>();
         float total = 0;
@@ -175,15 +136,12 @@ public class ForeServlet extends ForeBaseServlet {
             // order.add(orderItem);
             // updata
             orderItemDAO.setOrder(orderItemId, oid);
-            orderItemDAO.changeStatus(orderItemId, 3);// 更改状态为未支付
+            orderItemDAO.changeStatus(orderItemId, OrderDAO.waitPay);// 更改状态为未支付
 
-            total += orderItem.getAmount() * orderItem.getProduct().getPrice();
+            total += orderItem.getNumber() * orderItem.getProduct().getPrice();
         }
-        System.out.println("!!!total!" + total);
         request.getSession().setAttribute("oid", oid);
-
         request.getSession().setAttribute("total", total);
-
         return "pay.jsp";
     }
 
@@ -198,7 +156,7 @@ public class ForeServlet extends ForeBaseServlet {
     public String pay(HttpServletRequest request, HttpServletResponse response) {
         float orderPriceTotal = (float) request.getSession().getAttribute("total");
         int oid = (int) request.getSession().getAttribute("oid");
-        orderItemDAO.changeStatus(oid, 4);
+        orderItemDAO.changeStatus(oid, orderDAO.waitDelivery);
         return "over.jsp";
     }
 
@@ -208,12 +166,5 @@ public class ForeServlet extends ForeBaseServlet {
         request.setAttribute("orders", orders);
         return "order.jsp";
     }
-
-    // public String showCategory(HttpServletRequest request, HttpServletResponse
-    // response) {
-    // List<List<mice.bean.Category>> orders = productItemDAO.getTotal();
-    // request.setAttribute("orders", orders);
-    // return "order.jsp";
-    // }
 
 }

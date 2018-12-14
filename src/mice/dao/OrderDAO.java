@@ -15,23 +15,31 @@ public class OrderDAO {
     protected static ProductDAO productDAO = new ProductDAO();
     protected static OrderItemDAO orderItemDAO = new OrderItemDAO();
     protected static OrderDAO orderDAO = new OrderDAO();
-    // public void add(Order bean) {
-    // String sql = "INSERT INTO `mice`.`Order` (`id`,
-    // `u_id`,`p_id`,`content`,`createtime`) VALUES (null,?,?,?,null);";
-    // try (PreparedStatement ps = DBUtil.connection().prepareStatement(sql)) {
-    // ps.setInt(1, bean.getId());
-    // ps.setInt(2, bean.getUserId());
-    // ps.setInt(3, bean.getOrderItem().getId());
-    // ps.setString(4, bean.getContent());
-    // ps.execute();
-    // ResultSet rs = ps.getGeneratedKeys();
-    // if (rs.next()) {
-    // bean.setId(rs.getInt("id"));
-    // }
-    // } catch (Exception e) {
-    // e.printStackTrace();
-    // }
-    // }
+
+    public static final String waitPay = "waitPay";
+    public static final String waitDelivery = "waitDelivery";
+    public static final String waitConfirm = "waitConfirm";
+    public static final String waitReview = "waitReview";
+    public static final String finish = "finish";
+    public static final String delete = "delete";
+
+    public static void add(Order bean) {
+        String sql = "INSERT INTO `mice`.`order` (`id`, `u_id`, `datetime`, `a_id`, `a_name`, `a_address`, `a_phone`) VALUES (NULL, ?, CURRENT_TIMESTAMP, ?, ?, ?, ?);";
+        try (PreparedStatement ps = DBUtil.connection().prepareStatement(sql)) {
+            ps.setInt(1, bean.getUserId());
+            ps.setInt(2, bean.getAddressId());
+            ps.setString(3, bean.getAddressName());
+            ps.setString(4, bean.getAddressAddress());
+            ps.setString(5, bean.getAddressPhone());
+            ps.execute();
+            ResultSet rs = ps.getGeneratedKeys();
+            if (rs.next()) {
+                bean.setId(rs.getInt(1));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
     public static int createOrder() {
         int id = 0;
@@ -91,10 +99,10 @@ public class OrderDAO {
         return beans;
     }
 
-    public static void changeStatus(int id, int status) {
+    public static void changeStatus(int id, String status) {
         String sql = "UPDATE  `mice`.`orderitem` SET  `status` =  ? WHERE  `orderitem`.`o_id` =?;";
         try (PreparedStatement ps = DBUtil.connection().prepareStatement(sql)) {
-            ps.setInt(1, status);
+            ps.setString(1, status);
             ps.setInt(2, id);
             ps.execute();
 

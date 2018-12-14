@@ -5,9 +5,9 @@ package mice.bean;
  */
 public class Property {
 
-    int id;
-    String name;
-    int categoryId;
+    private int id;
+    private String name;
+    private int categoryId;
 
     public int getCategoryId() {
         return this.categoryId;
@@ -32,7 +32,5 @@ public class Property {
     public void setName(String name) {
         this.name = name;
     }
-
-
 
 }
