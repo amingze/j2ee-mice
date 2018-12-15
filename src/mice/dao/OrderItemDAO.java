@@ -107,12 +107,12 @@ public class OrderItemDAO {
 		return bean;
 	}
 
-	public static List<OrderItem> getList(int id) {
+	public static List<OrderItem> getListByUserId(int UserId) {
 		String sql = "SELECT *  FROM `orderitem` WHERE `u_id` = ?";
 		List<OrderItem> beans = new ArrayList<>();
 
 		try (PreparedStatement ps = DBUtil.connection().prepareStatement(sql)) {
-			ps.setInt(1, id);
+			ps.setInt(1, UserId);
 			ResultSet eq = ps.executeQuery();
 			while (eq.next()) {
 				OrderItem bean = new OrderItem();

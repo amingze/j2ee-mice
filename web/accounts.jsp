@@ -6,4 +6,4 @@
 <%@include file="include/part/header.jsp"%>
 <link rel="stylesheet" type="text/css" media="screen" href="include\css\main.css" />
 
-${total}
+${totalPrice}

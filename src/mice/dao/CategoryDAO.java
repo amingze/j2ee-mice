@@ -2,6 +2,7 @@ package mice.dao;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.List;
 
 import mice.bean.Category;
 import mice.bean.Product;
@@ -60,6 +61,23 @@ public class CategoryDAO {
             e1.printStackTrace();
         }
         return bean;
+    }
+
+    public static List<Category> list() {
+        String sql = "SELECT * FROM `category`";
+        try (PreparedStatement ps = DBUtil.connection().prepareStatement(sql)) {
+            ResultSet eq = ps.executeQuery();
+            while (eq.next()) {
+                Category bean = new Category();
+                bean.setId(eq.getInt("id"));
+                bean.setName(eq.getString("name"));
+                // bean.setProducts(List<Product>);
+                // bean.setLargeCategoryId("");
+            }
+        } catch (Exception e) {
+
+        }
+        return null;
     }
 
 }

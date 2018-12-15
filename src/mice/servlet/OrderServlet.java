@@ -13,22 +13,22 @@ import mice.bean.Product;
 import mice.bean.User;
 import mice.dao.OrderDAO;
 import mice.dao.OrderItemDAO;
+import mice.service.OrderService;
 
 public class OrderServlet extends ForeBaseServlet {
 
-    public String addAmount(String arg) {
-
-        return null;
+    public static String list(HttpServletRequest request, HttpServletResponse response) {
+        List<List<OrderItem>> orderList = OrderService.list();
+        request.setAttribute("orderList", orderList);
+        return "!";
     }
 
-    public String reduceAmount(String arg) {
-
-        return null;
-    }
-
-    public String changeStatus(String arg) {
-
-        return null;
+    public String changeStatus(HttpServletRequest request, HttpServletResponse response) {
+        String orderId = request.getParameter("orderId");
+        String orderStatus = request.getParameter("orderStatus");
+        int int_orderId = Integer.parseInt(orderId);
+        OrderService.status(int_orderId, orderStatus);
+        return "!";
     }
 
 }

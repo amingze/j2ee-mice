@@ -18,7 +18,7 @@ window.onload=function(){
             </ul>
             <ul class="hd-right">
                 <li id="cart" style="display:none" class="statusNone"><a  href="${contextPath}/forecart">购物车</a></li>
-                <li id="name"><a>${user.name }</a><li>
+                <li id="name"><a>${userBean.name }</a><li>
                 <li id="login" class="statusBlock"><a  href="${contextPath}/login.jsp">登录</a></li>
                 <li id="register" class="statusBlock"> <a href="${contextPath}/register.jsp">注册</a></li>
                 <li id="logout" style="display:none"  class="statusNone"> <a href="${contextPath}/forelogout">登出</a></li>

@@ -1,5 +1,6 @@
 package mice.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import mice.bean.Address;
@@ -104,26 +105,30 @@ public class OrderService {
         }
     }
 
-    // public static void putOrderList(List<OrderItem> orderItems) {
-    // for (OrderItem orderItem : orderItems) {
-    // OrderDAO.changeStatus(orderItem.getId(), OrderDAO.waitPay);
-    // }
-    // }
-
-    public static void changeOrderItemsStatus(List<OrderItem> orderItems, String status) {
-        for (OrderItem orderItem : orderItems) {
-            OrderItemDAO.changeStatus(orderItem.getId(), status);
+    public static void changeOrderItemsStatus(String[] orderItemsId, String status) {
+        for (String orderItem : orderItemsId) {
+            int oi = Integer.parseInt(orderItem);
+            changeOrderItemStatus(oi, status);
         }
     }
 
-    public static Order createOrder(User userBean, Address addressBean) {
+    public static void changeOrderItemStatus(int orderItemId, String status) {
+        OrderItemDAO.changeStatus(orderItemId, status);
+    }
+
+    public static Order createOrder(int userId, Address addressBean) {
         Order bean = new Order();
-        bean.setUserId(userBean.getId());
+        bean.setUserId(userId);
         bean.setAddressName(addressBean.getName());
         bean.setAddressAddress(addressBean.getAddress());
         bean.setAddressPhone(addressBean.getPhone());
         OrderDAO.add(bean);
         return bean;
+    }
+
+    public static Order createOrder(User userBean, Address addressBean) {
+
+        return createOrder(userBean.getId(), addressBean);
     }
 
     public static void changeOrderItemOId(int orderItemId, int orderId) {
@@ -132,11 +137,15 @@ public class OrderService {
         orderItemDAO.updata(oii);
     }
 
-    public static void changeOrderItemsOId(List<OrderItem> orderItemIds, int orderId) {
-        for (OrderItem orderItem : orderItemIds) {
-            changeOrderItemOId(orderItem.getId(), orderId);
+    public static void changeOrderItemsOId(String[] orderItemIds, int orderId) {
+        for (String orderItemId : orderItemIds) {
+            int oiId = Integer.parseInt(orderItemId);
+            changeOrderItemOId(oiId, orderId);
         }
+    }
 
+    public static float totalPrice(Order orderBean) {
+        return totalPrice(orderItemDAO.getByOrder(orderBean.getId()));
     }
 
     public static float totalPrice(List<OrderItem> orderItems) {
@@ -147,17 +156,24 @@ public class OrderService {
         return total;
     }
 
-    public static void buy(Order orderBean, List<OrderItem> orderItems) {
-        Address addressBean = new Address();
-        addressBean.setName("text1");
-        addressBean.setPhoneNumber("text2");
-        addressBean.setAddress("text3");
-        Order order = OrderService.createOrder(UserDAO.get(orderBean.getUserId()), addressBean);
-        int oiId = order.getId();
-        changeOrderItemsOId(orderItems, oiId);
-        changeOrderItemsStatus(orderItems, OrderDAO.waitPay);
-        totalPrice(orderItems);
+    // public static float buy(int userId, String[] orderItemsId) {
 
+    // // return totalPrice(order);
+
+    // }
+
+    public static void status(int orderId, String status) {
+        OrderDAO.changeStatus(orderId, status);
+    }
+
+    public static List<List<OrderItem>> order(int userId) {
+
+        return OrderDAO.listByUser(userId);
+    }
+
+    public static List<List<OrderItem>> list() {
+
+        return OrderDAO.list();
     }
 
     public static void main(String[] args) {

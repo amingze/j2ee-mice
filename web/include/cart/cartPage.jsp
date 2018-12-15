@@ -60,7 +60,7 @@ function setPost(oiid,price,num) {
 
 } 
 </script>
-<c:forEach items="${cartlist}" var="cart" varStatus="st">
+<c:forEach items="${cartList}" var="cart" varStatus="st">
     <div class="objOrderItem">
         productId ${cart.productId}
         userId ${cart.userId}

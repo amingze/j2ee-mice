@@ -7,7 +7,7 @@
         <div class="bd-logo" style="background-image: url(include/style/img/1.jpg);"></div>
         <div class="bd-list">
 
-        <c:forEach items="${productlist}" var="product" varStatus="st">
+        <c:forEach items="${productList}" var="product" varStatus="st">
             <div class="product">
                 <div class="pd-img" style="background-image: url(${contextPath}/foreimg?id=${product.id }.jpg);"></div>
                 <div class="pd-log">

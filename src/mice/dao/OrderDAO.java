@@ -23,6 +23,25 @@ public class OrderDAO {
     public static final String finish = "finish";
     public static final String delete = "delete";
 
+    public static Order get(int id) {
+        String sql = "SELECT * FROM `order` where `id` = ? ";
+        Order bean = new Order();
+        try (PreparedStatement ps = DBUtil.connection().prepareStatement(sql)) {
+            ps.setInt(1, id);
+            ps.execute();
+            ResultSet rs = ps.getGeneratedKeys();
+            bean.setId(rs.getInt("id"));
+            bean.setUserId(rs.getInt("u_id"));
+            bean.setAddressAddress(rs.getString("a_address"));
+            bean.setAddressId(rs.getInt("a_id"));
+            bean.setAddressName(rs.getString("a_name"));
+            bean.setAddressPhone(rs.getString("a_phone"));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return bean;
+    }
+
     public static void add(Order bean) {
         String sql = "INSERT INTO `mice`.`order` (`id`, `u_id`, `datetime`, `a_id`, `a_name`, `a_address`, `a_phone`) VALUES (NULL, ?, CURRENT_TIMESTAMP, ?, ?, ?, ?);";
         try (PreparedStatement ps = DBUtil.connection().prepareStatement(sql)) {
@@ -81,11 +100,28 @@ public class OrderDAO {
 
     }
 
-    public static List<List<OrderItem>> getByUser(int userId) {
+    public static List<List<OrderItem>> listByUser(int userId) {
         List<List<OrderItem>> beans = new ArrayList<>();
         String sql = "SELECT * FROM `orderitem` where `u_id` = ?";
         try (PreparedStatement ps = DBUtil.connection().prepareStatement(sql)) {
             ps.setInt(1, userId);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                int id = rs.getInt("id");
+                List<OrderItem> bean = new ArrayList<OrderItem>();
+                bean = orderItemDAO.getByOrder(id);
+                beans.add(bean);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return beans;
+    }
+
+    public static List<List<OrderItem>> list() {
+        List<List<OrderItem>> beans = new ArrayList<>();
+        String sql = "SELECT * FROM `orderitem` ";
+        try (PreparedStatement ps = DBUtil.connection().prepareStatement(sql)) {
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 int id = rs.getInt("id");
@@ -113,7 +149,7 @@ public class OrderDAO {
 
     public static void main(String[] args) {
         List<List<OrderItem>> order = new ArrayList<>();
-        order = orderDAO.getByUser(16);
+        order = orderDAO.listByUser(16);
 
         for (List<OrderItem> beans : order) {
             for (OrderItem bean : beans)

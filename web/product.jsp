@@ -21,6 +21,6 @@
 
 <input type="number" name="productNum"  class="productNum" value="1">
 <div type="number" name="productId" class="productId" value="${productId}" pid="${productId}">
-<button class="buttonAddCart"  pid="${productId}" value ="${productId}">加入购物车</button>
+<button class="buttonAddCart"  pid="${productId}" value ="${productBean.id}">加入购物车</button>
 
 

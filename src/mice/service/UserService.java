@@ -42,8 +42,8 @@ public class UserService {
     public static User login(String name, String passwd) {
         User bean = UserDAO.check(name, passwd);
         if (null == bean) {
-            return bean;
+            return null;
         }
-        return null;
+        return bean;
     }
 }

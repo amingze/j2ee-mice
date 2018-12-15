@@ -32,60 +32,9 @@ public class ProductServlet extends BackBaseServlet {
 	}
 
 	public String add(HttpServletRequest request, HttpServletResponse response) {
-
-		Product bean = new Product();
-		// DiskFileItemFactory factory = new DiskFileItemFactory();
-		String filename = null;
-		// 默认后缀名
-		String postfix = ".jpg";
-		String turename = null;
-		try {
-			DiskFileItemFactory factory = new DiskFileItemFactory();
-			ServletFileUpload upload = new ServletFileUpload(factory);
-			factory.setSizeThreshold(1024 * 1024 * 10);
-			List<FileItem> items = null;
-			try {
-				items = upload.parseRequest(request);
-				String name = items.get(0).getString("utf-8");
-				String price = items.get(1).getString("utf-8");
-				System.out.println("name:" + name);
-				bean.setName(name);
-				bean.setPrice(Float.parseFloat(price));
-				ProductDao.add(bean);
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-			Iterator iter = items.iterator();
-			while (iter.hasNext()) {
-				FileItem item = (FileItem) iter.next();
-				if (!item.isFormField()) {
-					turename = item.getName();
-					turename = new String(turename.getBytes("GBK"), "UTF-8");
-					filename = bean.getId() + ".jpg";
-					String folder = request.getSession().getServletContext().getRealPath("img/product");
-
-					File file = new File(folder, filename);
-					file.getParentFile().mkdirs();
-					System.out.println("!!folder:" + folder);
-					InputStream in = item.getInputStream();
-					FileOutputStream fio = new FileOutputStream(file);
-					byte byt[] = new byte[1024 * 1024 * 10];
-					int length = 0;
-					while ((length = in.read(byt)) != -1) {
-						fio.write(byt, 0, length);
-					}
-					fio.close();
-				}
-			}
-
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-
+		setImage(request, response);
 		request.setAttribute("status", "添加成功");
-
 		return "@admin_product_list";
-
 	}
 
 	public String updata(HttpServletRequest request, HttpServletResponse response) {
@@ -94,7 +43,6 @@ public class ProductServlet extends BackBaseServlet {
 		bean.setName(request.getParameter("name"));
 		bean.setPrice(Float.parseFloat(request.getParameter("price")));
 		ProductDAO.updata(bean);
-
 		request.setAttribute("status", "修改成功");
 
 		return "@admin_product_list";
@@ -104,7 +52,6 @@ public class ProductServlet extends BackBaseServlet {
 	public String delete(HttpServletRequest request, HttpServletResponse response) {
 		int id = Integer.parseInt(request.getParameter("id"));
 		ProductDAO.delete(id);
-
 		request.setAttribute("status", "删除成功");
 		return "@admin_product_list";
 
@@ -147,5 +94,56 @@ public class ProductServlet extends BackBaseServlet {
 		}
 		return "!admin_product_list";
 
+	}
+
+	public static String setImage(HttpServletRequest request, HttpServletResponse response) {
+		Product bean = new Product();
+		// DiskFileItemFactory factory = new DiskFileItemFactory();
+		String filename = null;
+		// 默认后缀名
+		String postfix = ".jpg";
+		String turename = null;
+		try {
+			DiskFileItemFactory factory = new DiskFileItemFactory();
+			ServletFileUpload upload = new ServletFileUpload(factory);
+			factory.setSizeThreshold(1024 * 1024 * 10);
+			List<FileItem> items = null;
+			try {
+				items = upload.parseRequest(request);
+				String name = items.get(0).getString("utf-8");
+				String price = items.get(1).getString("utf-8");
+				System.out.println("name:" + name);
+				bean.setName(name);
+				bean.setPrice(Float.parseFloat(price));
+				ProductDAO.add(bean);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			Iterator iter = items.iterator();
+			while (iter.hasNext()) {
+				FileItem item = (FileItem) iter.next();
+				if (!item.isFormField()) {
+					turename = item.getName();
+					turename = new String(turename.getBytes("GBK"), "UTF-8");
+					filename = bean.getId() + ".jpg";
+					String folder = request.getSession().getServletContext().getRealPath("img/product");
+
+					File file = new File(folder, filename);
+					file.getParentFile().mkdirs();
+					System.out.println("!!folder:" + folder);
+					InputStream in = item.getInputStream();
+					FileOutputStream fio = new FileOutputStream(file);
+					byte byt[] = new byte[1024 * 1024 * 10];
+					int length = 0;
+					while ((length = in.read(byt)) != -1) {
+						fio.write(byt, 0, length);
+					}
+					fio.close();
+				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return "!";
 	}
 }
