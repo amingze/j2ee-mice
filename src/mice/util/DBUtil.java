@@ -19,7 +19,7 @@ public class DBUtil {
 	// private final static String DB_LOGIN_NAME = "root";
 	private final static String DB_LOGIN_NAME = "root";
 	// private final static String DB_LOGIN_PASS = "123";
-	// private final static String DB_LOGIN_PASS = "ZZT2gZa2";
+	// private final static String DB_LOGIN_PASS = "ZZT2gZa212";
 	private final static String DB_LOGIN_PASS = "usbw";
 	private final static String DB_DBNAME = "mice";
 	private final static String DB_ENCODE = "UTF-8";

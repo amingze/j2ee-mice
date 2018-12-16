@@ -6,6 +6,9 @@
 <head>
 <meta charset="UTF-8">
 <title>商品管理</title>
+    <title>完整demo</title>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
+
 </head>
 <body>
 <p>----搜索----</p>
@@ -40,6 +43,19 @@
 	<input type="submit" value="修改">
 	${status}
 </form>
+这里写你的初始化内容
+<!-- 加载编辑器的容器 -->
+ <script id="container" name="content" type="text/plain">
+        
+    </script>
+    <!-- 配置文件 -->
+    <script type="text/javascript" src="${contextPath}/admin/ueditor/ueditor.config.js"></script>
+    <!-- 编辑器源码文件 -->
+    <script type="text/javascript" src="${contextPath}/admin/ueditor/ueditor.all.js"></script>
+    <!-- 实例化编辑器 -->
+    <script type="text/javascript">
+        var ue = UE.getEditor('container');
+    </script>
 
 </body>
 </html>
