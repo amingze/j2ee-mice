@@ -1,3 +1,5 @@
 eclipse.preferences.version=1
-encoding//web/admin/user.jsp=UTF-8
-encoding/src=UTF-8
+encoding//src/mice/bean/Order.java=UTF-8
+encoding//web/admin/listCategory.jsp=UTF-8
+encoding//web/admin/listProduct.jsp=UTF-8
+encoding//web/cart.jsp=UTF-8
