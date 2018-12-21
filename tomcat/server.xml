@@ -130,7 +130,7 @@
         <!--
         <Valve className="org.apache.catalina.authenticator.SingleSignOn" />
         -->
-          <Context path="/" docBase="/home/amingze/code/j2ee/mice/web" debug="0" reloadable="false" />
+          <Context path="/" docBase="/home/amingze/code/j2ee/mice/web" debug="0" reloadable="ture" />
         <!-- Access log processes all example.
              Documentation at: /docs/config/valve.html
              Note: The pattern used is equivalent to using pattern="common" -->

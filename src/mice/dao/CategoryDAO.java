@@ -9,9 +9,12 @@ package mice.dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+<<<<<<< HEAD
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+=======
+>>>>>>> c0687b9101aa3aad2a25d30c163cca51017aa544
 import java.util.List;
 
 import mice.bean.Category;
@@ -113,6 +116,7 @@ public class CategoryDAO {
         return bean;
     }
 
+<<<<<<< HEAD
     public List<Category> list() {
         return list(0, Short.MAX_VALUE);
     }
@@ -145,3 +149,23 @@ public class CategoryDAO {
     }
 
 }
+=======
+    public static List<Category> list() {
+        String sql = "SELECT * FROM `category`";
+        try (PreparedStatement ps = DBUtil.connection().prepareStatement(sql)) {
+            ResultSet eq = ps.executeQuery();
+            while (eq.next()) {
+                Category bean = new Category();
+                bean.setId(eq.getInt("id"));
+                bean.setName(eq.getString("name"));
+                // bean.setProducts(List<Product>);
+                // bean.setLargeCategoryId("");
+            }
+        } catch (Exception e) {
+
+        }
+        return null;
+    }
+
+}
+>>>>>>> c0687b9101aa3aad2a25d30c163cca51017aa544
