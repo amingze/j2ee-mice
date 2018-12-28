@@ -1,20 +1,6 @@
 package mice.bean;
 
 public class ProductImage {
-<<<<<<< HEAD
-=======
-	private String type;
-	private int productId;
-	private int id;
-
-	public String getType() {
-		return type;
-	}
-
-	public void setType(String type) {
-		this.type = type;
-	}
->>>>>>> c0687b9101aa3aad2a25d30c163cca51017aa544
 
 	
 	private Product product;

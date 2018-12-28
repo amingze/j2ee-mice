@@ -4,12 +4,6 @@ package mice.bean;
 import java.util.List;
 
 public class Category {
-<<<<<<< HEAD
-=======
-    private int id;
-    private String name;
-    private int largeCategoryId;
->>>>>>> c0687b9101aa3aad2a25d30c163cca51017aa544
 
 	private String name;
 	private int id;

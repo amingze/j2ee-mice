@@ -1,6 +1,5 @@
 package mice.servlet;
 
-<<<<<<< HEAD
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -116,33 +115,3 @@ public class CategoryServlet extends BaseBackServlet {
 		return "admin/listCategory.jsp";
 	}
 }
-=======
-import java.util.List;
-
-import mice.bean.Category;
-import mice.service.CategoryService;
-
-/**
- * CategoryServlet
- */
-public class CategoryServlet {
-    public static void add(Category category) {
-        CategoryService.add(category);
-    }
-
-    public static void delete(int catergoryId) {
-        CategoryService.delete(catergoryId);
-
-    }
-
-    public static void update(Category category) {
-        CategoryService.update(category);
-    }
-
-    public static List<Category> list() {
-        List<Category> categorys = CategoryService.list();
-        return categorys;
-    }
-
-}
->>>>>>> c0687b9101aa3aad2a25d30c163cca51017aa544

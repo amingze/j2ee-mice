@@ -9,7 +9,6 @@ import mice.bean.Product;
 public class ProductServlet extends BaseBackServlet {
 
 	public String add(HttpServletRequest request, HttpServletResponse response) {
-<<<<<<< HEAD
 		int cid = Integer.parseInt(request.getParameter("cid"));
 		Category c = categoryDAO.get(cid);
 
@@ -20,20 +19,6 @@ public class ProductServlet extends BaseBackServlet {
 		int stock = Integer.parseInt(request.getParameter("stock"));
 
 		Product p = new Product();
-=======
-		setImage(request, response);
-		request.setAttribute("status", "添加成功");
-		return "@admin_product_list";
-	}
-
-	public String updata(HttpServletRequest request, HttpServletResponse response) {
-		Product bean = new Product();
-		bean.setId(Integer.parseInt(request.getParameter("id")));
-		bean.setName(request.getParameter("name"));
-		bean.setPrice(Float.parseFloat(request.getParameter("price")));
-		ProductDAO.updata(bean);
-		request.setAttribute("status", "修改成功");
->>>>>>> c0687b9101aa3aad2a25d30c163cca51017aa544
 
 		p.setCategory(c);
 		p.setName(name);
@@ -47,16 +32,10 @@ public class ProductServlet extends BaseBackServlet {
 
 	public String delete(HttpServletRequest request, HttpServletResponse response) {
 		int id = Integer.parseInt(request.getParameter("id"));
-<<<<<<< HEAD
 		Product p = productDAO.get(id);
 		productDAO.delete(id);
 		return "@admin_product_list?cid=" + p.getCategory().getId();
 	}
-=======
-		ProductDAO.delete(id);
-		request.setAttribute("status", "删除成功");
-		return "@admin_product_list";
->>>>>>> c0687b9101aa3aad2a25d30c163cca51017aa544
 
 	public String edit(HttpServletRequest request, HttpServletResponse response) {
 		int id = Integer.parseInt(request.getParameter("id"));

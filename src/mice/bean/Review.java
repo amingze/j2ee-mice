@@ -1,25 +1,3 @@
-<<<<<<< HEAD
-=======
-package mice.bean;
-
-/**
- * Review
- */
-public class Review {
-
-    private int id;
-    private int userId;
-    private int productId;
-    private String Content;
-
-    public int getId() {
-        return this.id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
->>>>>>> c0687b9101aa3aad2a25d30c163cca51017aa544
 
 package mice.bean;
 
